@@ -23,8 +23,8 @@
 - `GET /api/workspaces`
 - `POST /api/workspaces`
 - `GET /api/workspaces/:id`
-- `PATCH /api/notes/:id`
-- `DELETE /api/notes/:id`
+- `PATCH /api/workspaces/:id`
+- `DELETE /api/workspaces/:id`
 - `GET /api/workspaces/:id/projects/`
   -index of all projects for a workspace
 

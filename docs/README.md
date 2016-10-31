@@ -1,4 +1,4 @@
-# FresherNote
+# Shmasana
 
 [Heroku link][heroku]
 [Trello link][trello]
