@@ -23,6 +23,8 @@
 - `GET /api/workspaces`
 - `POST /api/workspaces`
 - `GET /api/workspaces/:id`
+
+Ken: Didn't see any reference to notes in your MVP
 - `PATCH /api/notes/:id`
 - `DELETE /api/notes/:id`
 - `GET /api/workspaces/:id/projects/`
