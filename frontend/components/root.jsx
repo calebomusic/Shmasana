@@ -5,27 +5,27 @@ import App from './app';
 import SessionFormContainer from './session/session_form_container';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const _redirectIfLoggedIn = () => {
-  if(window.currentUser) {
-    hashHistory.replace('/');
-  }
-}
+const Root = ({ store }) => {
 
-const Root = ({ store }) => (
-  <MuiThemeProvider>
+  const _redirectIfLoggedIn = () => {
+      if(store.getState().currentUser) {
+        hashHistory.replace('/');
+      }
+  }
+
+  return(<MuiThemeProvider>
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={App} >
+      <Route path="/" component={App} ></Route>
       <Route path="/login"
         component={SessionFormContainer}
-        onEnter={_redirectIfLoggedIn}></Route>
+        onEnter={_redirectIfLoggedIn(store)}></Route>
       <Route path="/signup"
         component={SessionFormContainer}
-        onEnter={_redirectIfLoggedIn}></Route>
-      </Route>
+        onEnter={_redirectIfLoggedIn(store)}></Route>
     </Router>
   </Provider>
-  </MuiThemeProvider>
-);
+  </MuiThemeProvider>);
+};
 
 export default Root

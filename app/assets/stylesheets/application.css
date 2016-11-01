@@ -56,12 +56,6 @@ input[type="submit"] {
 
 /* Clearfix */
 
-body {
-  background: #FF4E50; /* fallback for old browsers */
-  background-color: #fc7279;
-  background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%)
-}
-
 .group:after {
   content: "";
   display: block;
@@ -70,6 +64,12 @@ body {
 
 
 /*Session Form*/
+body {
+  background: #FF4E50; /* fallback for old browsers */
+  background-color: #fc7279;
+  background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%)
+}
+
 .session-form {
   width: 400px;
   height: 400px;
@@ -86,8 +86,7 @@ body {
 
 }
 .or {
-  text-align: center;
-  display:flex;
+  display: flex;
   margin-bottom: 20px;
   font-size: 24px;
   margin-left: 5px;
@@ -95,9 +94,21 @@ body {
   color: #B9BCC0;
 }
 
-.or > hr {
-  width: 44%;
+.or p {
+  position: relative;
+  bottom: 3px;
+  margin-left: 7px;
+  margin-right: 7px;
 
+  text-align: justify;
+}
+
+.or > hr {
+  width: 38%;
+  flex-grow: 1;
+  font-size: 100%;
+  font-weight: 0px;
+  height: 0%;
 }
 
 .session-title {
@@ -122,13 +133,24 @@ body {
   margin-bottom: 30px;
   margin-top: 5px;
 }
+
 .session-form-button {
   position: absolute;
   left: 1000px;
   font-size: 100px;
 }
 
-.errors {}
+.errors {
+  font-size: 14px;
+  background-color: #FEEDED;
+  text-align: center;
+  border-radius: 3px;
+  clear: both;
+  color: #49505B;
+  line-height: 1.25;
+  padding: 15px;
+  text-align: center;
+}
 
 .session-label {
   font-size: 12px;

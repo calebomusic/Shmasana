@@ -9,7 +9,7 @@ import {PrimaryButton, FooterButton} from './session_style';
 class SessionForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {username: '', password: ''};
+    this.state = {email: '', password: ''};
 
     this.disableButton = this.disableButton.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,6 +17,8 @@ class SessionForm extends React.Component {
     this.renderFooter = this.renderFooter.bind(this);
     this.logIn = this.logIn.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
+    // this.renderEmailInput = this.renderEmailInput.bind(this);
   };
 
   handleSubmit(e) {
@@ -30,7 +32,7 @@ class SessionForm extends React.Component {
   }
 
   disableButton(){
-    if(this.state.username.length > 0 && this.state.password.length > 0) {
+    if(this.state.email.length > 0 && this.state.password.length > 0) {
       return false;
     } else {
       return true;
@@ -39,12 +41,12 @@ class SessionForm extends React.Component {
 
   signUp(e) {
     e.preventDefault();
-    hashHistory.push('/signup');
+    hashHistory.replace('/signup');
   }
 
   logIn(e) {
     e.preventDefault();
-    hashHistory.push('/login');
+    hashHistory.replace('/login');
   }
 
   renderFooter(){
@@ -63,23 +65,51 @@ class SessionForm extends React.Component {
     }
   }
 
+  // renderEmailInput(){
+  //   if(this.props.formType === 'Sign Up') {
+  //     return(<div>
+  //     <label className='session-label'>EMAIL</label>
+  //     <input className='session-input' value={this.state.email}
+  //       onChange={this.updateForm('email')}></input>
+  //     </div>)
+  //   }
+  // }
+
+  renderErrors() {
+    debugger
+    if(this.props.errors.length > 0) {
+      return(
+        <ul className='errors'>
+          {this.props.errors.map((error, i) => (
+            <li key={`error-${i}`}>
+              {error}
+            </li>
+          ))}
+        </ul>)
+    }
+  }
+
   render(){
     return(
-      <div>
+      <div className='session'>
         <div className='session-form'>
 
           <h1 className='session-title'>{this.props.formType}</h1>
 
-          <div className='or'><hr />or<hr /></div>
+          <div className='or'><hr /><p>or</p><hr /></div>
 
-          <ul className='errors'>{this.props.errors.responseText}</ul>
+          {this.renderErrors()}
 
           <form onSubmit={this.handleSubmit}>
-            <label className='session-label'>USERNAME</label>
-            <input className='session-input' value={this.state.username} onChange={this.updateForm('username')}></input>
+            <label className='session-label'>EMAIL</label>
+            <input className='session-input' value={this.state.email}
+              onChange={this.updateForm('email')}></input>
+
             <label className='session-label'>PASSWORD</label>
-            <input className='session-input' value={this.state.password} type='password' onChange={this.updateForm('password')}></input>
-            <PrimaryButton className='session-form-button' type='submit' label={this.props.formType} disabled={this.disableButton()}/>
+            <input className='session-input' value={this.state.password} type='password'
+              onChange={this.updateForm('password')}></input>
+            <PrimaryButton className='session-form-button' type='submit' label={this.props.formType}
+              disabled={this.disableButton()}/>
           </form>
         </div>
           <footer className='session-footer'>{this.renderFooter()}</footer>

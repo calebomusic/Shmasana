@@ -8,7 +8,7 @@ const null_user = {
 
 export default (state = null_user, action) => {
   Object.freeze(state);
-  
+
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
       return {
@@ -18,7 +18,7 @@ export default (state = null_user, action) => {
     case RECEIVE_ERRORS:
       return {
         currentUser: null,
-        errors: action.errors
+        errors: action.errors.responseJSON
       }
     case LOGOUT:
       return null_user

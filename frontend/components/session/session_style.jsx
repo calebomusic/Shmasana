@@ -15,11 +15,9 @@ const primaryStyle = {
 const footerButton = {
   margin: 12,
   height: 10,
-  // backgroundColor: 'transparent',
   color: 'white'
 };
 
-// export default { primaryButton, footerButton }
 import RaisedButton from 'material-ui/RaisedButton';
 import React from 'react';
 

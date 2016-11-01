@@ -16,7 +16,6 @@ export default ({getstate, dispatch}) => (next) => (action) => {
     hashHistory.replace('/');
   }
   const errors = (errors) => dispatch(receiveErrors(errors))
-
   switch (action.type) {
     case LOGIN:
       login(action.user, success, errors);
