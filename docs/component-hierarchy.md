@@ -1,7 +1,7 @@
 ## Component Hierarchy
 
-**AuthFormContainer**
- - AuthForm
+**SessionFormContainer**
+ - SessionForm
 
 **App**
   -HeaderContainer
@@ -40,8 +40,8 @@
 
 |Path   | Component   |
 |-------|-------------|
-| "/sign-up" | "AuthFormContainer" |
-| "/sign-in" | "AuthFormContainer" |
+| "/sign-up" | "SessionFormContainer" |
+| "/sign-in" | "SessionFormContainer" |
 | "/" | "AppContainer" |
 | "/workspaceId" | "TaskList" |
 | "/workspaceId/taskId" | "TaskDetails" |

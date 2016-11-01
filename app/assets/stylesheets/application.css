@@ -13,3 +13,84 @@
  *= require_tree .
  *= require_self
  */
+
+ html, body, header, nav, h1, h2, h4, h5, a, ul, li, div, form, p, input, button {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+
+   font: inherit;
+   font-family: 'Roboto', sans-serif;
+   color: inherit;
+   text-align: inherit;
+   text-decoration: inherit;
+   vertical-align: inherit;
+   display: inherit;
+
+   box-sizing: inherit;
+
+   background: transparent;
+ }
+
+ ul {
+  list-style: none;
+}
+
+input[type="password"],
+input[type="email"],
+input[type="text"],
+input[type="submit"],
+textarea,
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /*gets rid of  styling on these*/
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+  /*shows hand when over button*/
+}
+
+/* Clearfix */
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+
+/*Session Form*/
+.session {
+  width: 400px;
+  height: 400px;
+  margin: 80px auto;
+  position: relative;
+  display: block;
+  color: #b2b2b2;
+}
+.or {
+  text-align: center;
+  display:flex;
+  margin-bottom: 20px;
+}
+
+.session-input {
+  width: 100%;
+  color: black;
+  border-top: 1px solid #C0B1C7;
+  border: 1px solid #b2b2b2;
+  padding: 5px;
+  border-radius: 3px;
+  -webkit-transition: all 0.30s ease-in-out;
+  background: white;
+  color: #b2b2b2;
+  margin-bottom: 5px;
+}
+
+.errors {}
+
+.session-form {}
