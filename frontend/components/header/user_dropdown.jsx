@@ -4,12 +4,13 @@ import React from 'react';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import Divider from 'material-ui/Divider';
 
 const style = {
   backgroundColor: '#fc7279'
 };
 
-class ActionDropdown extends React.Component {
+class UserDropdown extends React.Component {
 
   constructor(props) {
     super(props);
@@ -23,7 +24,6 @@ class ActionDropdown extends React.Component {
 
   handleTouchTap(e) {
     e.preventDefault();
-
     this.setState({
       open: true,
       anchorEl: e.currentTarget,
@@ -39,9 +39,11 @@ class ActionDropdown extends React.Component {
   render() {
     return (
       <div>
-        <FloatingActionButton mini={true} onTouchTap={this.handleTouchTap}>
-           <ContentAdd />
+        <div className='header-user-dropdown' onTouchTap={this.handleTouchTap}>
+          {this.props.user.username}
+        <FloatingActionButton mini={true} style={style} >
         </FloatingActionButton>
+        </div>
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
@@ -50,10 +52,12 @@ class ActionDropdown extends React.Component {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
-            <MenuItem primaryText="Task" />
-            <MenuItem primaryText="Conversation" />
-            <MenuItem primaryText="Project" />
-            <MenuItem primaryText="Invite" />
+            <MenuItem primaryText="Teams" />
+            <MenuItem primaryText="..." />
+            <Divider />
+            <MenuItem primaryText='Settings' />
+            <Divider />
+            <MenuItem primaryText="Logout" onClick={this.props.logout}/>
           </Menu>
         </Popover>
       </div>
@@ -61,4 +65,4 @@ class ActionDropdown extends React.Component {
   }
 }
 
-export default ActionDropdown;
+export default UserDropdown;

@@ -168,3 +168,19 @@ body {
   background-color: white;
   color: #b2b2b2
 }*/
+
+/*Header*/
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  vertical-align: center;
+}
+.header-user-dropdown {
+  cursor: pointer;
+}
+
+.header-user-dropdown:hover {
+  color: '#1aafd0';
+  cursor: pointer;
+}

@@ -6,7 +6,6 @@ import TasksContainer from './tasks/tasks_container'
 
 const App = ({ children }) => (
   <div>
-    <h1>Shmasana</h1>
     <HeaderContainer />
     {children}
   </div>

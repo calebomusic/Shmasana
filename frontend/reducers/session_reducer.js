@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { hashHistory } from 'react-router';
 import { RECEIVE_CURRENT_USER, RECEIVE_ERRORS, LOGOUT} from '../actions/session_actions.js';
 
 const null_user = {
@@ -21,6 +22,7 @@ export default (state = null_user, action) => {
         errors: action.errors.responseJSON
       }
     case LOGOUT:
+      hashHistory.replace('/login')
       return null_user
     default:
       return state;
