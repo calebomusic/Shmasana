@@ -30,7 +30,7 @@ class SessionForm extends React.Component {
   }
 
   disableButton(){
-    if(this.state.username.length > 0 || this.state.password.length > 0) {
+    if(this.state.username.length > 0 && this.state.password.length > 0) {
       return false;
     } else {
       return true;
@@ -65,23 +65,26 @@ class SessionForm extends React.Component {
 
   render(){
     return(
-      <div className='session'>
-        <h1>{this.props.formType}</h1>
+      <div>
+        <div className='session-form'>
 
-        <p className='or'>or</p>
+          <h1 className='session-title'>{this.props.formType}</h1>
 
-        <ul className='errors'>{this.props.errors.responseText}</ul>
+          <div className='or'><hr />or<hr /></div>
 
-        <form onSubmit={this.handleSubmit} className='session-form'>
-          Username:
-          <input className='session-input' value={this.state.username} onChange={this.updateForm('username')}></input>
-          Password:
-          <input className='session-input' value={this.state.password} type='password' onChange={this.updateForm('password')}></input>
-          <PrimaryButton type='submit' label={this.props.formType} disabled={this.disableButton()}/>
-        </form>
+          <ul className='errors'>{this.props.errors.responseText}</ul>
 
-        {this.renderFooter()}
-      </div>)
+          <form onSubmit={this.handleSubmit}>
+            <label className='session-label'>USERNAME</label>
+            <input className='session-input' value={this.state.username} onChange={this.updateForm('username')}></input>
+            <label className='session-label'>PASSWORD</label>
+            <input className='session-input' value={this.state.password} type='password' onChange={this.updateForm('password')}></input>
+            <PrimaryButton className='session-form-button' type='submit' label={this.props.formType} disabled={this.disableButton()}/>
+          </form>
+        </div>
+          <footer className='session-footer'>{this.renderFooter()}</footer>
+        </div>)
+
   }
 }
 
