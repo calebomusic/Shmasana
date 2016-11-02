@@ -74,6 +74,7 @@ class SignUpHome extends React.Component {
           <div className='message-title'>Move work forward</div>
           <div className='message-subtitle'>Shmasana is the easiest way for teams to track their work—and get shmresults.</div>
         </div>
+        <footer></footer>
       </div>)
 
   }

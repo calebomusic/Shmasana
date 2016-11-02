@@ -133,11 +133,6 @@ body {
   margin-top: 5px;
 }
 
-.session-form-button {
-  position: absolute;
-  left: 1000px;
-  font-size: 100px;
-}
 
 .errors {
   font-size: 14px;
@@ -158,7 +153,8 @@ body {
 
 .session-footer {
   float: right;
-  margin-right: 28.5%;
+  margin-right: 420px;
+  display: block;
   font-size: 14px;
   color: white;
   background-color:transparent;
