@@ -14,7 +14,7 @@ class SessionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateForm = this.updateForm.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
-    this.logIn = this.logIn.bind(this);
+    this.signUp = this.signUp.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
   };
 
@@ -36,9 +36,9 @@ class SessionForm extends React.Component {
     }
   }
 
-  logIn(e) {
+  signUp(e) {
     e.preventDefault();
-    hashHistory.replace('/login');
+    hashHistory.push('/signup');
   }
 
   renderFooter() {

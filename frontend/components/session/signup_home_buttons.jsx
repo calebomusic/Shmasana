@@ -1,6 +1,7 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 
+import Modal from 'react-modal'
 import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
@@ -22,10 +23,10 @@ const demoStyle = {
   margin: 10
 };
 
-export const GetStarted = () => (
+export const GetStarted = (props) => (
   <RaisedButton label='Get Started for Free'
     backgroundColor='#6a67ce' labelColor='white'
-    style={getStartedStyle} onTouchTap={signUp}/>
+    style={getStartedStyle} onTouchTap={props.onTouchTap} />
 )
 
 export const Demo = () => (
@@ -44,9 +45,5 @@ const _redirectToLogin = () => {
 }
 
 const loginDemo = () => {
-
-}
-
-const signUp = () => {
 
 }

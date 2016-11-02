@@ -1,4 +1,11 @@
 /*Sign Up Home*/
+
+
+.signup-home{
+  background: #ff6d92 radial-gradient(circle at center,#f5b200 0,#fc636b 30%,#ff6d92 70%);
+  background-image: radial-gradient(circle at center,#f5b200 0,#fc636b 30%,#ff6d92 70%);*/
+}
+
 .signup-header {
   display: flex;
   justify-content: space-between;
@@ -22,7 +29,7 @@
 
 .message {
   width: 600px;
-  height: 400px;
+  height: 550px;
   margin: 60px auto;
   margin-bottom: 10px;
   position: relative;
@@ -45,4 +52,52 @@
   margin-top: 20px;
   text-align: center;
   font-size: 1.375em;
+}
+
+.signup-form-modal {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-form {
+  width: 400px;
+  height: 450px;
+  margin: 80px auto;
+  margin-bottom: 10px;
+  position: relative;
+  display: block;
+  color: #898E95;
+  border: 1px;
+  border-radius: 5px;
+  padding: 50px;
+  background-color: white;
+}
+
+.signup-input {
+  width: 94%;
+  color: black;
+  border-top: 1px solid #C0B1C7;
+  border: 1px solid #b2b2b2;
+  padding: 10px;
+  border-radius: 3px;
+  -webkit-transition: all 0.30s ease-in-out;
+  background: white;
+  color: #b2b2b2;
+  margin-bottom: 25px;
+  margin-top: 5px;
+}
+
+.signup-form-button {
+  position: absolute;
+  left: 1000px;
+  font-size: 100px;
+}
+
+.signup-title {
+  text-align: center;
+  color: black;
+  font-size: 42px;
+  font-weight: normal;
+  vertical-align: center;
+  margin-bottom: 10px;
 }

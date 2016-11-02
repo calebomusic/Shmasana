@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def ensure_username
-    self.username = self.email
+    self.username = self.email if self.username.nil?
   end
 
   def ensure_session_token

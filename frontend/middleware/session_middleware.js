@@ -10,11 +10,13 @@ import { hashHistory } from 'react-router';
 
 
 export default ({getstate, dispatch}) => (next) => (action) => {
+
   const success = (user) => {
     dispatch(receiveCurrentUser(user));
     // TODO: replace to this route?
     hashHistory.replace('/');
   }
+
   const errors = (errors) => dispatch(receiveErrors(errors))
   switch (action.type) {
     case LOGIN:

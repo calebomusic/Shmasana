@@ -9,7 +9,6 @@ const null_user = {
 
 export default (state = null_user, action) => {
   Object.freeze(state);
-
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
       return {
@@ -17,7 +16,6 @@ export default (state = null_user, action) => {
         errors: []
       }
     case RECEIVE_ERRORS:
-      debugger
       return {
         currentUser: null,
         errors: action.errors.responseJSON

@@ -3,9 +3,10 @@ import { hashHistory } from 'react-router';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import {GetStarted, Login, Demo} from './signup_home_buttons';
+import SignUpFormModal from './signup_form_modal';
 
 
-class SessionForm extends React.Component {
+class SignUpHome extends React.Component {
   constructor(props) {
     super(props)
     this.state = {email: '', password: ''};
@@ -64,7 +65,7 @@ class SessionForm extends React.Component {
           <div className='signup-header-left'>Shmasana</div>
           <div className='signup-header-right'>
             <Demo />
-            <GetStarted />
+            <SignUpFormModal processForm={this.props.processForm} errors={this.props.errors}/>
             <Login />
           </div>
 
@@ -78,7 +79,7 @@ class SessionForm extends React.Component {
   }
 }
 
-export default SessionForm;
+export default SignUpHome;
 
 // return(
 //   <div className='session'>
