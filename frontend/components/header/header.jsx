@@ -7,7 +7,9 @@ import UserDropdown from './user_dropdown';
 const Header = (props) => {
   return(<div className='home-header'>
   <div className='home-header-left'>
-    <Link to='/'>My Tasks</Link>
+    <p>
+      <Link to='/'>MY TASKS</Link>
+    </p>
     <ActionDropdown />
   </div>
     <div className='home-header-right'>

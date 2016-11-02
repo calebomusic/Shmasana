@@ -40,7 +40,7 @@ class UserDropdown extends React.Component {
     return (
       <div>
         <div className='header-user-dropdown' onTouchTap={this.handleTouchTap}>
-          {this.props.user.username}
+          <p>{this.props.user.username}</p>
         <FloatingActionButton mini={true} style={style} >
         </FloatingActionButton>
         </div>

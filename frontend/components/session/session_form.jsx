@@ -2,8 +2,7 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 
 import RaisedButton from 'material-ui/RaisedButton';
-// import style from './session_style';
-import {PrimaryButton, FooterButton} from './session_style';
+import {PrimaryButton, FooterButton} from './session_form_buttons';
 
 
 class SessionForm extends React.Component {
@@ -16,9 +15,7 @@ class SessionForm extends React.Component {
     this.updateForm = this.updateForm.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.logIn = this.logIn.bind(this);
-    this.signUp = this.signUp.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
-    // this.renderEmailInput = this.renderEmailInput.bind(this);
   };
 
   handleSubmit(e) {
@@ -39,41 +36,18 @@ class SessionForm extends React.Component {
     }
   }
 
-  signUp(e) {
-    e.preventDefault();
-    hashHistory.replace('/signup');
-  }
-
   logIn(e) {
     e.preventDefault();
     hashHistory.replace('/login');
   }
 
-  renderFooter(){
-    if(this.props.formType === 'Log In') {
-      return(<div className='{this.formType}-footer'>
-      Don’t have an account?
-      <FooterButton onClick={this.signUp}
-        label='Sign up'/>
-      </div>)
-    } else {
-      return(<div className='{this.formType}-footer'>
-      Already have an account?
-      <FooterButton onClick={this.logIn}
-        label='Log in'/>
-      </div>)
-    }
+  renderFooter() {
+    return(<div className='{this.formType}-footer'>
+    Don’t have an account?
+    <FooterButton onClick={this.signUp}
+      label='Sign up'/>
+    </div>)
   }
-
-  // renderEmailInput(){
-  //   if(this.props.formType === 'Sign Up') {
-  //     return(<div>
-  //     <label className='session-label'>EMAIL</label>
-  //     <input className='session-input' value={this.state.email}
-  //       onChange={this.updateForm('email')}></input>
-  //     </div>)
-  //   }
-  // }
 
   renderErrors() {
     if(this.props.errors && this.props.errors.length > 0) {

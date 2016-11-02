@@ -82,9 +82,8 @@ body {
   border-radius: 2px;
   padding: 50px;
   background-color: white;
-
-
 }
+
 .or {
   display: flex;
   margin-bottom: 20px;
@@ -173,14 +172,72 @@ body {
 .home-header {
   display: flex;
   justify-content: space-between;
-  text-align: center;
-  vertical-align: center;
+  border-bottom: 1px solid;
+  background-color: #ffffff;
+  border-color: #EFF0F1;
+  color: #898e95;
+  font-size: 12px;
+  font-weight: normal;
 }
 .header-user-dropdown {
   cursor: pointer;
 }
 
+.home-header p {
+  margin-right: 5px;
+  padding: 12px;
+}
+
+.home-header p:hover {
+  color: #1AAFD0;
+  font-weight: normal;
+}
+
+
 .header-user-dropdown:hover {
   color: '#1aafd0';
   cursor: pointer;
+}
+
+.action-dropdown-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background-color: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%);
+}
+
+/*Sidebar and header*/
+
+.sidebar-header {
+  float: left;
+  width: 100%
+}
+
+/*Sidebar*/
+
+.sidebar {
+  background-color: white;
+  float: left;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  background-color: #ffffff;
+  border-color: #EFF0F1;
+  color: #898e95;
+  font-size: 12px;
+  font-weight: normal;
+  height: 100%;
+}
+
+/*Tasks*/
+
+.tasks {
+  width: 400px;
+  height: 600px;
+  padding-top: 100px;
+  margin-left: 200px;
+  /*margin: 80px auto;*/
+  /*background-color: red;*/
+  /*color: blue;*/
 }

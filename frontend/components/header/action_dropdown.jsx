@@ -4,7 +4,7 @@ import React from 'react';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-
+import Divider from 'material-ui/Divider'
 const style = {
   backgroundColor: '#fc7279'
 };
@@ -48,11 +48,14 @@ class ActionDropdown extends React.Component {
           anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
           onRequestClose={this.handleRequestClose}
-        >
+          >
           <Menu>
             <MenuItem primaryText="Task" />
+            <Divider />
             <MenuItem primaryText="Conversation" />
+            <Divider />
             <MenuItem primaryText="Project" />
+            <Divider />
             <MenuItem primaryText="Invite" />
           </Menu>
         </Popover>

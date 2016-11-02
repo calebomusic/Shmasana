@@ -1,0 +1,48 @@
+/*Sign Up Home*/
+.signup-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%
+  border: 1px solid;
+  background-color: white;
+  height: 60px;
+}
+
+.signup-header-left {
+  margin-top: 16px;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.signup-home-right {
+  /*display: block;
+  float: right;*/
+}
+
+.message {
+  width: 600px;
+  height: 400px;
+  margin: 60px auto;
+  margin-bottom: 10px;
+  position: relative;
+  display: block;
+  border: 1px;
+  border-radius: 2px;
+  padding: 50px;
+  color: white;
+}
+
+.message-title {
+  vertical-align: center;
+  text-align: center;
+  font-size: 65px;
+  line-height: 60px;
+  max-width: 600px;
+}
+
+.message-subtitle {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.375em;
+}

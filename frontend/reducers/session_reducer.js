@@ -17,6 +17,7 @@ export default (state = null_user, action) => {
         errors: []
       }
     case RECEIVE_ERRORS:
+      debugger
       return {
         currentUser: null,
         errors: action.errors.responseJSON
