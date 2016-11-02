@@ -73,6 +73,7 @@ class SignUpFormModal extends React.Component {
           <div>
             <div className='session'>
              <div className='signup-form'>
+               <div className='signup-close-modal' onTouchTap={this.closeModal}>x</div>
                <h1 className='signup-title'>Sign Up</h1>
 
                {this.renderErrors()}

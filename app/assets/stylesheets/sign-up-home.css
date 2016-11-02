@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  border: 1px solid;
+  border-color: #898E95;
   background-color: white;
   height: 60px;
 }
@@ -100,4 +100,22 @@
   font-weight: normal;
   vertical-align: center;
   margin-bottom: 10px;
+}
+
+.signup-close-modal {
+  float: right;
+  position: relative;
+  bottom: 30px;
+  left: 20px;
+  margin-bottom: 30px;
+  font-size: 35px;
+  font-style: oblique;
+  font-weight: lighter;
+  color: #b9bcc0;
+  cursor: pointer;
+}
+
+.signup-close-modal:hover {
+  color: #1AAFD0;
+  font-weight: normal;
 }
