@@ -29,10 +29,14 @@ export const GetStarted = (props) => (
     style={getStartedStyle} onTouchTap={props.onTouchTap} />
 )
 
-export const Demo = () => (
-  <RaisedButton label='Demo'
-    style={demoStyle} />
-)
+export const Demo = (props) => {
+  const _loginDemoUser = () => {
+    props.login({user: { email: 'shmalebomusic@gmail.com', password: 'password'}});
+  }
+
+  return(<RaisedButton label='Demo'
+    style={demoStyle} onTouchTap={_loginDemoUser}/>)
+}
 
 
 export const Login = (props) => (
@@ -42,8 +46,4 @@ export const Login = (props) => (
 
 const _redirectToLogin = () => {
   hashHistory.push('/login')
-}
-
-const loginDemo = () => {
-
 }

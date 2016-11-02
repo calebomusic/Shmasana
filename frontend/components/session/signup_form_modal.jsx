@@ -52,7 +52,6 @@ class SignUpFormModal extends React.Component {
   }
 
   renderErrors() {
-    debugger
     if(this.props.errors && this.props.errors.length > 0) {
       return(
         <ul className='errors'>

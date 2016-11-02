@@ -18,6 +18,7 @@ export default ({getstate, dispatch}) => (next) => (action) => {
   }
 
   const errors = (errors) => dispatch(receiveErrors(errors))
+  
   switch (action.type) {
     case LOGIN:
       login(action.user, success, errors);

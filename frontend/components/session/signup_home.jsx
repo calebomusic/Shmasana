@@ -64,8 +64,8 @@ class SignUpHome extends React.Component {
         <div className='signup-header'>
           <div className='signup-header-left'>Shmasana</div>
           <div className='signup-header-right'>
-            <Demo />
-            <SignUpFormModal processForm={this.props.processForm} errors={this.props.errors}/>
+            <Demo login={this.props.login} />
+            <SignUpFormModal errors={this.props.errors}/>
             <Login />
           </div>
 
@@ -80,28 +80,3 @@ class SignUpHome extends React.Component {
 }
 
 export default SignUpHome;
-
-// return(
-//   <div className='session'>
-//     <div className='session-form'>
-//
-//       <h1 className='session-title'>{this.props.formType}</h1>
-//
-//       <div className='or'><hr /><p>door</p><hr /></div>
-//
-//       {this.renderErrors()}
-//
-//       <form onSubmit={this.handleSubmit}>
-//         <label className='session-label'>EMAIL</label>
-//         <input className='session-input' value={this.state.email}
-//           onChange={this.updateForm('email')}></input>
-//
-//         <label className='session-label'>PASSWORD</label>
-//         <input className='session-input' value={this.state.password} type='password'
-//           onChange={this.updateForm('password')}></input>
-//         <PrimaryButton className='session-form-button' type='submit' label={this.props.formType}
-//           disabled={this.disableButton()}/>
-//       </form>
-//     </div>
-//       <footer className='session-footer'>{this.renderFooter()}</footer>
-//     </div>
