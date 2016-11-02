@@ -8,7 +8,7 @@ const Header = (props) => {
   return(<div className='home-header'>
   <div className='home-header-left'>
     <p>
-      <Link to='/'>MY TASKS</Link>
+      <Link to='/0'>MY TASKS</Link>
     </p>
     <ActionDropdown />
   </div>

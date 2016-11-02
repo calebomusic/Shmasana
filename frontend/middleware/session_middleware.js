@@ -14,7 +14,7 @@ export default ({getstate, dispatch}) => (next) => (action) => {
   const success = (user) => {
     dispatch(receiveCurrentUser(user));
     // TODO: replace to this route?
-    hashHistory.push('/');
+    hashHistory.push('/0');
   }
 
   const successfulLogout = (user) => {}

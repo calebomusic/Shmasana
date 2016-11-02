@@ -38,7 +38,7 @@ class SessionForm extends React.Component {
 
   signUp(e) {
     e.preventDefault();
-    hashHistory.push('/signup');
+    hashHistory.push('/');
   }
 
   renderFooter() {

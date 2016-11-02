@@ -37,7 +37,7 @@ class SignUpHome extends React.Component {
 
   signUp(e) {
     e.preventDefault();
-    hashHistory.replace('/signup');
+    hashHistory.replace('/');
   }
 
   logIn(e) {

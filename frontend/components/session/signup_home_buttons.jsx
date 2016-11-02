@@ -32,7 +32,6 @@ export const GetStarted = (props) => (
 export const Demo = (props) => {
   const _loginDemoUser = () => {
     props.login({user: { email: 'shmalebomusic@gmail.com', password: 'password'}});
-    hashHistory.push('/')
   }
 
   return(<RaisedButton label='Demo'
