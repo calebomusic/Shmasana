@@ -67,7 +67,7 @@ input[type="submit"] {
 body {
   background: #FF4E50; /* fallback for old browsers */
   background-color: #fc7279;
-  background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%)
+  background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%);
 }
 
 .session-form {
@@ -207,7 +207,7 @@ body {
 
 .sidebar-header {
   float: left;
-  width: 100%
+  width: 100%;
 }
 
 /*Sidebar*/
