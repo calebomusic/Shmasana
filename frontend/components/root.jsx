@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route, hashHistory} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import App from './app';
@@ -11,10 +11,11 @@ import { receiveErrors } from '../actions/session_actions';
 
 const Root = ({ store }) => {
 
-  const _redirectIfLoggedIn = () => {
+  const _redirectIfLoggedInAndClearErrors = () => {
       if(store.getState().session.currentUser) {
         hashHistory.replace('/');
       }
+      _clearErrors()
   }
 
   const _clearErrors = () => {
@@ -27,12 +28,11 @@ const Root = ({ store }) => {
       <Route path="/" component={App} ></Route>
       <Route path="/signup"
         component={SignUpHomeContainer}
-        onEnter={_redirectIfLoggedIn(store)}
-        onEnter={_clearErrors}></Route>
+        onEnter={_redirectIfLoggedInAndClearErrors}></Route>
       <Route path="/login"
         component={SessionFormContainer}
-        onEnter={_redirectIfLoggedIn(store)}
-        onEnter={_clearErrors}></Route>
+        onEnter={_redirectIfLoggedInAndClearErrors}
+        ></Route>
     </Router>
   </Provider>
   </MuiThemeProvider>);

@@ -5,6 +5,7 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+import { hashHistory } from 'react-router';
 
 const style = {
   backgroundColor: '#fc7279'
@@ -20,6 +21,7 @@ class UserDropdown extends React.Component {
 
     this.handleTouchTap = this.handleTouchTap.bind(this)
     this.handleRequestClose = this.handleRequestClose.bind(this)
+    this.logoutRedirect = this.logoutRedirect.bind(this);
   }
 
   handleTouchTap(e) {
@@ -36,6 +38,10 @@ class UserDropdown extends React.Component {
     });
   };
 
+  logoutRedirect() {
+    this.props.logout();
+    hashHistory.push('/login');
+  }
   render() {
     return (
       <div>
@@ -57,7 +63,7 @@ class UserDropdown extends React.Component {
             <Divider />
             <MenuItem primaryText='Settings' />
             <Divider />
-            <MenuItem primaryText="Logout" onClick={this.props.logout}/>
+            <MenuItem primaryText="Logout" onClick={this.logoutRedirect}/>
           </Menu>
         </Popover>
       </div>

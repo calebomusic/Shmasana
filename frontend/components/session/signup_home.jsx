@@ -9,7 +9,7 @@ import SignUpFormModal from './signup_form_modal';
 class SignUpHome extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {email: '', password: ''};
+    this.state = {email: '', password: '', username: ''};
 
     this.disableButton = this.disableButton.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -65,7 +65,7 @@ class SignUpHome extends React.Component {
           <div className='signup-header-left'>Shmasana</div>
           <div className='signup-header-right'>
             <Demo login={this.props.login} />
-            <SignUpFormModal errors={this.props.errors}/>
+            <SignUpFormModal processForm={this.props.processForm}   errors={this.props.errors}/>
             <Login />
           </div>
 

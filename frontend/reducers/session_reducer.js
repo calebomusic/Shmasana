@@ -21,8 +21,7 @@ export default (state = null_user, action) => {
         errors: action.errors.responseJSON
       }
     case LOGOUT:
-      hashHistory.replace('/login')
-      return null_user
+      return null_user;
     default:
       return state;
   }
