@@ -72,7 +72,7 @@ body {
 
 .session-form {
   width: 400px;
-  height: 400px;
+  height: 450px;
   margin: 80px auto;
   margin-bottom: 10px;
   position: relative;
@@ -110,13 +110,22 @@ body {
   height: 0%;
 }
 
+.session-demo-button {
+  bottom: 3px;
+  margin-left: 37%;
+  position: relative;
+  margin-bottom: 15px;
+  display: inline-block;
+  vertical-align: center;
+}
+
 .session-title {
   text-align: center;
   color: black;
   font-size: 42px;
   font-weight: normal;
   vertical-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 22px;
 }
 
 .session-input {
@@ -129,7 +138,7 @@ body {
   -webkit-transition: all 0.30s ease-in-out;
   background: white;
   color: #b2b2b2;
-  margin-bottom: 30px;
+  margin-bottom: 27px;
   margin-top: 5px;
 }
 

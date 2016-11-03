@@ -3,6 +3,7 @@ import { hashHistory } from 'react-router';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import {PrimaryButton, FooterButton} from './session_form_buttons';
+import { Demo } from './signup_home_buttons';
 
 
 class SessionForm extends React.Component {
@@ -68,6 +69,8 @@ class SessionForm extends React.Component {
         <div className='session-form'>
 
           <h1 className='session-title'>{this.props.formType}</h1>
+
+          <div className='session-demo-button'><Demo login={this.props.formType} /></div>
 
           <div className='or'><hr /><p>or</p><hr /></div>
 
