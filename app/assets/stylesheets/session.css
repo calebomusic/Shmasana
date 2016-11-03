@@ -4,18 +4,24 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 60px auto;
+}
+
+.session-logo {
+  margin-top: 15px;
+  /*padding-top: 30px*/
+  margin-bottom: 28px;
+  font-size: 24px;
+  color: white;
 }
 .session-form {
-  width: 400px;
+  width: 450px;
   height: 450px;
-  margin: 60px auto;
   margin-bottom: 10px;
   position: relative;
   display: block;
   color: #898E95;
   border: 1px;
-  border-radius: 2px;
+  border-radius: 3.5px;
   padding: 50px;
   background-color: white;
 }
@@ -98,7 +104,7 @@
 
 .session-footer {
   float: right;
-  margin-left: 265px;
+  margin-left: 322px;
   font-size: 14px;
   color: white;
   background-color:transparent;

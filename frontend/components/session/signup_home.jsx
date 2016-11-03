@@ -62,7 +62,7 @@ class SignUpHome extends React.Component {
     return(
       <div className='signup-home'>
         <div className='signup-header'>
-          <div className='signup-header-left'>Shmasana</div>
+          <div className='signup-header-left'>shmasana</div>
           <div className='signup-header-right'>
             <Demo login={this.props.login} />
             <SignUpFormModal processForm={this.props.processForm}   errors={this.props.errors}/>

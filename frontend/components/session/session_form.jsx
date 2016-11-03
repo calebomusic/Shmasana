@@ -66,11 +66,12 @@ class SessionForm extends React.Component {
   render(){
     return(
       <div className='session'>
+        <div className='session-logo'>shmasana</div>
         <div className='session-form'>
 
           <h1 className='session-title'>{this.props.formType}</h1>
 
-          <div className='session-demo-button'><Demo login={this.props.formType} /></div>
+          <div className='session-demo-button'><Demo login={this.props.processForm} /></div>
 
           <div className='or'><hr /><p>or</p><hr /></div>
 

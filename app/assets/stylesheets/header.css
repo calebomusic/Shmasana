@@ -7,7 +7,7 @@
   border-color: #EFF0F1;
   color: #898e95;
   font-size: 12px;
-  font-weight: normal;
+  font-weight: normal;``
 }
 
 .header-user-dropdown {
@@ -70,7 +70,4 @@
   height: 600px;
   padding-top: 100px;
   margin-left: 200px;
-  /*margin: 80px auto;*/
-  /*background-color: red;*/
-  /*color: blue;*/
 }
