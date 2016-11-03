@@ -88,7 +88,9 @@ class SessionForm extends React.Component {
               disabled={this.disableButton()}/>
           </form>
         </div>
-          <footer className='session-footer'>{this.renderFooter()}</footer>
+        <footer className='session-footer'>
+          {this.renderFooter()}
+        </footer>
         </div>)
 
   }

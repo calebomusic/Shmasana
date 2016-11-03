@@ -1,0 +1,106 @@
+
+/*Session Form*/
+.session {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 60px auto;
+}
+.session-form {
+  width: 400px;
+  height: 450px;
+  margin: 60px auto;
+  margin-bottom: 10px;
+  position: relative;
+  display: block;
+  color: #898E95;
+  border: 1px;
+  border-radius: 2px;
+  padding: 50px;
+  background-color: white;
+}
+
+.or {
+  display: flex;
+  margin-bottom: 20px;
+  font-size: 24px;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: #B9BCC0;
+}
+
+.or p {
+  position: relative;
+  bottom: 3px;
+  margin-left: 7px;
+  margin-right: 7px;
+
+  text-align: justify;
+}
+
+.or > hr {
+  width: 38%;
+  flex-grow: 1;
+  font-size: 100%;
+  font-weight: 0px;
+  height: 0%;
+}
+
+.session-demo-button {
+  bottom: 3px;
+  margin-left: 36.5%;
+  position: relative;
+  margin-bottom: 15px;
+  display: inline-block;
+  vertical-align: center;
+}
+
+.session-title {
+  text-align: center;
+  color: black;
+  font-size: 42px;
+  font-weight: normal;
+  vertical-align: center;
+  margin-bottom: 22px;
+}
+
+.session-input {
+  width: 94%;
+  color: black;
+  border-top: 1px solid #C0B1C7;
+  border: 1px solid #b2b2b2;
+  padding: 10px;
+  border-radius: 3px;
+  -webkit-transition: all 0.30s ease-in-out;
+  background: white;
+  color: #b2b2b2;
+  margin-bottom: 30px;
+  margin-top: 5px;
+}
+
+
+.errors {
+  font-size: 14px;
+  background-color: #FEEDED;
+  text-align: center;
+  border-radius: 3px;
+  clear: both;
+  color: #49505B;
+  line-height: 1.25;
+  padding: 15px;
+  text-align: center;
+}
+
+.session-label {
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+.session-footer {
+  float: right;
+  margin-left: 265px;
+  font-size: 14px;
+  color: white;
+  background-color:transparent;
+  margin-bottom: 50px;
+}
