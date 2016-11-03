@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
   validates :username, :email, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  has_many :workspacings
+  has_many :join_user_workspaces
   has_many :workspaces,
-    through: :workspacings,
+    through: :join_user_workspaces,
     source: :workspace
 
   attr_reader :password

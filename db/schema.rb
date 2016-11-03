@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102224023) do
+ActiveRecord::Schema.define(version: 20161103000242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "join_user_workspaces", force: :cascade do |t|
+    t.integer  "user_id",      null: false
+    t.integer  "workspace_id", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "join_user_workspaces", ["user_id", "workspace_id"], name: "index_join_user_workspaces_on_user_id_and_workspace_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
