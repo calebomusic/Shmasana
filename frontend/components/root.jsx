@@ -22,6 +22,12 @@ const Root = ({ store }) => {
     store.dispatch(receiveErrors({errors: []}))
   }
 
+  const _redirectToSignUpHomeIfNotLoggedIn = () => {
+    if(store.getState().session.currentUser === null) {
+      hashHistory.replace('/')
+    }
+  }
+
   return(<MuiThemeProvider>
   <Provider store={store}>
     <Router history={hashHistory}>
@@ -31,7 +37,8 @@ const Root = ({ store }) => {
         component={SessionFormContainer}
         onEnter={_redirectIfLoggedInAndClearErrors}
         ></Route>
-      <Route path="/0" component={App} ></Route>
+      <Route path="/0" component={App}
+        onEnter={_redirectToSignUpHomeIfNotLoggedIn}></Route>
     </Router>
   </Provider>
   </MuiThemeProvider>);

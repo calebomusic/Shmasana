@@ -36,7 +36,7 @@ export const updateWorkspace = (workspace, success, errors) => (
 export const createWorkspace = (workspace, success, errors) => (
   $.ajax({
     url: `api/workspaces`,
-    type: 'create',
+    type: 'post',
     data: {workspace},
     success,
     errors

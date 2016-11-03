@@ -16,9 +16,13 @@ export default (state = null_user, action) => {
         errors: []
       }
     case RECEIVE_ERRORS:
+      let errors;
+      if(action.errors.responseJSON) {
+        errors = action.errors.responseJSON.slice(0, 2)
+      }
       return {
         currentUser: null,
-        errors: action.errors.responseJSON
+        errors: errors
       }
     case LOGOUT:
       return null_user;

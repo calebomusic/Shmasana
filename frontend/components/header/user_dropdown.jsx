@@ -60,6 +60,10 @@ class UserDropdown extends React.Component {
             <MenuItem primaryText="Teams" />
             <MenuItem primaryText="..." />
             <Divider />
+            <MenuItem primaryText="Create WorkSpace"
+              onClick={this.props.createWorkspace({})}
+              />
+            <Divider />
             <MenuItem primaryText='Settings' />
             <Divider />
             <MenuItem primaryText="Logout" onClick={this.logoutRedirect}/>
