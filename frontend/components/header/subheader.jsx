@@ -7,23 +7,27 @@ class SubHeader extends React.Component {
     super(props)
     this.state = {workspaceName: ''}
     this.fetchWorkspace = fetchWorkspace.bind(this)
-
-    // fetchWorkspace(this.props.currentUser, workspace_id, (workspace) => {
-    //   workspaceName = workspace.name;
-    // });
+    this.subheaderChange = this.subheaderChange.bind(this)
   }
 
   componentWillMount() {
-    debugger
-    if(this.props.workspace) {
-      this.setState({workspaceName: this.props.workspace.name})
-    } else {
-      const workspace_id = parseInt(this.props.params.workspaceId);
-      this.fetchWorkspace(workspace_id, this.props.currentUser, (workspace) => {
-        this.setState({workspaceName: workspace.name});
-      });
-    }
+    this.subheaderChange(this.props);
   }
+
+  componentWillReceiveProps(newProps) {
+    this.subheaderChange(newProps);
+  }
+
+  subheaderChange(props) {
+    if(props.workspace) {
+      this.setState({workspaceName: props.workspace.name})
+    } else {
+      const workspace_id = parseInt(props.params.workspaceId);
+      this.fetchWorkspace(workspace_id, props.currentUser, (workspace) => {
+        this.setState({workspaceName: workspace.name});
+    });
+  }}
+
   render() {
     return(
       <div className='subheader'>

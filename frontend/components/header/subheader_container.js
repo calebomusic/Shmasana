@@ -3,7 +3,6 @@ import SubHeader from './subheader';
 import { fetchWorkspace } from '../../actions/workspace_actions';
 
 const mapStateToProps = (state, ownProps) => {
-  debugger
   let workspace
   if (Object.keys(state.workspace).length > 0) {
     workspace = state.workspace[Object.keys(state.workspace)[0]]
