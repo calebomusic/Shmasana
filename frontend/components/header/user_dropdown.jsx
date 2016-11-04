@@ -17,20 +17,22 @@ class UserDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      open: false, modal: false
     };
 
     this.handleTouchTap = this.handleTouchTap.bind(this)
     this.handleRequestClose = this.handleRequestClose.bind(this)
     this.logoutRedirect = this.logoutRedirect.bind(this);
     this.createWorkspace = this.createWorkspace.bind(this);
+    this.openModalAndClose = this.openModalAndClose.bind(this);
   }
 
   handleTouchTap(e) {
     e.preventDefault();
     this.setState({
       open: true,
-      anchorEl: e.currentTarget,
+      modal: false,
+      anchorEl: e.currentTarget
     });
   };
 
@@ -48,9 +50,26 @@ class UserDropdown extends React.Component {
   createWorkspace() {
     this.props.createWorkspace({workspace: { name: '' }})
   }
+
+  openModalAndClose() {
+    this.setState({['modal']: true})
+    this.handleRequestClose();
+  }
   render() {
-    return (
-      <div>
+    console.log(this.state.modal);
+    if (this.state.modal) {
+      return(
+        <div>
+          <div className='header-user-dropdown' onTouchTap={this.handleTouchTap}>
+            <p>{this.props.user.username}</p>
+          <FloatingActionButton mini={true} style={style} >
+          </FloatingActionButton>
+        </div>
+          <CreateWorkspaceModal
+          createWorkspace={this.props.createWorkspace} />
+        </div>)
+    } else {
+      return(<div>
         <div className='header-user-dropdown' onTouchTap={this.handleTouchTap}>
           <p>{this.props.user.username}</p>
         <FloatingActionButton mini={true} style={style} >
@@ -67,15 +86,15 @@ class UserDropdown extends React.Component {
             <MenuItem primaryText="Teams" />
             <MenuItem primaryText="..." />
             <Divider />
-            <CreateWorkspaceModal createWorkspace={this.props.createWorkspace}/>
+            <MenuItem primaryText="Create Workspace" onTouchTap={this.openModalAndClose}/>
             <Divider />
             <MenuItem primaryText='Settings' />
             <Divider />
             <MenuItem primaryText="Logout" onClick={this.logoutRedirect}/>
           </Menu>
         </Popover>
-      </div>
-    );
+      </div>)
+    }
   }
 }
 

@@ -1,13 +1,15 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import Modal from 'react-modal';
+
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
-import PrimaryButton from '../session/signup_home_buttons';
+import { PrimaryButton } from '../session/session_form_buttons';
 
 class CreateWorkspaceModal extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { name: "", modalOpen: false }
+    this.state = { name: "", modalOpen: true }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -15,6 +17,7 @@ class CreateWorkspaceModal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateForm = this.updateForm.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+
   }
 
   closeModal() {
@@ -39,9 +42,7 @@ class CreateWorkspaceModal extends React.Component {
   }
 
   disableButton(){
-    if(this.state.email.length > 0
-      && this.state.password.length > 0
-        && this.state.username.length > 0) {
+    if(this.state.name.length > 0) {
       return false;
     } else {
       return true;
@@ -64,29 +65,52 @@ class CreateWorkspaceModal extends React.Component {
   render(){
     return(
       <div className='signup-form-modal'>
-        <MenuItem primaryText="Create WorkSpace" onTouchTap={this.openModal} />
-      <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal} className='login-form-modal'>
-
-          <div>
+          <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal} >
+            <div>
             <div>Create Your WorkSpace</div>
             <div className='signup-close-modal' onTouchTap={this.closeModal}>x</div>
 
+              <form onSubmit={this.handleSubmit}>
 
-               <form onSubmit={this.handleSubmit}>
-                 <label className='session-label'>WORKSPACE NAME</label>
-                 <input className='signup-input' value={this.state.name}
-                   onChange={this.updateForm('name')}></input>
-                 <label className='session-label'>MEMBERS</label>
-                   <input className='signup-input' value={this.state.name}
-                     onChange={this.updateForm('name')}></input>
-                   <PrimaryButton className='login-form-button' type='submit' label='Create Workspace' />
-               </form>
-        </div>
-      </Modal>
+                <label className='session-label'>WORKSPACE NAME</label>
+                <input className='signup-input' value={this.state.name}
+                  placeholder='Company or Team Name'
+                  onChange={this.updateForm('name')}></input>
+
+                <label className='session-label'>MEMBERS</label>
+                  <input className='signup-input' type='text-area'
+                    placeholder='separate emails with commas'></input>
+
+                <PrimaryButton className='login-form-button' type='submit' label='Create'
+                   disabled={this.disableButton()} />
+              </form>
+              </div>
+          </Modal>
     </div>
     )
   }
 }
 
 // Add way to add members!
-export default CreateWorkspaceModal;
+export default withRouter(CreateWorkspaceModal);
+// <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal} className='login-form-modal'>
+//   <div>Can you see me?
+//   </div>
+// </Modal>
+
+// <div>Create Your WorkSpace</div>
+// <div className='signup-close-modal' onTouchTap={this.closeModal}>x</div>
+//
+//
+//    <form onSubmit={this.handleSubmit}>
+//      <label className='session-label'>WORKSPACE NAME</label>
+//      <input className='signup-input' value={this.state.name}
+//        onChange={this.updateForm('name')}></input>
+//      <label className='session-label'>MEMBERS</label>
+//        <input className='signup-input' value={this.state.name}
+//          onChange={this.updateForm('name')}></input>
+//        <PrimaryButton className='login-form-button' type='submit' label='Create Workspace' />
+//    </form>
+
+// <input className='signup-input' value={this.state.name}
+//   onChange={this.updateForm('name')}></input>
