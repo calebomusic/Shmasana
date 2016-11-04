@@ -15,6 +15,7 @@ const mapDispatchToProps = (dispatch) => (
   {
     logout: () => dispatch(logout()),
     createWorkspace: (workspace) => dispatch(createWorkspace(workspace)),
+    fetchWorkspace: (id) => dispatch(fetchWorkspace(id)),
     fetchWorkspaces: () => dispatch(fetchWorkspaces())
   }
 )

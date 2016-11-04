@@ -14,10 +14,15 @@ class SubHeader extends React.Component {
   }
 
   componentWillMount() {
-    const workspace_id = parseInt(this.props.params.workspaceId);
-    this.fetchWorkspace(this.props.currentUser, workspace_id, (workspace) => {
-      this.setState({workspaceName: workspace.name});
-    });
+    debugger
+    if(this.props.workspace) {
+      this.setState({workspaceName: this.props.workspace.name})
+    } else {
+      const workspace_id = parseInt(this.props.params.workspaceId);
+      this.fetchWorkspace(workspace_id, this.props.currentUser, (workspace) => {
+        this.setState({workspaceName: workspace.name});
+      });
+    }
   }
   render() {
     return(

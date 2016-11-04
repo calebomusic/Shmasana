@@ -15,7 +15,7 @@ const Header = (props) => {
     <div className='home-header-right'>
       <UserDropdown user={props.currentUser}
         logout={props.logout} fetchWorkspaces={props.fetchWorkspaces}
-        createWorkspace={props.createWorkspace}
+        createWorkspace={props.createWorkspace} fetchWorkspace={props.fetchWorkspace}
         />
     </div>
   </div>)

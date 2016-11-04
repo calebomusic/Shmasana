@@ -5,7 +5,9 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
-import { hashHistory } from 'react-router';
+import { Link, hashHistory } from 'react-router';
+
+import { fetchUserWorkspaces } from '../../util/workspace_api_util'
 
 import CreateWorkspaceModal  from './create_workspace_modal';
 
@@ -17,7 +19,7 @@ class UserDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false, modal: false
+      open: false, modal: false, workspaces: []
     };
 
     this.handleTouchTap = this.handleTouchTap.bind(this)
@@ -25,8 +27,16 @@ class UserDropdown extends React.Component {
     this.logoutRedirect = this.logoutRedirect.bind(this);
     this.createWorkspace = this.createWorkspace.bind(this);
     this.openModalAndClose = this.openModalAndClose.bind(this);
+    this.renderTeams = this.renderTeams.bind(this);
+    this.fetchUserWorkspaces = fetchUserWorkspaces.bind(this);
+    this.closeAndFetchWorkspace = this.closeAndFetchWorkspace.bind(this);
   }
-
+  componentWillMount() {
+    const userId = this.props.user.id
+    this.fetchUserWorkspaces(userId, (workspaces) => {
+      this.setState({workspaces: workspaces});
+    });
+  }
   handleTouchTap(e) {
     e.preventDefault();
     this.setState({
@@ -55,8 +65,23 @@ class UserDropdown extends React.Component {
     this.setState({['modal']: true})
     this.handleRequestClose();
   }
+
+  renderTeams() {
+    return(this.state.workspaces.map( (workspace) => {
+      let closeAndFetchWorkspace = this.closeAndFetchWorkspace.bind(this, workspace.id);
+      return(<MenuItem primaryText={workspace.name} key={workspace.id}
+        onTouchTap={closeAndFetchWorkspace}>
+      </MenuItem>)
+      }
+    ))
+  }
+
+  closeAndFetchWorkspace(id) {
+    this.props.fetchWorkspace(id);
+    this.handleRequestClose();
+  }
+
   render() {
-    console.log(this.state.modal);
     if (this.state.modal) {
       return(
         <div>
@@ -83,8 +108,7 @@ class UserDropdown extends React.Component {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
-            <MenuItem primaryText="Teams" />
-            <MenuItem primaryText="..." />
+            {this.renderTeams()}
             <Divider />
             <MenuItem primaryText="Create Workspace" onTouchTap={this.openModalAndClose}/>
             <Divider />

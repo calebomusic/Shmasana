@@ -1,10 +1,10 @@
-export const fetchWorkspace = (user, id, success, errors) => (
+export const fetchWorkspace = (id, user, success, errors) => {
   $.ajax({
     url: `api/users/${user.id}/workspaces/${id}`,
     success,
     errors
   })
-)
+}
 
 export const fetchWorkspaces = (success, errors) => (
   $.ajax({
@@ -22,7 +22,7 @@ export const fetchUserWorkspaces = (id, success, errors) => {
   })
 }
 
-export const deleteWorkspace = (user, id, success, errors) => (
+export const deleteWorkspace = (id, user, success, errors) => (
   $.ajax({
     url: `api/users/${user.id}/workspaces/${id}`,
     type: 'delete',
@@ -31,7 +31,7 @@ export const deleteWorkspace = (user, id, success, errors) => (
   })
 )
 
-export const updateWorkspace = (user, id, success, errors) => (
+export const updateWorkspace = (id, user, success, errors) => (
   $.ajax({
     url: `api/users/${user.id}/workspaces/${id}`,
     type: 'patch',

@@ -75,7 +75,7 @@ const WorkspacesMiddleware = store => next => action => {
       createWorkspace(action.workspace, currentUser, receiveWorkspaceSuccess);
       return next(action);
     case UPDATE_WORKSPACE:
-      updateWorkspace(action.workspace, receiveWorkspaceSuccess);
+      updateWorkspace(action.workspace, currentUser, receiveWorkspaceSuccess);
       return next(action);
     case DELETE_WORKSPACE:
       deleteWorkspace(action.id, removeWorkspaceSuccess);
