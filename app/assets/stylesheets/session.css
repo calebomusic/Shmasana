@@ -4,6 +4,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #FF4E50;
+  background-color: #fc7279;
+  background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%);
+  background-size: cover;
 }
 
 .session-logo {

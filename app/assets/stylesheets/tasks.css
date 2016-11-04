@@ -1,7 +1,7 @@
 .tasks {
   background-color: #F8F8F9;
   background-image: linear-gradient(to bottom,#F8F8F9, #EFF0F1);
-  height: 750px;
+  height: 100%;
   display: flex;
   justify-content: space-around;;
   align-items: center;
@@ -11,7 +11,7 @@
 
 .task-list {
   background-color: green;
-  height: 98%;
+  height: 96%;
   width: 75%;
   border: 1px solid;
   border-color: #EFF0F1;
@@ -23,7 +23,7 @@
   border: 1px solid;
   border-color: #EFF0F1;
   background-color: white;
-  height: 98%;
+  height: 96%;
   width: 50%;
   margin-right: .5%;
   margin-left: 1.5%;

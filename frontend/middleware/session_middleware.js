@@ -22,6 +22,7 @@ export default (store) => (next) => (action) => {
     store.dispatch(receiveCurrentUser(user));
     store.dispatch(createWorkspace({name: user.username}))
   }
+  
   const successfulLogout = (user) => {}
 
   const errors = (errors) => store.dispatch(receiveErrors(errors))

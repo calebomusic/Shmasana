@@ -14,7 +14,7 @@
  *= require_self
  */
 
- header, nav, h1, h2, h4, h5, a, ul, li, div, form, p, input, button {
+ html, body, header, nav, h1, h2, h4, h5, a, ul, li, div, form, p, input, button {
    margin: 0;
    padding: 0;
    border: 0;
@@ -56,6 +56,7 @@
 #root {
     margin: 0;
     height: 100%;
+    width: 100%;
 }
 
  ul {
@@ -85,11 +86,4 @@ input[type="submit"] {
   content: "";
   display: block;
   clear: both;
-}
-
-body {
-  background-size: cover;
-  background: #FF4E50;
-  background-color: #fc7279;
-  background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%);
 }

@@ -8,14 +8,14 @@ import SessionFormContainer from './session/session_form_container';
 import SignUpHomeContainer from './session/signup_home_container'
 
 import { receiveErrors } from '../actions/session_actions';
+import { fetchUserWorkspacesOnLogin } from '../actions/workspace_actions';
 
 const Root = ({ store }) => {
 
   const _redirectIfLoggedInAndClearErrors = () => {
       let currentUser = store.getState().session.currentUser
       if(currentUser) {
-        // fix this to redirect to user/workspace
-        hashHistory.replace(`/${currentUser.id}/1`);
+        store.dispatch(fetchUserWorkspacesOnLogin(currentUser.id))
       }
       _clearErrors()
   }
@@ -25,8 +25,11 @@ const Root = ({ store }) => {
   }
 
   const _redirectToSignUpHomeIfNotLoggedIn = () => {
-    if(store.getState().session.currentUser === null) {
+    const currentUser = store.getState().session.currentUser
+    if(!currentUser) {
       hashHistory.replace('/')
+    } else if(!store.getState().workspace || !store.getState().workspace.name) {
+      store.dispatch(fetchUserWorkspacesOnLogin(currentUser.id))
     }
   }
 

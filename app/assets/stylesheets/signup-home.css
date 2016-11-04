@@ -3,7 +3,13 @@
 .signup-home {
   background: #ff6d92 radial-gradient(circle at center,#f5b200 0,#fc636b 30%,#ff6d92 70%);
   background-image: radial-gradient(circle at center,#f5b200 0,#fc636b 30%,#ff6d92 70%);
+  background-origin: border-box;
+  background-position: 0px -125px;
   height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .signup-header {
@@ -121,6 +127,8 @@
 }
 
 .signup-home footer {
+  display: flex;
+  align-items: flex-end;
   background-color: white;
   height: 25%;
 }
