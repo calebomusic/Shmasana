@@ -1,17 +1,17 @@
 import React from 'react';
 
-import HeaderContainer from './header/header_container'
+import AllHeaders from './header/all_headers';
 import SideBarContainer from './sidebar/sidebar_drawer_container'
 import TasksContainer from './tasks/tasks_container'
 
 
 const App = ({ children }) => (
   <div>
-    <div className='sidebar-header'>
-      <SideBarContainer />
-      <HeaderContainer  />
+    <SideBarContainer />
+    <div className='main-content'>
+      <AllHeaders />
+      <TasksContainer />
     </div>
-    <TasksContainer />
       {children}
   </div>
 );

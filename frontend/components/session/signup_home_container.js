@@ -12,7 +12,8 @@ const mapDispatchToProps = (dispatch, ownProps) => (
   {
     formType: 'Sign Up',
     processForm: (user) => dispatch(signup(user)),
-    login: (user) => dispatch(login(user))
+    login: (user) => dispatch(login(user)),
+    createWorkspace: (workspace) => dispatch(createWorkspace(workspace))
   }
 )
 

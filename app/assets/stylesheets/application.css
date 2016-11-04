@@ -14,7 +14,7 @@
  *= require_self
  */
 
- html, body, header, nav, h1, h2, h4, h5, a, ul, li, div, form, p, input, button {
+ header, nav, h1, h2, h4, h5, a, ul, li, div, form, p, input, button {
    margin: 0;
    padding: 0;
    border: 0;
@@ -32,6 +32,31 @@
 
    background: transparent;
  }
+
+  html, body {
+    margin: 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    outline: 0;
+
+    font: inherit;
+    font-family: 'Roboto', sans-serif;
+    color: inherit;
+    text-align: inherit;
+    text-decoration: inherit;
+    vertical-align: inherit;
+    display: inherit;
+
+    box-sizing: inherit;
+
+    background: transparent;
+  }
+
+#root {
+    margin: 0;
+    height: 100%;
+}
 
  ul {
   list-style: none;
@@ -63,7 +88,8 @@ input[type="submit"] {
 }
 
 body {
-  background: #FF4E50; /* fallback for old browsers */
+  background-size: cover;
+  background: #FF4E50;
   background-color: #fc7279;
   background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%);
 }

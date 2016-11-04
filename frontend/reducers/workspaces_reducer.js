@@ -4,13 +4,14 @@ import { RECEIVE_ALL_WORKSPACES,
 import merge from 'lodash/merge';
 
 const WorkspacesReducer = (oldState = {}, action) => {
+  let newState
   switch (action.type) {
     case RECEIVE_ALL_WORKSPACES:
       return merge({}, action.workspaces);
     case RECEIVE_WORKSPACE:
-      return merge({}, oldState, {[action.workspace.id]: action.workspace});
+      return merge({}, {[action.workspace.id]: action.workspace});
     case REMOVE_WORKSPACE:
-      let newState = merge({}, oldState);
+      newState = merge({}, oldState);
       delete newState[action.workspace.id];
       return newState;
     default:

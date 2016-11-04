@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import Header from './header';
 import { logout } from '../../actions/session_actions';
-import { createWorkspace, fetchWorkspaces } from '../../actions/workspace_actions';
+import { createWorkspace, fetchWorkspaces, fetchWorkspace } from '../../actions/workspace_actions';
 
-const mapStateToProps = ({session}) => (
-  {
+const mapStateToProps = ({session}) => {
+  return({
     currentUser: session.currentUser
-  }
-)
+  })
+}
 
 
 const mapDispatchToProps = (dispatch) => (

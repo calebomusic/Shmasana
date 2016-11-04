@@ -12,8 +12,10 @@ import { receiveErrors } from '../actions/session_actions';
 const Root = ({ store }) => {
 
   const _redirectIfLoggedInAndClearErrors = () => {
-      if(store.getState().session.currentUser) {
-        hashHistory.replace('/0');
+      let currentUser = store.getState().session.currentUser
+      if(currentUser) {
+        // fix this to redirect to user/workspace
+        hashHistory.replace(`/${currentUser.id}/1`);
       }
       _clearErrors()
   }
@@ -37,11 +39,15 @@ const Root = ({ store }) => {
         component={SessionFormContainer}
         onEnter={_redirectIfLoggedInAndClearErrors}
         ></Route>
-      <Route path="/0" component={App}
-        onEnter={_redirectToSignUpHomeIfNotLoggedIn}></Route>
+      <Route path="/:userId"
+        onEnter={_redirectToSignUpHomeIfNotLoggedIn}>
+        <Route path="/:userId/:workspaceId" component={App}
+          onEnter={_redirectToSignUpHomeIfNotLoggedIn}> </Route>
+      </Route>
     </Router>
   </Provider>
   </MuiThemeProvider>);
 };
 
+// is the user path necessary?
 export default Root

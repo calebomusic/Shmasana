@@ -7,6 +7,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import { hashHistory } from 'react-router';
 
+import CreateWorkspaceModal  from './create_workspace_modal';
+
 const style = {
   backgroundColor: '#fc7279'
 };
@@ -21,6 +23,7 @@ class UserDropdown extends React.Component {
     this.handleTouchTap = this.handleTouchTap.bind(this)
     this.handleRequestClose = this.handleRequestClose.bind(this)
     this.logoutRedirect = this.logoutRedirect.bind(this);
+    this.createWorkspace = this.createWorkspace.bind(this);
   }
 
   handleTouchTap(e) {
@@ -41,6 +44,10 @@ class UserDropdown extends React.Component {
     this.props.logout();
     hashHistory.push('/login');
   }
+
+  createWorkspace() {
+    this.props.createWorkspace({workspace: { name: '' }})
+  }
   render() {
     return (
       <div>
@@ -60,9 +67,7 @@ class UserDropdown extends React.Component {
             <MenuItem primaryText="Teams" />
             <MenuItem primaryText="..." />
             <Divider />
-            <MenuItem primaryText="Create WorkSpace"
-              onClick={this.props.createWorkspace({})}
-              />
+            <CreateWorkspaceModal createWorkspace={this.props.createWorkspace}/>
             <Divider />
             <MenuItem primaryText='Settings' />
             <Divider />

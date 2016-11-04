@@ -5,7 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {GetStarted, Login, Demo} from './signup_home_buttons';
 import SignUpFormModal from './signup_form_modal';
 
-
 class SignUpHome extends React.Component {
   constructor(props) {
     super(props)
@@ -14,7 +13,6 @@ class SignUpHome extends React.Component {
     this.disableButton = this.disableButton.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateForm = this.updateForm.bind(this);
-    this.signUp = this.signUp.bind(this);
   };
 
   handleSubmit(e) {
@@ -33,11 +31,6 @@ class SignUpHome extends React.Component {
     } else {
       return true;
     }
-  }
-
-  signUp(e) {
-    e.preventDefault();
-    hashHistory.replace('/');
   }
 
   logIn(e) {

@@ -3,6 +3,8 @@ class Api::WorkspacesController < ApplicationController
     @workspace = Workspace.new(workspace_params)
 
     if @workspace.save
+      user = User.find_by_id(params[:user_id])
+      @workspace.users.push(user)
       render :show
     else
       render json: @workspace.errors.full_messages, status: 422
@@ -10,10 +12,13 @@ class Api::WorkspacesController < ApplicationController
   end
 
   def show
+    @workspace = Workspace.find_by_id(params[:id])
   end
 
   def index
-    @workspaces = Workspace.all
+    user_id = params[:user_id]
+
+    @workspaces = Workspace.includes(:users).where(users: {id: user_id})
   end
 
   def destroy

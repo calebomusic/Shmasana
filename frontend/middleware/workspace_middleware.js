@@ -4,6 +4,8 @@ import {
   removeWorkspace,
   FETCH_WORKSPACES,
   FETCH_WORKSPACE,
+  FETCH_USER_WORKSPACES,
+  FETCH_USER_WORKSPACES_ON_LOGIN,
   CREATE_WORKSPACE,
   UPDATE_WORKSPACE,
   DELETE_WORKSPACE
@@ -14,28 +16,63 @@ import {
   deleteWorkspace,
   updateWorkspace,
   fetchWorkspaces,
-  fetchWorkspace
+  fetchWorkspace,
+  fetchUserWorkspaces,
+  fetchUserWorkspacesOnLogin
 } from '../util/workspace_api_util';
 
 import { hashHistory } from 'react-router';
 
-const WorkspacesMiddleware = ({getState, dispatch}) => next => action => {
+const WorkspacesMiddleware = store => next => action => {
   // TODO: testing
   let errors = e => console.log(e.responseJSON);
 
-  let receiveAllWorkspacesSuccess = workspaces => dispatch(receiveAllWorkspaces(workspaces));
-  let receiveWorkspaceSuccess = workspace => dispatch(receiveWorkspace(workspace));
-  let removeWorkspaceSuccess = workspace => dispatch(removeWorkspace(workspace));
+  let receiveAllWorkspacesSuccess = workspaces => {
+    store.dispatch(receiveAllWorkspaces(workspaces));
+  }
+
+  let receiveAllUserWorkspacesSuccess = workspaces => {
+    store.dispatch(receiveAllWorkspaces(workspaces));
+  }
+
+  // Dispatches receive workspace on login in order to direct user to
+  // their last workspace on login
+  let receiveWorkspaceOnLogin = workspaces => {
+    let workspace = workspaces[workspaces.length - 1]
+    dispatchReceiveWorkspace(workspace);
+  }
+
+  let dispatchReceiveWorkspace = workspace => {
+    store.dispatch(receiveWorkspace(workspace));
+    const currentUser = store.getState().session.currentUser;
+    hashHistory.push(`${currentUser.id}/${workspace.id}`);
+  }
+
+  let receiveWorkspaceSuccess = workspace => {
+    store.dispatch(receiveWorkspace(workspace));
+    const currentUser = store.getState().session.currentUser;
+    hashHistory.push(`${currentUser.id}/${workspace.id}`);
+  }
+
+  let removeWorkspaceSuccess = workspace => store.dispatch(removeWorkspace(workspace));
+
+  const currentUser = store.getState().session.currentUser;
 
   switch (action.type) {
     case FETCH_WORKSPACES:
       fetchWorkspaces(receiveAllWorkspacesSuccess);
       return next(action);
     case FETCH_WORKSPACE:
-      fetchWorkspace(action.id, receiveWorkspaceSuccess);
+      fetchWorkspace(action.id, currentUser, receiveWorkspaceSuccess);
+      return next(action);
+    case FETCH_USER_WORKSPACES_ON_LOGIN:
+      fetchUserWorkspaces(action.user_id, receiveWorkspaceOnLogin)
+      return next(action);
+    case FETCH_USER_WORKSPACES:
+      fetchUserWorkspaces(action.user_id, receiveAllUserWorkspacesSuccess)
       return next(action);
     case CREATE_WORKSPACE:
-      createWorkspace(action.workspace, receiveWorkspaceSuccess);
+      createWorkspace(action.workspace, currentUser, receiveWorkspaceSuccess);
       return next(action);
     case UPDATE_WORKSPACE:
       updateWorkspace(action.workspace, receiveWorkspaceSuccess);

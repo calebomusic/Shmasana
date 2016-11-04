@@ -10,7 +10,7 @@ const mapStateToProps = ({session}) => (
 
 
 const mapDispatchToProps = (dispatch) => (
-  // fetch user's teams?
+  // calendar?
   {
     logout: () => dispatch(logout())
   }

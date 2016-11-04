@@ -1,0 +1,31 @@
+.tasks {
+  background-color: #F8F8F9;
+  background-image: linear-gradient(to bottom,#F8F8F9, #EFF0F1);
+  height: 750px;
+  display: flex;
+  justify-content: space-around;;
+  align-items: center;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.task-list {
+  background-color: green;
+  height: 98%;
+  width: 75%;
+  border: 1px solid;
+  border-color: #EFF0F1;
+  background-color: white;
+  margin-top: 2%;
+}
+
+.task-detail {
+  border: 1px solid;
+  border-color: #EFF0F1;
+  background-color: white;
+  height: 98%;
+  width: 50%;
+  margin-right: .5%;
+  margin-left: 1.5%;
+  margin-top: 2%;
+}
