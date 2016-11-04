@@ -7,4 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-User.create(username: 'Shmaleb', password: 'password', email: 'shmalebomusic@gmail.com')
+u = User.create(username: 'Shmaleb', password: 'password', email: 'shmalebomusic@gmail.com')
+
+w = []
+w << Workspace.create(name: 'Full-Stack')
+w << Workspace.create(name: 'Another-Workspace')
+
+w.each { |w| w.users.push(u) }
