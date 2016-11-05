@@ -2,10 +2,12 @@ import { connect } from 'react-redux';
 import Header from './header';
 import { logout } from '../../actions/session_actions';
 import { createWorkspace, fetchWorkspaces, fetchWorkspace } from '../../actions/workspace_actions';
+import { openSidebar } from '../../actions/sidebar_actions'
 
-const mapStateToProps = ({session}) => {
+const mapStateToProps = (state) => {
   return({
-    currentUser: session.currentUser
+    currentUser: state.session.currentUser,
+    sidebar: state.sidebar
   })
 }
 
@@ -16,7 +18,8 @@ const mapDispatchToProps = (dispatch) => (
     logout: () => dispatch(logout()),
     createWorkspace: (workspace) => dispatch(createWorkspace(workspace)),
     fetchWorkspace: (id) => dispatch(fetchWorkspace(id)),
-    fetchWorkspaces: () => dispatch(fetchWorkspaces())
+    fetchWorkspaces: () => dispatch(fetchWorkspaces()),
+    openSidebar: () => dispatch(openSidebar())
   }
 )
 

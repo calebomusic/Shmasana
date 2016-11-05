@@ -40,9 +40,7 @@ class ActionDropdown extends React.Component {
   render() {
     return (
       <div>
-        <FloatingActionButton mini={true} onTouchTap={this.handleTouchTap}>
-           <ContentAdd />
-        </FloatingActionButton>
+        <button className='action-dropdown-button'>+</button>
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
@@ -64,5 +62,9 @@ class ActionDropdown extends React.Component {
     );
   }
 }
+
+// <FloatingActionButton mini={true} onTouchTap={this.handleTouchTap}>
+//    <ContentAdd />
+// </FloatingActionButton>
 
 export default ActionDropdown;

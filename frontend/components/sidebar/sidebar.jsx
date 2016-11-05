@@ -12,8 +12,8 @@ const style = {
 }
 
 class SideBar extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {open: true};
     this.handleToggle = this.handleToggle.bind(this);
     this.renderOpenSidebar = this.renderOpenSidebar.bind(this);
@@ -29,7 +29,7 @@ class SideBar extends React.Component {
       <div className='sidebar'>
         <div className='logo-exit'>
           <span className='sidebar-logo'>shmasana</span>
-          <span className='sidebar-exit'>x</span>
+          <span className='sidebar-exit' onTouchTap={this.props.closeSidebar}>x</span>
         </div>
           {this.renderTeamates()}
           {this.renderProjects()}
@@ -63,15 +63,10 @@ class SideBar extends React.Component {
     </div>)
   }
   render() {
-    if (this.state.open) {
+    if (this.props.sidebar) {
       return this.renderOpenSidebar();
     } else {
-      return(<div className='sidebar-button'>
-        <FlatButton
-          label={<DrawerIcon />}
-          onTouchTap={this.handleToggle}
-          style={style} />
-      </div>)
+      return(<div></div>)
     }
   }
 }
