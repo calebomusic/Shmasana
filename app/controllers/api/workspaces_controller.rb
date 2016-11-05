@@ -24,7 +24,7 @@ class Api::WorkspacesController < ApplicationController
   def destroy
     @workspace = Workspace.find_by_id(params[:id])
     @workspace.destroy
-    render :show
+    render :index
   end
 
   def update

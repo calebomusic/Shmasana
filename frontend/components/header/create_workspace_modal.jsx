@@ -34,9 +34,10 @@ class CreateWorkspaceModal extends React.Component {
       name: this.state.name
     };
 
-    const emails = this.state.email.split(',').map( (email) => (
-      email.trim()
-    ))
+    // Need someway to handle emails
+    // const emails = this.state.email.split(',').map( (email) => (
+    //   email.trim()
+    // ))
 
     this.props.createWorkspace(workspace);
   }

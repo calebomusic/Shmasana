@@ -22,8 +22,8 @@ class SubHeader extends React.Component {
     if(props.workspace) {
       this.setState({workspaceName: props.workspace.name})
     } else {
-      const workspace_id = parseInt(props.params.workspaceId);
-      this.fetchWorkspace(workspace_id, props.currentUser, (workspace) => {
+      const workspaceId = parseInt(props.params.workspaceId);
+      this.fetchWorkspace(workspaceId, props.currentUser, (workspace) => {
         this.setState({workspaceName: workspace.name});
     });
   }}

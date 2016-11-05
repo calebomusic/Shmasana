@@ -2,10 +2,11 @@
   background-color: #2e3c54;
   height: 100%;
   width: 15%;
-  min-width: 280px;
+  min-width: 242px;
   display: flex;
   flex-direction: column;
-  transition: all 0.2s;
+  -webkit-transition: width 10s, height 10s, -webkit-transform 10s;
+   transition: width 10s, height 10s, transform 10s;
 }
 
 .logo-exit {

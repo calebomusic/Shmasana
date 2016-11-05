@@ -29,5 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // TODO: testing
   window.store = store
+  window.state = store.getState()
   window.logout = logout;
 })

@@ -7,8 +7,13 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider'
 
 const style = {
-  backgroundColor: '#fc7279'
+  backgroundColor: 'white'
 };
+
+const popoverStyle = {
+  display: 'flex',
+  flexDirection: 'column'
+}
 
 class ActionDropdown extends React.Component {
 
@@ -40,15 +45,16 @@ class ActionDropdown extends React.Component {
   render() {
     return (
       <div>
-        <button className='action-dropdown-button'>+</button>
+        <button className='action-dropdown-button' onTouchTap={this.handleTouchTap}>+</button>
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
           anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
           onRequestClose={this.handleRequestClose}
+          style={popoverStyle}
           >
-          <Menu>
+          <Menu style={style}>
             <MenuItem primaryText="Task" />
             <Divider />
             <MenuItem primaryText="Conversation" />
@@ -66,5 +72,7 @@ class ActionDropdown extends React.Component {
 // <FloatingActionButton mini={true} onTouchTap={this.handleTouchTap}>
 //    <ContentAdd />
 // </FloatingActionButton>
+
+// CHECK THIS OUT: https://codepen.io/michaelmov/pen/RaxxJB/
 
 export default ActionDropdown;

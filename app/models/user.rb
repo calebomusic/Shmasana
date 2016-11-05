@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     through: :join_user_workspaces,
     source: :workspace
 
+  has_many :projects,
+    through: :workspaces,
+    source: :projects
+
   attr_reader :password
   after_initialize :ensure_session_token, :ensure_username
 

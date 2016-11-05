@@ -5,6 +5,7 @@ import {
   FETCH_WORKSPACES,
   FETCH_WORKSPACE,
   FETCH_USER_WORKSPACES,
+  FETCH_USER_WORKSPACE_ON_LOGIN,
   FETCH_USER_WORKSPACES_ON_LOGIN,
   CREATE_WORKSPACE,
   UPDATE_WORKSPACE,
@@ -17,8 +18,7 @@ import {
   updateWorkspace,
   fetchWorkspaces,
   fetchWorkspace,
-  fetchUserWorkspaces,
-  fetchUserWorkspacesOnLogin
+  fetchUserWorkspaces
 } from '../util/workspace_api_util';
 
 import { hashHistory } from 'react-router';
@@ -37,21 +37,22 @@ const WorkspacesMiddleware = store => next => action => {
 
   // Dispatches receive workspace on login in order to direct user to
   // their last workspace on login
-  let receiveWorkspaceOnLogin = workspaces => {
-    let workspace = workspaces[workspaces.length - 1]
-    dispatchReceiveWorkspace(workspace);
-  }
-
-  let dispatchReceiveWorkspace = workspace => {
-    store.dispatch(receiveWorkspace(workspace));
-    const currentUser = store.getState().session.currentUser;
-    hashHistory.push(`${currentUser.id}/${workspace.id}`);
-  }
+    let receiveWorkspaceOnLoginSuccess = workspace => {
+      store.dispatch(receiveWorkspace(workspace));
+      const currentUser = store.getState().session.currentUser;
+      hashHistory.push(`${currentUser.id}/${workspace.id}`);
+    }
 
   let receiveWorkspaceSuccess = workspace => {
-    store.dispatch(receiveWorkspace(workspace));
-    const currentUser = store.getState().session.currentUser;
-    hashHistory.push(`${currentUser.id}/${workspace.id}`);
+    const currentUserId = store.getState().session.currentUser.id;
+    const workspaceId = workspace.id;
+    store.dispatch(receiveWorkspace(workspace, currentUserId));
+    redirectToNewWorkspace(currentUserId, workspaceId);
+  }
+
+  let redirectToNewWorkspace = (currentUserId, workspaceId) => {
+    debugger
+    hashHistory.push(`${currentUserId}/${workspaceId}`)
   }
 
   let removeWorkspaceSuccess = workspace => store.dispatch(removeWorkspace(workspace));
@@ -67,6 +68,9 @@ const WorkspacesMiddleware = store => next => action => {
       return next(action);
     case FETCH_USER_WORKSPACES_ON_LOGIN:
       fetchUserWorkspaces(action.user_id, receiveWorkspaceOnLogin)
+      return next(action);
+    case FETCH_USER_WORKSPACE_ON_LOGIN:
+      fetchWorkspace(action.id, currentUser, receiveWorkspaceOnLoginSuccess);
       return next(action);
     case FETCH_USER_WORKSPACES:
       fetchUserWorkspaces(action.user_id, receiveAllUserWorkspacesSuccess)
