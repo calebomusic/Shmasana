@@ -1,33 +1,4 @@
 Rails.application.routes.draw do
-
-  namespace :api do
-  get 'tasks/index'
-  end
-
-  namespace :api do
-  get 'tasks/show'
-  end
-
-  namespace :api do
-  get 'tasks/create'
-  end
-
-  namespace :api do
-  get 'tasks/update'
-  end
-
-  namespace :api do
-  get 'tasks/index_by_user'
-  end
-
-  namespace :api do
-  get 'tasks/index_by_project'
-  end
-
-  namespace :api do
-  get 'tasks/index_by_workspace'
-  end
-
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create] do
       resources :workspaces, only: [:create, :index, :update, :show]
