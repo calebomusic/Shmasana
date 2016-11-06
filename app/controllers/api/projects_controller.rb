@@ -1,7 +1,7 @@
 class Api::ProjectsController < ApplicationController
   def index
     workspace_id = params[:workspace_id]
-    @projects = Project.where(workspace_id: workspace_id)
+    @projects  = Project.where(workspace_id: workspace_id)
   end
 
   def show

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { withRouter, Link } from 'react-router';
 import DrawerIcon from 'material-ui/svg-icons/action/reorder';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -20,18 +20,24 @@ class SideBar extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {projects: [], open: true};
+    this.state = {projects: [], project: this.props.project.id, open: true};
     this.handleToggle = this.handleToggle.bind(this);
     this.renderOpenSidebar = this.renderOpenSidebar.bind(this);
     this.renderTeamates = this.renderTeamates.bind(this);
     this.renderProjectList = this.renderProjectList.bind(this);
+    this.updateProject = this.updateProject.bind(this);
   }
 
   componentWillMount() {
     const workspaceId = parseInt(this.props.router.params.workspaceId)
-    fetchProjectsByWorkspace(workspaceId, (workspaces) => {
-      this.setState({workspaces: workspaces});
+    fetchProjectsByWorkspace(workspaceId, (projects) => {
+      this.setState({projects: projects});
     });
+  }
+
+  componentWillReceiveProps(newProps) {
+    // debugger
+    this.setState({projectId: newProps.project.id })
   }
 
   handleToggle() {
@@ -67,24 +73,40 @@ class SideBar extends React.Component {
   renderProjects() {
     return(<div className='sidebar-projects'>
     <div className='projects-title-and-button'>
-      <p>PROJECTS</p>
+      <p className='project-list-title'>PROJECTS</p>
       <CreateProjectModal createProject={this.props.createProject}/>
     </div>
-      <ul>
-        {this.renderProjectList}
+      <ul className='project-list'>
+        {this.renderProjectList()}
       </ul>
     </div>)
   }
 
-  renderProjectList() {
-    const userId = this.props.router.userId
-    const workspaceId = this.props.router.workspaceId
-    const url = `/${userId}/workspaceId/`
-    const projects = thist.state.projects.map( (project) => {
-      let projectURL = `${url}${project.id}`
-      return(<li><Link to={projectURL}>{project.name}</Link></li>)
-    })
+  updateProject(newProject) {
+    // debugger
+    this.props.fetchProject(newProject.id)
   }
+
+  renderProjectList() {
+    const userId = this.props.router.params.userId
+    const workspaceId = this.props.router.params.workspaceId
+    const url = `/${userId}/${workspaceId}/`
+
+    return this.state.projects.map( (project) => {
+      let projectURL = `${url}${project.id}`;
+      const updateProject = this.updateProject.bind(this, project)
+      let className = 'project-list-item';
+
+      if (this.state.project && this.state.project.id === project.id ) {
+        className = 'project-list-item-selected';
+      }
+
+      return(<li onTouchTap={updateProject}>
+              <p className={className}>{project.name}</p>
+            </li>)
+    });
+  }
+
   render() {
     if (this.props.sidebar) {
       return this.renderOpenSidebar();

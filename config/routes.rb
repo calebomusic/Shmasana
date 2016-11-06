@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
 
     # May not use the below:
-    resources :project, only: [:show]
+    resources :projects, only: [:show]
 
     resource :session, only: [:create, :destroy]
   end

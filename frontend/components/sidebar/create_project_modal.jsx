@@ -31,7 +31,7 @@ class CreateProjectModal extends React.Component {
       name: this.state.name,
       workspace_id: parseInt(this.props.router.params.workspaceId)
     };
-
+    this.closeModal();
     this.props.createProject(project);
   }
 

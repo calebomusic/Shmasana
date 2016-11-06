@@ -18,7 +18,7 @@ export const createProject = (project, workspaceId, success, errors) => {
 
 export const fetchProject = (id, success, errors) => {
   $.ajax({
-    url: `api/workspaces/${workspace.id}/projects/${id}`,
+    url: `api/projects/${id}`,
     success,
     errors
   })

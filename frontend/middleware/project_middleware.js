@@ -19,22 +19,24 @@ const ProjectMiddleware = store => next => action => {
   // This is currently the exact same as successfulCreate
   const successfulCreate = (project) => {
     store.dispatch(receiveProject(project));
-    // redirectToProject()
+    redirectToProject()
   }
 
   const successfulProjectFetch = (project) => {
     store.dispatch(receiveProject(project));
-    // redirectToProject(project)
+    redirectToProject(project)
   }
 
   const redirectToProject = (project) => {
-    const workspaceId = store.getState().workspace.id;
-    hashHistory.push(`${workspaceId}/${project.id}`);
+    const currentUserId = store.getState().session.currentUser.id
+    const workspaceId = project.workspace_id;
+    hashHistory.push(`${workspaceId}/${workspaceId}/${project.id}`);
   }
 
   switch (action.type) {
     case FETCH_PROJECT:
       fetchProject(action.id, successfulProjectFetch)
+      return next(action)
     case FETCH_PROJECTS_BY_WORKSPACE:
       // Why would this need to be an action?
       return next(action);
