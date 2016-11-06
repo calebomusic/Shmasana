@@ -1,15 +1,16 @@
 class Api::TasksController < ApplicationController
   def index
-    @tasks = Task.where(workspace_id: params[:workspace_id]) if params[:workspace_id]
-    @tasks = Task.where(assignee_id: params[:user_id]) if params[:user_id] && !params[:project_id]
-
-    if params[:user_id] && params[:project_id]
+    if params[:workspace_id] && !params[:user_id]
+      @tasks = Task.where(workspace_id: params[:workspace_id])
+    elsif params[:workspace_id] && params[:user_id]
+      @tasks = Task.where(workspace_id: params[:workspace_id]).where(user_id: params[:user_id])
+    elsif params[:user_id] && !params[:project_id]
+      @tasks = Task.where(assignee_id: params[:user_id])
+    elsif params[:user_id] && params[:project_id]
       @tasks = Task.where(assignee_id: params[:user_id]).where(project_id: params[:project_id])
+    else
+      @tasks = Task.where(project_id: params[:project_id])
     end
-
-    @tasks = Task.where(project_id: params[:project_id]) if params[:project_id]
-
-    @tasks
   end
 
   def show
@@ -27,6 +28,7 @@ class Api::TasksController < ApplicationController
   end
 
   def update
+    debugger
     @task = Task.find_by_id(params[:id])
 
     if @task.update(task_params)
@@ -36,9 +38,18 @@ class Api::TasksController < ApplicationController
     end
   end
 
+  def destroy
+    @task = Task.find_by_id(params[:id])
+    project = @task.project_id
+    @task.destroy
+    # Is this what I should render?
+    render :index
+  end
+
   private
   def task_params
     params.require(:task).permit(:author_id, :assignee_id, :project_id, :title,
-                                :description, :due_date, :completed, :completed_at)
+                                :description, :due_date, :completed, :completed_at,
+                                :id)
   end
 end

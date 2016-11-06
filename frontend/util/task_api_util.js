@@ -26,6 +26,14 @@ export const fetchTasksByWorkspace = (workspaceId, success, errors) => {
   })
 }
 
+export const fetchTasksByUserAndWorkspace = (userId, workspaceId, success) => {
+  $.ajax({
+    url: `api/users/${userId}/workspaces/${workspaceId}/tasks`,
+    success,
+    errors
+  })
+}
+
 export const fetchTasksByProject = (projectId, success, errors) => {
   $.ajax({
     url: `api/projects/${projectId}/tasks/`,
@@ -51,6 +59,14 @@ export const fetchTasksByUserAndProject = (userId, projectId, success, errors) =
 }
 
 export const fetchTask = (id, success, errors) => {
+  $.ajax({
+    url: `api/tasks/${id}`,
+    success,
+    errors
+  })
+}
+
+export const deleteTask = (id, success, errors) => {
   $.ajax({
     url: `api/tasks/${id}`,
     success,

@@ -14,9 +14,12 @@ import {
   createProject,
 } from './actions/project_actions';
 
-import { createTask, updateTask, fetchTasksByWorkspace,
-  fetchTasksByProject, fetchTasksByUser, fetchTasksByUserAndProject,
-  fetchTask} from './util/task_api_util'
+// import { createTask, updateTask, fetchTasksByWorkspace,
+//   fetchTasksByProject, fetchTasksByUser, fetchTasksByUserAndProject,
+//   fetchTask} from './util/task_api_util'
+
+import { createTask, updateTask, fetchTasksByProject } from './actions/task_actions';
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
@@ -42,6 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.logout = logout;
   window.project = () => store.dispatch(createProject({name: 'newer project', workspace_id: 20}))
   window.fetch = () => fetchProjectsByWorkspace(18, (p) => ( console.log(p)))
+
+  window.createTask = () => store.dispatch(createTask({project_id: 4, title: 'new task', author_id: 5, assignee_id: 5 }))
+  window.updateTask = () => store.dispatch(updateTask({project_id: 4, title: 'Updated Task', author_id: 5, assignee_id: 5 }))
+  window.fetchTasksByProject = () => store.dispatch(fetchTasksByProject(4))
   // window.createTask = () => (createTask({project_id: 4, title: 'new task', author_id: 5, assignee_id: 5 }, 4, (task) => (console.log(task))))
   // window.updateTask = () => updateTask({project_id: 4, title: 'updated task once more', author_id: 4, assignee_id: 5}, 4, (task) => (console.log(task)))
   // window.fetchTasksByProject = () => fetchTasksByProject(4, (task) => (console.log(task)))
