@@ -7,6 +7,7 @@ import { openSidebar } from '../../actions/sidebar_actions'
 const mapStateToProps = (state) => {
   return({
     currentUser: state.session.currentUser,
+    workspace: state.workspace[Object.keys(state.workspace)],
     sidebar: state.sidebar
   })
 }

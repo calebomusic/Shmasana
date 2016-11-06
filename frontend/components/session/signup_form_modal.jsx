@@ -28,6 +28,7 @@ class SignUpFormModal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    
     const user = {
       username: this.state.username,
       email: this.state.email,
@@ -69,7 +70,6 @@ class SignUpFormModal extends React.Component {
       <div className='signup-form-modal'>
         <GetStarted onTouchTap={this.openModal}/>
       <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal} className='login-form-modal'>
-
           <div>
             <div className='signup'>
              <div className='signup-form'>

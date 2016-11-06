@@ -9,9 +9,7 @@ import { login, signup, logout } from '../util/session_api_util';
 // May not need all of the below
 import { createWorkspace, fetchUserWorkspaces, fetchUserWorkspaceOnLogin } from '../actions/workspace_actions';
 
-import { hashHistory } from 'react-router';
-
-export default (store) => (next) => (action) => {
+const SessionMiddleware = store => next => action => {
 
   const successfulLogin = (user) => {
     store.dispatch(receiveCurrentUser(user));
@@ -42,3 +40,5 @@ export default (store) => (next) => (action) => {
       return next(action);
   }
 }
+
+export default SessionMiddleware;

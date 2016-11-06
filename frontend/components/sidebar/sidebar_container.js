@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import SideBar from './sidebar';
-import { closeSidebar } from '../../actions/sidebar_actions'
+import { closeSidebar } from '../../actions/sidebar_actions';
+import { createProject } from '../../actions/project_actions';
 
 
 const mapStateToProps = (state) => (
@@ -11,11 +12,11 @@ const mapStateToProps = (state) => (
   }
 )
 
-
 const mapDispatchToProps = (dispatch) => (
   {
     // logout: () => dispatch(logout())
-    closeSidebar: () => dispatch(closeSidebar())
+    closeSidebar: () => dispatch(closeSidebar()),
+    createProject: (project) => dispatch(createProject(project))
   }
 )
 

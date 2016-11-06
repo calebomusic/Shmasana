@@ -6,6 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import App from './app';
 import SessionFormContainer from './session/session_form_container';
 import SignUpHomeContainer from './session/signup_home_container';
+import ProjectsContainer from './project/project_container';
+import TasksContainer from './tasks/tasks_container';
 
 import { receiveErrors } from '../actions/session_actions';
 import { fetchUserWorkspacesOnLogin, fetchUserWorkspaceOnLogin } from '../actions/workspace_actions';
@@ -56,7 +58,11 @@ const Root = ({store}) => {
       <Route path="/:userId"
         onEnter={_redirectToSignUpHomeIfNotLoggedIn}>
         <Route path="/:userId/:workspaceId" component={App}
-          onEnter={_redirectToSignUpHomeIfNotLoggedIn}> </Route>
+          onEnter={_redirectToSignUpHomeIfNotLoggedIn}>
+          <Route path="/:userId/:workspaceId/:projectId" component={ProjectsContainer}>
+            <Route path="/:userId/:workspaceId/:projectId/:taskId" component={TasksContainer} />
+          </Route>
+        </Route>
       </Route>
     </Router>
   </Provider>

@@ -102,24 +102,3 @@ class CreateWorkspaceModal extends React.Component {
 
 // Add way to add members!
 export default withRouter(CreateWorkspaceModal);
-// <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal} className='login-form-modal'>
-//   <div>Can you see me?
-//   </div>
-// </Modal>
-
-// <div>Create Your WorkSpace</div>
-// <div className='signup-close-modal' onTouchTap={this.closeModal}>x</div>
-//
-//
-//    <form onSubmit={this.handleSubmit}>
-//      <label className='session-label'>WORKSPACE NAME</label>
-//      <input className='signup-input' value={this.state.name}
-//        onChange={this.updateForm('name')}></input>
-//      <label className='session-label'>MEMBERS</label>
-//        <input className='signup-input' value={this.state.name}
-//          onChange={this.updateForm('name')}></input>
-//        <PrimaryButton className='login-form-button' type='submit' label='Create Workspace' />
-//    </form>
-
-// <input className='signup-input' value={this.state.name}
-//   onChange={this.updateForm('name')}></input>

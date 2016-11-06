@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create] do
       resources :workspaces, only: [:create, :index, :update, :show]
-      resources :projects, only: [:index, :show]
     end
 
     # Allow the ability to show all projects?
@@ -21,6 +20,9 @@ Rails.application.routes.draw do
     resources :workspaces, only: [:show] do
       resources :projects, only: [:create, :index, :show]
     end
+
+    # May not use the below:
+    resources :project, only: [:show]
 
     resource :session, only: [:create, :destroy]
   end

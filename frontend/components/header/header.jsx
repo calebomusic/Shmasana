@@ -26,11 +26,13 @@ const Header = (props) => {
     </span>
   }
 
+  // const myTasks = `/${props.currentUser.id}/${props.workspace.id}`;
+
   return(<div className='home-header'>
   <div className='home-header-left'>
     {sidebarButton}
     <p>
-      <Link to='/0'>MY TASKS</Link>
+      <Link to={''}>MY TASKS</Link>
     </p>
     <ActionDropdown />
   </div>

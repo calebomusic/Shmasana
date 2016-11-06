@@ -51,7 +51,6 @@ const WorkspacesMiddleware = store => next => action => {
   }
 
   let redirectToNewWorkspace = (currentUserId, workspaceId) => {
-    debugger
     hashHistory.push(`${currentUserId}/${workspaceId}`)
   }
 

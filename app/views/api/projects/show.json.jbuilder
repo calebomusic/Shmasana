@@ -1,3 +1,1 @@
-json.array! @projects do |project|
-  json.partial! "api/projects/project" , project: project
-end
+json.partial! "api/projects/project" , project: @project

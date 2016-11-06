@@ -1,6 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import DrawerIcon from 'material-ui/svg-icons/action/reorder';
 import FlatButton from 'material-ui/FlatButton';
+
+import CreateProjectModal from './create_project_modal';
+
+import { fetchProjectsByWorkspace } from '../../util/project_api_util';
 
 
 const style = {
@@ -12,12 +17,21 @@ const style = {
 }
 
 class SideBar extends React.Component {
+
   constructor(props) {
     super(props)
-    this.state = {open: true};
+    this.state = {projects: [], open: true};
     this.handleToggle = this.handleToggle.bind(this);
     this.renderOpenSidebar = this.renderOpenSidebar.bind(this);
     this.renderTeamates = this.renderTeamates.bind(this);
+    this.renderProjectList = this.renderProjectList.bind(this);
+  }
+
+  componentWillMount() {
+    const workspaceId = parseInt(this.props.router.params.workspaceId)
+    fetchProjectsByWorkspace(workspaceId, (workspaces) => {
+      this.setState({workspaces: workspaces});
+    });
   }
 
   handleToggle() {
@@ -54,13 +68,22 @@ class SideBar extends React.Component {
     return(<div className='sidebar-projects'>
     <div className='projects-title-and-button'>
       <p>PROJECTS</p>
-      <button className='smaller-sidebar-button'>+</button>
+      <CreateProjectModal createProject={this.props.createProject}/>
     </div>
-    <ul className='project-list'>
-      <li><p>Dummy Project</p></li>
-      <li><p>Dumb Project</p></li>
-    </ul>
+      <ul>
+        {this.renderProjectList}
+      </ul>
     </div>)
+  }
+
+  renderProjectList() {
+    const userId = this.props.router.userId
+    const workspaceId = this.props.router.workspaceId
+    const url = `/${userId}/workspaceId/`
+    const projects = thist.state.projects.map( (project) => {
+      let projectURL = `${url}${project.id}`
+      return(<li><Link to={projectURL}>{project.name}</Link></li>)
+    })
   }
   render() {
     if (this.props.sidebar) {
@@ -71,4 +94,4 @@ class SideBar extends React.Component {
   }
 }
 
-export default SideBar;
+export default withRouter(SideBar);

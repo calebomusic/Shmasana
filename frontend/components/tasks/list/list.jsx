@@ -4,4 +4,4 @@ const List = () => (
   <div className='task-list'></div>
 )
 
-export default List
+export default List;
