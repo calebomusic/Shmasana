@@ -54,6 +54,7 @@ workspace_id| integer   | not null, foreign key (references workspaces), indexed
 title       | string    |
 description | string    |
 completed   | boolean   | default: false
+completed_at| datetime  | 
 
 ## comments
 column name | data type | details

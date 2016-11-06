@@ -1,14 +1,40 @@
 Rails.application.routes.draw do
 
-  get 'projects/index'
+  namespace :api do
+  get 'tasks/index'
+  end
 
-  get 'projects/show'
+  namespace :api do
+  get 'tasks/show'
+  end
 
-  get 'projects/create'
+  namespace :api do
+  get 'tasks/create'
+  end
+
+  namespace :api do
+  get 'tasks/update'
+  end
+
+  namespace :api do
+  get 'tasks/index_by_user'
+  end
+
+  namespace :api do
+  get 'tasks/index_by_project'
+  end
+
+  namespace :api do
+  get 'tasks/index_by_workspace'
+  end
 
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create] do
       resources :workspaces, only: [:create, :index, :update, :show]
+      resources :projects, only: [:show] do
+        resources :tasks, only: [:index]
+      end
+      resources :tasks, only: [:index]
     end
 
     # Allow the ability to show all projects?
@@ -19,11 +45,14 @@ Rails.application.routes.draw do
 
     resources :workspaces, only: [:show] do
       resources :projects, only: [:create, :index, :show]
+      resources :tasks, only: [:index]
     end
 
     # May not use the below:
-    resources :projects, only: [:show]
-
+    resources :projects, only: [:show] do
+      resources :tasks, only: [:create, :update, :index]
+    end
+    resources :tasks, only: :show
     resource :session, only: [:create, :destroy]
   end
 

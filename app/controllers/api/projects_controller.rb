@@ -12,8 +12,8 @@ class Api::ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      workspace = Workspace.find_by_id(@project.workspace_id)
-      workspace.projects.push(@project)
+      # workspace = Workspace.find_by_id(@project.workspace_id)
+      # workspace.projects.push(@project)
       render :show
     else
       render json: @project.errors.full_messages, status: 422

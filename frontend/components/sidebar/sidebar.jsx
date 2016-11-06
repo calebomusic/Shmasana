@@ -1,11 +1,11 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router';
+import { withRouter, Link, hashHistory } from 'react-router';
 import DrawerIcon from 'material-ui/svg-icons/action/reorder';
 import FlatButton from 'material-ui/FlatButton';
 
 import CreateProjectModal from './create_project_modal';
 
-import { fetchProjectsByWorkspace } from '../../util/project_api_util';
+import { fetchProjectsByWorkspace, fetchProject } from '../../util/project_api_util';
 
 
 const style = {
@@ -27,11 +27,12 @@ class SideBar extends React.Component {
     this.renderTeamates = this.renderTeamates.bind(this);
     this.renderProjectList = this.renderProjectList.bind(this);
     this.updateProject = this.updateProject.bind(this);
+    this.fetchProject = fetchProject.bind(this);
   }
 
   componentWillMount() {
     const workspaceId = parseInt(this.props.router.params.workspaceId)
-    
+
     fetchProjectsByWorkspace(workspaceId, (projects) => {
       this.setState({projects: projects});
     });
@@ -91,7 +92,17 @@ class SideBar extends React.Component {
 
   updateProject(newProject) {
     // debugger
+
+    // This flashes the workspace and project name a few times
     this.props.fetchProject(newProject.id)
+
+    // This doesn't allow one to select other projects in the sidebar and update accordingly
+      // this.fetchProject(newProject.id, (project) => {
+    //   const currentUserId = this.props.currentUser.id;
+    //   const workspaceId = project.workspace_id;
+    //
+    //   hashHistory.push(`${currentUserId}/${workspaceId}/${project.id}`)
+    // })
   }
 
   renderProjectList() {

@@ -2,6 +2,7 @@ export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
 export const FETCH_PROJECTS_BY_WORKSPACE = 'FETCH_PROJECTS_BY_WORKSPACE';
 export const CREATE_PROJECT = 'CREATE_PROJECT';
+export const REMOVE_PROJECT = 'REMOVE_PROJECT';
 
 export const fetchProject = (id) => (
   {
@@ -10,7 +11,11 @@ export const fetchProject = (id) => (
   }
 )
 
-// Will is use this?
+export const removeProject = () => (
+  {
+    type: REMOVE_PROJECT
+  }
+)
 
 export const fetchProjectsByWorkspace = (workspaceId) => (
   {

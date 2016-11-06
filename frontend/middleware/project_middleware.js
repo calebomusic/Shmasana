@@ -12,25 +12,34 @@ import {
   fetchProject
 } from '../util/project_api_util';
 
-import { hashHistory } from 'react-router';
+import { hashHistory, Router } from 'react-router';
 
 const ProjectMiddleware = store => next => action => {
 
   // This is currently the exact same as successfulCreate
   const successfulCreate = (project) => {
     store.dispatch(receiveProject(project));
-    redirectToProject(project)
+    redirectToProject(project);
   }
 
   const successfulProjectFetch = (project) => {
     store.dispatch(receiveProject(project));
-    redirectToProject(project)
+    redirectToProject(project);
   }
 
   const redirectToProject = (project) => {
-    const currentUserId = store.getState().session.currentUser.id
-    const workspaceId = project.workspace_id;
-    hashHistory.push(`${currentUserId}/${workspaceId}/${project.id}`);
+    let urlProjectId;
+
+    if (this && this.url) {
+    let  url = this.url.split('/');
+    urlProjectId = parseInt(url[2]);
+    }
+
+    if (project.id !== urlProjectId) {
+      const currentUserId = store.getState().session.currentUser.id
+      const workspaceId = project.workspace_id;
+      hashHistory.push(`${currentUserId}/${workspaceId}/${project.id}`);
+    }
   }
 
   switch (action.type) {

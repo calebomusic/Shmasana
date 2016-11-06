@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import SubHeader from './subheader';
 import { fetchWorkspace } from '../../actions/workspace_actions';
+import { fetchProject, removeProject } from '../../actions/project_actions';
 
 const mapStateToProps = (state, ownProps) => {
   let workspace
@@ -10,7 +11,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return({
     currentUser: state.session.currentUser,
-    workspace: workspace
+    workspace: workspace,
+    project: state.project
   })
 }
 
@@ -19,7 +21,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => (
   // Needs some way to toggle task or calendar display.
   {
-    fetchWorkspace: (id) => dispatch(fetchWorkspace(id))
+    fetchWorkspace: (id) => dispatch(fetchWorkspace(id)),
+    fetchProject: (id) => dispatch(fetchProject(id)),
+    removeProject: () => dispatch(removeProject())
   }
 )
 
