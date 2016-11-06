@@ -1,3 +1,3 @@
 json.extract! project, :id, :name, :workspace_id
-# json.workspaces user.workspaces.pluck(:id)
+json.tasks project.tasks.pluck(:id)
 # May just nest all tasks in here.
