@@ -146,30 +146,67 @@
   font-style: oblique;
 }
 
-.project-list li {
+/*.project-list li {
   padding-right: 9px;
   margin-bottom: 5px;
   padding-top: 3px;
   padding-bottom: 3px;
-}
+}*/
 
 .project-list-item {
   margin-left: 18px;
 }
 
-.project-list li:hover {
+/*.project-list li:hover {
   color: white;
   background-color: #2c8dc9;
   cursor: pointer;
-}
+}*/
 
 .project-list-title {
   margin-top: 9px;
   /*margin-left: 18px;*/
 }
 
+
+.project-list .project-li {
+  padding-right: 9px;
+  margin-bottom: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.project-list-li:hover {
+  color: white;
+  background-color: #2c8dc9;
+  cursor: pointer;
+}
+
+.project-list-li {
+  padding-right: 9px;
+  margin-bottom: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.project-list-li-selected {
+  background-color: #1B2432;
+  color: white;
+  padding-right: 9px;
+  margin-bottom: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.project-list-li-selected:hover {
+  color: white;
+  background-color: #2c8dc9;
+  cursor: pointer;
+}
+
+
 .project-list-item-selected {
-  background-color: red;
+  margin-left: 18px;
 }
 
 /*App*/

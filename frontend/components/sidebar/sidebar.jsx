@@ -20,7 +20,8 @@ class SideBar extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {projects: [], project: this.props.project.id, open: true};
+    this.state = {projects: [], projectId: this.props.project.id, open: true};
+
     this.handleToggle = this.handleToggle.bind(this);
     this.renderOpenSidebar = this.renderOpenSidebar.bind(this);
     this.renderTeamates = this.renderTeamates.bind(this);
@@ -30,14 +31,20 @@ class SideBar extends React.Component {
 
   componentWillMount() {
     const workspaceId = parseInt(this.props.router.params.workspaceId)
+    
     fetchProjectsByWorkspace(workspaceId, (projects) => {
       this.setState({projects: projects});
     });
   }
 
+  // Don't forget to fetch new projects on prop change.
   componentWillReceiveProps(newProps) {
-    // debugger
     this.setState({projectId: newProps.project.id })
+
+    const workspaceId = parseInt(this.props.router.params.workspaceId)
+    fetchProjectsByWorkspace(workspaceId, (projects) => {
+      this.setState({projects: projects});
+    });
   }
 
   handleToggle() {
@@ -91,17 +98,18 @@ class SideBar extends React.Component {
     const userId = this.props.router.params.userId
     const workspaceId = this.props.router.params.workspaceId
     const url = `/${userId}/${workspaceId}/`
-
+    // debugger
     return this.state.projects.map( (project) => {
       let projectURL = `${url}${project.id}`;
       const updateProject = this.updateProject.bind(this, project)
       let className = 'project-list-item';
-
-      if (this.state.project && this.state.project.id === project.id ) {
+      let liClassName = 'project-list-li'
+      if (this.state.projectId && this.state.projectId === project.id ) {
         className = 'project-list-item-selected';
+        liClassName = 'project-list-li-selected'
       }
 
-      return(<li onTouchTap={updateProject}>
+      return(<li onTouchTap={updateProject} key={project.id} className={liClassName}>
               <p className={className}>{project.name}</p>
             </li>)
     });

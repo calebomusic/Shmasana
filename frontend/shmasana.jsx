@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // TODO: testing
   window.store = store
-  window.state = store.getState()
+  window.state = store.getState
   window.logout = logout;
   window.project = () => store.dispatch(createProject({name: 'new project', workspace_id: 18}))
   window.fetch = () => fetchProjectsByWorkspace(18, (p) => ( console.log(p)))

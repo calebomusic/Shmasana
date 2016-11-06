@@ -19,7 +19,7 @@ const ProjectMiddleware = store => next => action => {
   // This is currently the exact same as successfulCreate
   const successfulCreate = (project) => {
     store.dispatch(receiveProject(project));
-    redirectToProject()
+    redirectToProject(project)
   }
 
   const successfulProjectFetch = (project) => {
@@ -30,7 +30,7 @@ const ProjectMiddleware = store => next => action => {
   const redirectToProject = (project) => {
     const currentUserId = store.getState().session.currentUser.id
     const workspaceId = project.workspace_id;
-    hashHistory.push(`${workspaceId}/${workspaceId}/${project.id}`);
+    hashHistory.push(`${currentUserId}/${workspaceId}/${project.id}`);
   }
 
   switch (action.type) {

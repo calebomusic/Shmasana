@@ -5,7 +5,6 @@ import { createProject, receiveProject, fetchProject } from '../../actions/proje
 
 
 const mapStateToProps = (state) => {
-  // debugger
   return({
     // user projects
     // user team mates
