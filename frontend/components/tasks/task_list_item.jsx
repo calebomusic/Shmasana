@@ -1,9 +1,14 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
+
 class TaskListItem extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { location: '', selected: false }
+
+    const title = this.props.task.title ? this.props.task.title : ''
+
+    this.state = { location: '', selected: false,
+      title: title}
 
     this.setLocation = this.setLocation.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -38,6 +43,7 @@ class TaskListItem extends React.Component {
   }
 
   handleChange(e) {
+    this.setState({title: e.target.value})
     this.props.task.title = e.target.value
     this.props.updateTask(this.props.task);
   }
@@ -73,8 +79,8 @@ class TaskListItem extends React.Component {
     return(<li className={className}>
       <button onClick={this.toggleComplete}
         className='task-list-check'>√</button>
-      <input value={this.props.task.title} onChange={this.handleChange}
-        onFocus={this.updateFocus} onBlur={this.updateBlur} placeholder={this.props.task.title}>
+      <input value={this.state.title} onChange={this.handleChange}
+        onFocus={this.updateFocus} onBlur={this.updateBlur} placeholder='New Task'>
       </input>
     </li>)
   }

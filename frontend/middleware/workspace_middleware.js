@@ -39,20 +39,17 @@ const WorkspacesMiddleware = store => next => action => {
   // their last workspace on login
     let receiveWorkspaceOnLoginSuccess = workspace => {
       store.dispatch(receiveWorkspace(workspace));
-      const currentUser = store.getState().session.currentUser;
-      const workspaceId = workspace.id;
-      redirectToNewWorkspace(currentUserId, workspaceId);
+      redirectToNewWorkspace(workspace);
     }
 
   let receiveWorkspaceSuccess = workspace => {
-    const currentUserId = store.getState().session.currentUser.id;
-    const workspaceId = workspace.id;
     store.dispatch(receiveWorkspace(workspace, currentUserId));
-    redirectToNewWorkspace(currentUserId, workspaceId);
+    redirectToNewWorkspace(workspace);
   }
 
-  let redirectToNewWorkspace = (currentUserId, workspaceId) => {
-
+  let redirectToNewWorkspace = (workspace) => {
+    const currentUserId = currentUser.id
+    const workspaceId = workspace.id;
     hashHistory.push(`${currentUserId}/${workspaceId}`)
   }
 

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Detail from './detail';
-import { updateTask, deleteTask } from '../../actions/task_actions';
+import { updateTask, deleteTask, fetchTask } from '../../actions/task_actions';
 
 
 const mapStateToProps = (state) => (
@@ -15,7 +15,9 @@ const mapDispatchToProps = (dispatch) => (
   // fetch user's teams?
   {
     updateTask: (task) => dispatch(updateTask(task)),
-    deleteTask: (task) => dispatch(deleteTask(task))
+    deleteTask: (task) => dispatch(deleteTask(task)),
+    fetchTask: (id) => dispatch(fetchTask(id)),
+    removeTask: () => dispatch(removeTask())
   }
 )
 

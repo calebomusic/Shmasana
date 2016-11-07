@@ -29,7 +29,8 @@ export default (state = null_user, action) => {
     case LOGOUT:
       return null_user;
     case RECEIVE_WORKSPACE:
-      if (!newState.currentUser.workspaces.includes(action.workspace.id)) {
+      if ( newState.currentUser &&
+        !newState.currentUser.workspaces.includes(action.workspace.id)) {
         newState.currentUser.workspaces.push(action.workspace.id)
       }
       return newState;

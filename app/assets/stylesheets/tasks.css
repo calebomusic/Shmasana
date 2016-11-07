@@ -64,13 +64,12 @@
 }
 .task-list-item {
   border-bottom: 1px solid;
-  border-color: #fcbdc0;
+  border-color: #d3d3d3;
+  width: 92%;
 }
 
-.task-list-item:focus {
-  border-bottom: 1px solid;
-  border-color: red;
-}
+/*Selected list item?*/
+
 .completed-task-list-item {
 
 }
