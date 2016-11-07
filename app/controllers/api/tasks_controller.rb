@@ -3,7 +3,7 @@ class Api::TasksController < ApplicationController
     if params[:workspace_id] && !params[:user_id]
       @tasks = Task.where(workspace_id: params[:workspace_id])
     elsif params[:workspace_id] && params[:user_id]
-      @tasks = Task.where(workspace_id: params[:workspace_id]).where(user_id: params[:user_id])
+      @tasks = Task.where(workspace_id: params[:workspace_id]).where(author_id: params[:user_id])
     elsif params[:user_id] && !params[:project_id]
       @tasks = Task.where(assignee_id: params[:user_id])
     elsif params[:user_id] && params[:project_id]
@@ -11,6 +11,10 @@ class Api::TasksController < ApplicationController
     else
       @tasks = Task.where(project_id: params[:project_id])
     end
+
+    @tasks = @tasks.sort_by { |task| task.id }
+
+    @tasks
   end
 
   def show
@@ -28,7 +32,6 @@ class Api::TasksController < ApplicationController
   end
 
   def update
-    debugger
     @task = Task.find_by_id(params[:id])
 
     if @task.update(task_params)
@@ -50,6 +53,6 @@ class Api::TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:author_id, :assignee_id, :project_id, :title,
                                 :description, :due_date, :completed, :completed_at,
-                                :id)
+                                :id, :workspace_id, :created_at)
   end
 end

@@ -5,7 +5,7 @@ import { fetchWorkspace } from '../../util/workspace_api_util'
 class SubHeader extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {workspaceName: '', projectName: ''}
+    this.state = {workspace: {}, projectName: ''}
 
     this.fetchWorkspace = fetchWorkspace.bind(this);
     this.subheaderChange = this.subheaderChange.bind(this);
@@ -23,7 +23,7 @@ class SubHeader extends React.Component {
 
   subheaderChange(props) {
     let projectId = props.params.projectId
-    // debugger
+
     if (projectId) {
       if (props.project.name) {
         this.setState({projectName: props.project.name});
@@ -37,10 +37,11 @@ class SubHeader extends React.Component {
       this.setState({workspaceName: props.workspace.name,
                     projectName: undefined});
       this.removeProject()
-    } else {
+    } else if (!this.state.workspace.name ||
+      props.workspace && parseInt(props.workspace.id) !== this.state.workspace.id) {
       const workspaceId = parseInt(props.params.workspaceId);
       this.fetchWorkspace(workspaceId, props.currentUser, (workspace) => {
-        this.setState({workspaceName: workspace.name,
+        this.setState({workspace: workspace,
                         projectName: null});
       this.removeProject()
     });
@@ -58,7 +59,7 @@ class SubHeader extends React.Component {
     if (this.state.projectName) {
       subheader = this.state.projectName;
     } else {
-      subheader = this.state.workspaceName
+      subheader = this.state.workspace.name
     }
     return(
       <div className='subheader'>

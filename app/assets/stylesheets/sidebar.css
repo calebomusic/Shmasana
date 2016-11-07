@@ -169,12 +169,12 @@
 }
 
 
-.project-list .project-li {
+/*.project-list .project-li {
   padding-right: 9px;
   margin-bottom: 5px;
   padding-top: 3px;
   padding-bottom: 3px;
-}
+}*/
 
 .project-list-li:hover {
   color: white;
@@ -184,18 +184,16 @@
 
 .project-list-li {
   padding-right: 9px;
-  margin-bottom: 5px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .project-list-li-selected {
   background-color: #1B2432;
   color: white;
   padding-right: 9px;
-  margin-bottom: 5px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .project-list-li-selected:hover {

@@ -40,7 +40,7 @@ class SideBar extends React.Component {
 
   // Don't forget to fetch new projects on prop change.
   componentWillReceiveProps(newProps) {
-    this.setState({projectId: newProps.project.id })
+    this.setState({projectId: newProps.project.id });
 
     const workspaceId = parseInt(this.props.router.params.workspaceId)
     fetchProjectsByWorkspace(workspaceId, (projects) => {

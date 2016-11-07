@@ -18,7 +18,7 @@
   width: 100%;
   border-color: #898E95;
   background-color: white;
-  height: 60px;
+  min-height: 60px;
 }
 
 .signup-header-left {

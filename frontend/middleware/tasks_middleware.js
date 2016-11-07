@@ -21,22 +21,25 @@ const TasksMiddleware = store => next => action => {
   }
 
   // Make dif success callbacks to redirect?
-
+  // TODO: for testing
+  const errors = (errors) => {
+    console.log(errors)
+  }
   switch (action.type) {
     case FETCH_TASKS_BY_PROJECT:
-      fetchTasksByProject(action.projectId, successfulFetch);
+      fetchTasksByProject(action.projectId, successfulFetch, errors);
       return next(action);
     case FETCH_TASKS_BY_USER:
-      fetchTasksByUser(action.userId, successfulFetch);
+      fetchTasksByUser(action.userId, successfulFetch, errors);
       return next(action);
     case FETCH_TASKS_BY_WORKSPACE:
-      fetchTasksByWorkspace(action.workspaceId, successfulFetch);
+      fetchTasksByWorkspace(action.workspaceId, successfulFetch, errors);
       return next(action);
     case FETCH_TASKS_BY_USER_AND_WORKSPACE:
-      fetchTasksByUserAndWorkspace(action.userId, action.workspaceId, successfulFetch);
+      fetchTasksByUserAndWorkspace(action.userId, action.workspaceId, successfulFetch, errors);
       return next(action);
     case FETCH_TASKS_BY_USER_AND_PROJECT:
-      fetchTasksByUserAndProject(action.userId, action.projectId, successfulFetch)
+      fetchTasksByUserAndProject(action.userId, action.projectId, successfulFetch, errors)
       return next(action)
     default:
       return next(action)

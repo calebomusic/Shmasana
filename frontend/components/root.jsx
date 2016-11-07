@@ -7,8 +7,7 @@ import App from './app';
 import SessionFormContainer from './session/session_form_container';
 import SignUpHomeContainer from './session/signup_home_container';
 import ProjectsContainer from './project/project_container';
-import TasksContainer from './tasks/tasks_container';
-
+import TaskDetailContainer from './tasks/detail_container';
 import { receiveErrors } from '../actions/session_actions';
 import { fetchUserWorkspacesOnLogin, fetchUserWorkspaceOnLogin } from '../actions/workspace_actions';
 import { fetchWorkspace } from '../util/workspace_api_util';
@@ -28,22 +27,17 @@ const Root = ({store}) => {
     store.dispatch(receiveErrors({errors: []}))
   }
 
-  // This is not woring.
-  // Does this actually receive ownProps?
+  // This is not woring
   const _redirectToSignUpHomeIfNotLoggedIn = (ownProps) => {
     const currentUser = store.getState().session.currentUser;
     const workspaceId = parseInt(ownProps.params.workspaceId)
     let workspace;
+    // debugger
     if(!currentUser) {
       hashHistory.replace('/')
+    } else if (!currentUser.workspaces.includes(workspaceId)) {
+      hashHistory.push('/')
     }
-
-    const fetchWorkspaceErrors = () => {
-      const workspaceId = currentUser.workspaces[0]
-      store.dispatch(fetchUserWorkspaceOnLogin(workspaceId))
-    }
-
-    fetchWorkspace(workspaceId, currentUser, () => {}, fetchWorkspaceErrors)
   }
 
   return(<MuiThemeProvider>
@@ -59,8 +53,9 @@ const Root = ({store}) => {
         onEnter={_redirectToSignUpHomeIfNotLoggedIn}>
         <Route path="/:userId/:workspaceId" component={App}
           onEnter={_redirectToSignUpHomeIfNotLoggedIn}>
-          <Route path="/:userId/:workspaceId/:projectId" component={ProjectsContainer}>
-            <Route path="/:userId/:workspaceId/:projectId/:taskId" component={TasksContainer} />
+          <Route path="/:userId/:workspaceId/list/:taskId" component={TaskDetailContainer}/>
+          <Route path="/:userId/:workspaceId/:projectId" component={ProjectsContainer} >
+            <Route path="/:userId/:workspaceId/:projectId/:taskId" component={TaskDetailContainer} />
           </Route>
         </Route>
       </Route>

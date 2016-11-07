@@ -1,6 +1,6 @@
-export const createTask = (task, projectId, success, errors) => {
+export const createTask = (task, workspaceId, success, errors) => {
   $.ajax({
-    url: `api/projects/${projectId}/tasks`,
+    url: `api/workspaces/${workspaceId}/tasks`,
     type: 'post',
     data: {task},
     success,
@@ -26,7 +26,7 @@ export const fetchTasksByWorkspace = (workspaceId, success, errors) => {
   })
 }
 
-export const fetchTasksByUserAndWorkspace = (userId, workspaceId, success) => {
+export const fetchTasksByUserAndWorkspace = (userId, workspaceId, success, errors) => {
   $.ajax({
     url: `api/users/${userId}/workspaces/${workspaceId}/tasks`,
     success,

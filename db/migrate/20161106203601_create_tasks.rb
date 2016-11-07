@@ -3,7 +3,8 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.integer :author_id, null: false
       t.integer :assignee_id
-      t.integer :project_id, null: false
+      t.integer :project_id
+      t.integer :workspace_id, null: false
       t.string :title
       t.string :description
       t.datetime :due_date

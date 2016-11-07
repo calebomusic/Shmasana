@@ -40,7 +40,8 @@ const WorkspacesMiddleware = store => next => action => {
     let receiveWorkspaceOnLoginSuccess = workspace => {
       store.dispatch(receiveWorkspace(workspace));
       const currentUser = store.getState().session.currentUser;
-      hashHistory.push(`${currentUser.id}/${workspace.id}`);
+      const workspaceId = workspace.id;
+      redirectToNewWorkspace(currentUserId, workspaceId);
     }
 
   let receiveWorkspaceSuccess = workspace => {
@@ -51,6 +52,7 @@ const WorkspacesMiddleware = store => next => action => {
   }
 
   let redirectToNewWorkspace = (currentUserId, workspaceId) => {
+
     hashHistory.push(`${currentUserId}/${workspaceId}`)
   }
 

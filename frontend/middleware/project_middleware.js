@@ -28,18 +28,9 @@ const ProjectMiddleware = store => next => action => {
   }
 
   const redirectToProject = (project) => {
-    let urlProjectId;
-
-    if (this && this.url) {
-    let  url = this.url.split('/');
-    urlProjectId = parseInt(url[2]);
-    }
-
-    if (project.id !== urlProjectId) {
       const currentUserId = store.getState().session.currentUser.id
       const workspaceId = project.workspace_id;
       hashHistory.push(`${currentUserId}/${workspaceId}/${project.id}`);
-    }
   }
 
   switch (action.type) {

@@ -17,10 +17,19 @@ const TaskMiddleware = store => next => action => {
 
     const successfulFetch = (task) => {
       store.dispatch(receiveTask(task))
-      const workspaceId = task.workspace.id;
-      const projectId = task.project_id;
+      redirect(task)
+    }
+
+    const redirect = (task) => {
       const authorId = task.author_id;
-      hashHistory.push(`${authorId}/${workspaceId}/${projectId}/${task.id}`)
+      const workspaceId = task.workspace_id;
+
+      if (task.project_id) {
+        const projectId = task.project_id;
+        hashHistory.push(`${authorId}/${workspaceId}/${projectId}/${task.id}`)
+      } else {
+        hashHistory.push(`${authorId}/${workspaceId}/list/${task.id}`)
+      }
     }
 
     const successfulDelete = () => {

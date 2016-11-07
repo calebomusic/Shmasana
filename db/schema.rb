@@ -35,7 +35,8 @@ ActiveRecord::Schema.define(version: 20161106203601) do
   create_table "tasks", force: :cascade do |t|
     t.integer  "author_id",                    null: false
     t.integer  "assignee_id"
-    t.integer  "project_id",                   null: false
+    t.integer  "project_id"
+    t.integer  "workspace_id",                 null: false
     t.string   "title"
     t.string   "description"
     t.datetime "due_date"

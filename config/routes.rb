@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create] do
       resources :workspaces, only: [:create, :index, :update, :show] do
-        resources :tasks, only: [:index] 
+        resources :tasks, only: [:index]
       end
       resources :projects, only: [:show] do
         resources :tasks, only: [:index]
@@ -18,12 +18,12 @@ Rails.application.routes.draw do
 
     resources :workspaces, only: [:show] do
       resources :projects, only: [:create, :index, :show]
-      resources :tasks, only: [:index]
+      resources :tasks, only: [:index, :create]
     end
 
     # May not use the below:
     resources :projects, only: [:show] do
-      resources :tasks, only: [:create, :update, :index]
+      resources :tasks, only: [:update, :index]
     end
     resources :tasks, only: [:show, :destroy]
     resource :session, only: [:create, :destroy]

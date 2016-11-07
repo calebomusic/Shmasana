@@ -1,0 +1,10 @@
+.task-detail {
+  border: 1px solid;
+  border-color: #EFF0F1;
+  background-color: white;
+  height: 96%;
+  width: 50%;
+  margin-right: .5%;
+  margin-left: 1.5%;
+  margin-top: 2%;
+}

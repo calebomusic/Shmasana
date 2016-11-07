@@ -5,7 +5,6 @@ const ProjectReducer = (oldState = {}, action) => {
   let newState
   switch (action.type) {
     case RECEIVE_PROJECT:
-      console.log(merge({}, {[action.project.id]: action.project}));
       return action.project;
     case REMOVE_PROJECT:
       return {};
