@@ -37,25 +37,31 @@ const WorkspacesMiddleware = store => next => action => {
 
   // Dispatches receive workspace on login in order to direct user to
   // their last workspace on login
+
+  // This is now the same as rws below
     let receiveWorkspaceOnLoginSuccess = workspace => {
       store.dispatch(receiveWorkspace(workspace));
-      redirectToNewWorkspace(workspace);
+      redirectToNewWorkspace(workspace)
     }
 
   let receiveWorkspaceSuccess = workspace => {
-    store.dispatch(receiveWorkspace(workspace, currentUserId));
+    store.dispatch(receiveWorkspace(workspace));
     redirectToNewWorkspace(workspace);
   }
 
   let redirectToNewWorkspace = (workspace) => {
-    const currentUserId = currentUser.id
+    let currentUserId
+    if (store.getState().session.currentUserId) {
+      currentUserId = store.getState().session.currentUser;
+    } else {
+      currentUserId = workspace.users[0];
+    }
+
     const workspaceId = workspace.id;
     hashHistory.push(`${currentUserId}/${workspaceId}`)
   }
 
   let removeWorkspaceSuccess = workspace => store.dispatch(removeWorkspace(workspace));
-
-  const currentUser = store.getState().session.currentUser;
 
   switch (action.type) {
     case FETCH_WORKSPACES:

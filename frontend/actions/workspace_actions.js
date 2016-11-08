@@ -60,7 +60,7 @@ export const receiveAllWorkspaces = (workspaces) => (
     workspaces
   }
 )
-export const receiveWorkspace = (workspace, currentUserId) => (
+export const receiveWorkspace = (workspace) => (
   {
     type: RECEIVE_WORKSPACE,
     workspace
