@@ -63,6 +63,8 @@ const WorkspacesMiddleware = store => next => action => {
 
   let removeWorkspaceSuccess = workspace => store.dispatch(removeWorkspace(workspace));
 
+  const currentUser = store.getState().session.currentUser
+
   switch (action.type) {
     case FETCH_WORKSPACES:
       fetchWorkspaces(receiveAllWorkspacesSuccess);
