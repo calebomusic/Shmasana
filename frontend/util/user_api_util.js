@@ -7,10 +7,10 @@ export const fetchUser = (id, success, error) => {
   })
 }
 
-export const fetchUserByWorkspace = (id, success, error) => {
+export const fetchUsersByWorkspace = (workspaceId, success, error) => {
   $.ajax({
     type: 'GET',
-    url: `api/users/${id}`,
+    url: `api/workspaces/${workspaceId}/users`,
     success,
     error
   })

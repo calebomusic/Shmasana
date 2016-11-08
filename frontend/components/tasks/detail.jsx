@@ -1,16 +1,17 @@
 import React from 'react';
 import { withRouter, hashHistory } from 'react-router';
+
 import Trash from 'material-ui/svg-icons/action/delete';
 import DateRange from 'material-ui/svg-icons/action/date-range'
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
-import { fetchUser } from '../../util/user_api_util';
 import DatePicker from 'material-ui/DatePicker';
 import { fetchProject, fetchProjectsByWorkspace } from '../../util/project_api_util';
 import { lightBlue200, lightBlue500, lightRed200 } from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
 import Popover from 'material-ui/Popover';
 
+import { fetchUser, fetchUsersByWorkspace } from '../../util/user_api_util';
 
 
 class Detail extends React.Component {
@@ -18,11 +19,11 @@ class Detail extends React.Component {
     super(props)
 
     this.state = { assignee: {}, project: {}, selected: false,
-                   projectListOpen: false,
+                   projectListOpen: false, assignees: [],
                    projects: [], author: {}, task: {}, project_id: undefined,
                    title: '',
                    description: '',
-                   dueDate: '', openAssigneeList: false}
+                   dueDate: '', assigneeListOpen: false}
 
     this.renderHeader = this.renderHeader.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
@@ -33,12 +34,18 @@ class Detail extends React.Component {
     this.renderDescription = this.renderDescription.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.closeDetail = this.closeDetail.bind(this);
-    this.fetchProjectsByWorkspace = fetchProjectsByWorkspace.bind(this)
+    this.fetchProjectsByWorkspace = fetchProjectsByWorkspace.bind(this);
+    this.fetchUsersByWorkspace = fetchUsersByWorkspace.bind(this);
     this.renderProjectList = this.renderProjectList.bind(this);
-    this.openProjectList = this.openProjectList.bind(this);
+    this.toggleProjectList = this.toggleProjectList.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.fetchProjectList = this.fetchProjectList.bind(this);
     this.handleProjectChange = this.handleProjectChange.bind(this);
+    this.renderAssignee = this.renderAssignee.bind(this);
+    this.toggleAssigneeList = this.toggleAssigneeList.bind(this);
+    this.renderAssigneeList = this.renderAssigneeList.bind(this);
+    this.fetchAssignees = this.fetchAssignees.bind(this);
+    this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
 
   componentWillMount() {
@@ -56,9 +63,6 @@ class Detail extends React.Component {
     } else {
       this.setState({assignee: {}} )
     }
-
-    console.log(newProps.task.due_date);
-    console.log(this.state.dueDate);
 
     if (!newProps.task.due_date && !this.state.dueDate) {
       this.setState({dueDate: '' } )
@@ -91,7 +95,7 @@ class Detail extends React.Component {
     const assignee = this.state.assignee.username ? this.state.assignee.username : 'Unassigned'
 
     return(<div className='task-detail-header'>
-      <div className='task-detail-username'>{assignee}</div>
+      <div className='task-detail-username'>{this.renderAssignee()}</div>
       <div className='task-detail-due-date'>
         <DateRange />
         <DatePicker hintText={dueDate} value={this.state.dueDate} onChange={this.handleDateChange}
@@ -107,9 +111,11 @@ class Detail extends React.Component {
   }
 
   renderAssignee() {
-    const assignee = this.state.assignee.name ? this.state.assignee.name : 'Unassigned';
+    const assignee = this.state.assignee.username ? this.state.assignee.username : 'Unassigned';
 
     let assingneeList;
+
+    // debugger
 
     if (this.state.assigneeListOpen) {
       assingneeList = this.fetchAssignees()
@@ -123,14 +129,39 @@ class Detail extends React.Component {
   }
 
   toggleAssigneeList() {
-    this.setState({openAssigneeList: !this.state.openAssingneeList})
+    this.setState({assigneeListOpen: !this.state.assigneeListOpen})
   }
-  fetchAssignees() {
 
+  fetchAssignees() {
+    const workspaceId = parseInt(this.props.params.workspaceId)
+
+    let projectList;
+
+    if (this.state.assignees.length === 0) {
+      this.fetchUsersByWorkspace((workspaceId), (assignees) => {
+        this.setState({assignees: assignees})
+      }, (e) => console.log(e))
+    }
+
+    return this.renderAssigneeList()
   }
 
   renderAssigneeList() {
+    let assignees
 
+    if (this.state.assignees) {
+      assignees = this.state.assignees.map( (assignee) => (
+        <MenuItem value={assignee} primaryText={assignee.username} />
+      ))
+    }
+
+    // Needs a handle change
+    return(<DropDownMenu value={this.state.assignee} style={assigneeStyle}
+      onChange={this.handleDropdownChange('assignee_id')} autoWidth={false}
+      openImmediately={true}>
+        <MenuItem value={''} primaryText='Unassigned' />
+        {assignees}
+    </DropDownMenu>)
   }
 
   closeDetail() {
@@ -161,7 +192,7 @@ class Detail extends React.Component {
     if (this.state.projectListOpen) {
       projectList = this.fetchProjectList()
     } else {
-      projectList = <MenuItem value={undefined} primaryText={project} onClick={this.openProjectList} />
+      projectList = <MenuItem value={undefined} primaryText={project} onClick={this.toggleProjectList} />
     }
 
     return(<div className='task-detail-project'>
@@ -172,9 +203,6 @@ class Detail extends React.Component {
   fetchProjectList() {
     // debugger
     const workspaceId = parseInt(this.props.params.workspaceId)
-    const project = this.state.project.name ? this.state.project.name : 'NO PROJECT'
-
-    let projectList;
 
     if (this.state.projects.length === 0) {
       this.fetchProjectsByWorkspace((workspaceId), (projects) => {
@@ -188,18 +216,24 @@ class Detail extends React.Component {
 
   renderProjectList() {
     // debugger
-    const projects = this.state.projects.map( (project) => (
-      <MenuItem value={project} primaryText={project.name} />
-    ))
+
+    let projects;
+
+    if (this.state.projects) {
+      projects = this.state.projects.map( (project) => (
+        <MenuItem value={project} primaryText={project.name} />
+      ))
+    }
 
     return(<DropDownMenu value={this.state.project_id} style={popoverStyle}
-      onChange={this.handleProjectChange} autoWidth={false}>
+      onChange={this.handleProjectChange} autoWidth={false}
+      openImmediately={true}>
         <MenuItem value={undefined} primaryText={'No Project'} />
         {projects}
     </DropDownMenu>)
   }
 
-  openProjectList() {
+  toggleProjectList() {
     this.setState({projectListOpen: true})
   }
 
@@ -222,7 +256,7 @@ class Detail extends React.Component {
 
   handleChange(field) {
     return (e) => {
-      debugger
+      // debugger
       this.props.task[field] = e.target.value
       this.setState({[field]: e.target.value, projectList: false})
       this.props.updateTask(this.props.task);
@@ -236,9 +270,27 @@ class Detail extends React.Component {
   }
 
   handleProjectChange(e, i, project) {
-    debugger
+    // debugger
     this.props.task.project_id = project.id;
     this.props.updateTask(this.props.task)
+  }
+
+  handleDropdownChange(field) {
+    return (e, i, value) => {
+      if (field === 'assignee_id') {
+        this.toggleAssigneeList();
+      } else {
+        this.toggleProjectList();
+      }
+
+      debugger
+
+      if (value) {
+        value = value.id
+      }
+      this.props.task[field] = value;
+      this.props.updateTask(this.props.task);
+    }
   }
 
   renderTitle() {
@@ -309,4 +361,10 @@ const popoverStyle = {
   flexDirection: 'column',
   hoverColor: '#FFFFFF',
   hoverBackgroundColor: 'blue'
+}
+
+const assigneeStyle = {
+  width: '150px',
+  display: 'flex',
+  flexDirection: 'column'
 }

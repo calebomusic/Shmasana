@@ -33,7 +33,7 @@ class Api::TasksController < ApplicationController
 
   def update
     @task = Task.find_by_id(params[:id])
-
+    
     if @task.update(task_params)
       render :show
     else

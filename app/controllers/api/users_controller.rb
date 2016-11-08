@@ -11,7 +11,8 @@ class Api::UsersController < ApplicationController
   end
 
   def index
-    @users = User.where(workspace_id: params[:workspace_id])
+    workspace_id = params[:workspace_id]
+    @users = User.includes(:workspaces).where(workspaces: {id: workspace_id})
   end
 
   def show
