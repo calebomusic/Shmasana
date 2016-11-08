@@ -8,6 +8,9 @@ import { fetchUser } from '../../util/user_api_util';
 import DatePicker from 'material-ui/DatePicker';
 import { fetchProject, fetchProjectsByWorkspace } from '../../util/project_api_util';
 import { lightBlue200, lightBlue500, lightRed200 } from 'material-ui/styles/colors';
+import Divider from 'material-ui/Divider';
+import Popover from 'material-ui/Popover';
+
 
 
 class Detail extends React.Component {
@@ -15,11 +18,11 @@ class Detail extends React.Component {
     super(props)
 
     this.state = { assignee: {}, project: {}, selected: false,
-                   projectList: false,
-                   author: {}, task: {}, project_id: undefined,
+                   projectListOpen: false,
+                   projects: [], author: {}, task: {}, project_id: undefined,
                    title: '',
                    description: '',
-                   dueDate: ''}
+                   dueDate: '', openAssigneeList: false}
 
     this.renderHeader = this.renderHeader.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
@@ -34,12 +37,13 @@ class Detail extends React.Component {
     this.renderProjectList = this.renderProjectList.bind(this);
     this.openProjectList = this.openProjectList.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.fetchProjectList = this.fetchProjectList.bind(this);
+    this.handleProjectChange = this.handleProjectChange.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchTask(this.props.params.taskId)
     this.setState({dueDate: this.props.task.due_date })
-    console.log(this.state.dueDate);
   }
 
   componentWillReceiveProps(newProps){
@@ -102,16 +106,40 @@ class Detail extends React.Component {
     </div>)
   }
 
+  renderAssignee() {
+    const assignee = this.state.assignee.name ? this.state.assignee.name : 'Unassigned';
 
+    let assingneeList;
+
+    if (this.state.assigneeListOpen) {
+      assingneeList = this.fetchAssignees()
+    } else {
+      assingneeList = <MenuItem value={undefined} primaryText={assignee} onClick={this.toggleAssigneeList} />
+    }
+
+    return(<div className='task-detail-assignee'>
+            {assingneeList}
+          </div>)
+  }
+
+  toggleAssigneeList() {
+    this.setState({openAssigneeList: !this.state.openAssingneeList})
+  }
+  fetchAssignees() {
+
+  }
+
+  renderAssigneeList() {
+
+  }
 
   closeDetail() {
     this.props.removeTask()
-    hashHistory.push()
 
-    const userId = props.task.author_id;
-    const workspaceId = props.task.workspace_id;
-    const projectId = props.task.project_id;
-    const taskId = props.task.id;
+    const userId = this.props.task.author_id;
+    const workspaceId = this.props.task.workspace_id;
+    const projectId = this.props.task.project_id;
+    const taskId = this.props.task.id;
 
     let location;
 
@@ -125,12 +153,13 @@ class Detail extends React.Component {
   }
 
   renderProject() {
+    // debugger
     const project = this.state.project.name ? this.state.project.name : 'NO PROJECT'
 
     let projectList;
 
-    if (this.state.projectList) {
-      projectList = this.renderProjectList()
+    if (this.state.projectListOpen) {
+      projectList = this.fetchProjectList()
     } else {
       projectList = <MenuItem value={undefined} primaryText={project} onClick={this.openProjectList} />
     }
@@ -140,26 +169,38 @@ class Detail extends React.Component {
           </div>)
   }
 
-  renderProjectList() {
+  fetchProjectList() {
+    // debugger
     const workspaceId = parseInt(this.props.params.workspaceId)
     const project = this.state.project.name ? this.state.project.name : 'NO PROJECT'
 
     let projectList;
 
-    this.fetchProjectsByWorkspace((workspaceId), (projects) => {
-      projectList = projects
-    }, (e) => console.log(e))
+    if (this.state.projects.length === 0) {
+      this.fetchProjectsByWorkspace((workspaceId), (projects) => {
+        this.setState({projects: projects})
+      }, (e) => console.log(e))
+    }
 
-    console.log(projectList);
 
-    return(<DropDownMenu value={this.state.project_id}
-      onChange={this.handleChange('project_id')} style={style}>
+    return this.renderProjectList()
+  }
+
+  renderProjectList() {
+    // debugger
+    const projects = this.state.projects.map( (project) => (
+      <MenuItem value={project} primaryText={project.name} />
+    ))
+
+    return(<DropDownMenu value={this.state.project_id} style={popoverStyle}
+      onChange={this.handleProjectChange} autoWidth={false}>
         <MenuItem value={undefined} primaryText={'No Project'} />
+        {projects}
     </DropDownMenu>)
   }
 
   openProjectList() {
-    this.setState({projectList: true})
+    this.setState({projectListOpen: true})
   }
 
   parseDate(date) {
@@ -169,6 +210,7 @@ class Detail extends React.Component {
 
     return month + ' ' + day
   }
+
   updateFocus() {
     this.setState({selected: true});
     // this.props.fetchTask(this.props.task.id)
@@ -180,6 +222,7 @@ class Detail extends React.Component {
 
   handleChange(field) {
     return (e) => {
+      debugger
       this.props.task[field] = e.target.value
       this.setState({[field]: e.target.value, projectList: false})
       this.props.updateTask(this.props.task);
@@ -187,9 +230,15 @@ class Detail extends React.Component {
   }
 
   handleDateChange(e, date) {
-    this.props.task.due_date = date
+    this.props.task.due_date = date;
     // this.setState({dueDate: date})
     this.props.updateTask(this.props.task);
+  }
+
+  handleProjectChange(e, i, project) {
+    debugger
+    this.props.task.project_id = project.id;
+    this.props.updateTask(this.props.task)
   }
 
   renderTitle() {
@@ -251,4 +300,13 @@ export default withRouter(Detail);
 const style = {
   color: '#76e0f1',
   backgroundColor: '76e0f1'
+}
+
+
+const popoverStyle = {
+  width: '300px',
+  display: 'flex',
+  flexDirection: 'column',
+  hoverColor: '#FFFFFF',
+  hoverBackgroundColor: 'blue'
 }

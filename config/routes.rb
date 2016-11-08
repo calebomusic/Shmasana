@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :workspaces, only: [:show] do
       resources :projects, only: [:create, :index, :show]
       resources :tasks, only: [:index, :create]
+      resources :users, only: [:index]
     end
 
     # May not use the below:

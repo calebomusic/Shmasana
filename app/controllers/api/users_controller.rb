@@ -10,6 +10,10 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.where(workspace_id: params[:workspace_id])
+  end
+
   def show
     @user = User.find_by_id(params[:id])
   end
