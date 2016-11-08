@@ -111,8 +111,8 @@
 .task-list-check-title {
     margin-left: 2px;
     display:inline-block;
-    width: 36px;
-    height:36px;
+    min-width: 36px;
+    min-height:36px;
     background: white;
     border-radius:50%;
     -ms-transform: rotate(45deg); /* IE 9 */
@@ -131,8 +131,8 @@
 .task-list-check-title:before{
     content:"";
     position: absolute;
-    width:4px;
-    height:18px;
+    min-width:4px;
+    min-height:18px;
     background-color: #898E95;
     left: 17px;
     top: 6.5px;
@@ -142,8 +142,8 @@
     content:"";
     color: #898E95;
     position: absolute;
-    width:7px;
-    height:5px;
+    min-width:7px;
+    min-height:5px;
     background-color: #898E95;
     left:12px;
     top: 19.5px;

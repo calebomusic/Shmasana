@@ -42,10 +42,10 @@ const TaskMiddleware = store => next => action => {
 
   switch (action.type) {
     case CREATE_TASK:
-      createTask(action.task, action.task.project_id, successfulCreateOrUpdate)
+      createTask(action.task, action.task.workspace_id, successfulCreateOrUpdate);
       return next(action);
     case UPDATE_TASK:
-      updateTask(action.task, action.task.project_id, successfulCreateOrUpdate)
+      updateTask(action.task, action.task.workspace_id, successfulCreateOrUpdate);
       return next(action);
     case FETCH_TASK:
       fetchTask(action.id, successfulFetch)

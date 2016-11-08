@@ -4,7 +4,8 @@ import React from 'react';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-import Divider from 'material-ui/Divider'
+import Divider from 'material-ui/Divider';
+import { withRouter } from 'react-router';
 
 const style = {
   backgroundColor: 'white'
@@ -23,8 +24,9 @@ class ActionDropdown extends React.Component {
       open: false,
     };
 
-    this.handleTouchTap = this.handleTouchTap.bind(this)
-    this.handleRequestClose = this.handleRequestClose.bind(this)
+    this.handleTouchTap = this.handleTouchTap.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
+    this.createTask = this.createTask.bind(this);
   }
 
   handleTouchTap(e) {
@@ -42,6 +44,14 @@ class ActionDropdown extends React.Component {
     });
   };
 
+  createTask() {
+    const userId = parseInt(this.props.params.userId);
+    const workspaceId = parseInt(this.props.params.workspaceId);
+    const task = {workspace_id: workspaceId, author_id: userId}
+
+    this.props.createTask(task)
+  }
+
   render() {
     return (
       <div>
@@ -55,9 +65,7 @@ class ActionDropdown extends React.Component {
           style={popoverStyle}
           >
           <Menu style={style}>
-            <MenuItem primaryText="Task" />
-            <Divider />
-            <MenuItem primaryText="Conversation" />
+            <MenuItem primaryText="Task" onClick={this.createTask} />
             <Divider />
             <MenuItem primaryText="Project" />
             <Divider />
@@ -75,4 +83,4 @@ class ActionDropdown extends React.Component {
 
 // CHECK THIS OUT: https://codepen.io/michaelmov/pen/RaxxJB/
 
-export default ActionDropdown;
+export default withRouter(ActionDropdown);

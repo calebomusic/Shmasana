@@ -36,6 +36,7 @@ class WorkspaceTaskList extends React.Component {
       this.setState({tasks: tasks})
     )
   }
+
   createTask() {
     const userId = parseInt(this.props.params.userId)
     const workspaceId = parseInt(this.props.params.workspaceId)

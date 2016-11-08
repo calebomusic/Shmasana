@@ -2,6 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute, withRouter} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { lightBlue200, lightBlue500 } from 'material-ui/styles/colors';
 
 import App from './app';
 import SessionFormContainer from './session/session_form_container';
@@ -40,7 +42,7 @@ const Root = ({store}) => {
     }
   }
 
-  return(<MuiThemeProvider>
+  return(<MuiThemeProvider muiTheme={muiTheme}>
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={SignUpHomeContainer}
@@ -64,5 +66,18 @@ const Root = ({store}) => {
   </MuiThemeProvider>);
 };
 
+
+// ExampleTheme: https://github.com/callemall/material-ui/blob/master/src/styles/baseThemes/lightBaseTheme.js
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primaryColor: lightBlue200,
+    secondaryColor: lightBlue500,
+    accent1Color: lightBlue200
+  },
+  appBar: {
+    height: 50,
+  },
+});
 // is the user path necessary?
 export default Root;

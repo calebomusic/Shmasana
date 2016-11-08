@@ -17,6 +17,7 @@ const mapDispatchToProps = (dispatch) => (
   // fetch user's teams?
   {
     logout: () => dispatch(logout()),
+    createTask: (task) => dispatch(createTask(task)),
     createWorkspace: (workspace) => dispatch(createWorkspace(workspace)),
     fetchWorkspace: (id) => dispatch(fetchWorkspace(id)),
     fetchWorkspaces: () => dispatch(fetchWorkspaces()),

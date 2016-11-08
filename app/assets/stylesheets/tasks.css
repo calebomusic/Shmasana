@@ -100,39 +100,39 @@
 }*/
 
 .task-list-check {
-    display:inline-block;
-    background-color: #898E95;
-    width: 22px;
-    height:22px;
-    background: white;
-    border-radius:50%;
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-    transform: rotate(45deg);
-    border: 1px solid;
-    border-color: #898E95;
-    color: #898E95;
+  display:inline-block;
+  background-color: #898E95;
+  min-width: 22px;
+  min-height:22px;
+  background: white;
+  border-radius:50%;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+  border: 1px solid;
+  border-color: #898E95;
+  color: #898E95;
 }
 
 .task-list-check:before{
-    content:"";
-    position: absolute;
-    width:3px;
-    height:9px;
-    background-color: #898E95;
-    left:11px;
-    top:6px;
+  content:"";
+  position: absolute;
+  min-width:3px;
+  min-height:9px;
+  background-color: #898E95;
+  left:11px;
+  top:6px;
 }
 
 .task-list-check:after {
-    content:"";
-    color: inherit;
-    position: absolute;
-    width:3px;
-    height:3px;
-    background-color: #898E95;
-    left:8px;
-    top:12px;
+  content:"";
+  color: inherit;
+  position: absolute;
+  min-width:3px;
+  min-height:3px;
+  background-color: #898E95;
+  left:8px;
+  top:12px;
 }
 
 .task-list-check:hover:after {
@@ -140,13 +140,13 @@
 }
 
 .task-list-check:hover:before{
-    background-color: #3BF7D1;
+  background-color: #3BF7D1;
 }
 
 .task-list-check:hover {
-    border-color: #3BF7D1;
-    color: #9DFBE8;
-    box-shadow: 0px 0px 0px 2px #3BF7D1;
+  border-color: #3BF7D1;
+  color: #9DFBE8;
+  box-shadow: 0px 0px 0px 2px #3BF7D1;
 }
 
 .task-list-item-title {

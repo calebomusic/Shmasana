@@ -1,15 +1,18 @@
 import React from 'react';
 import { withRouter, hashHistory } from 'react-router';
 import Trash from 'material-ui/svg-icons/action/delete';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 import { fetchUser } from '../../util/user_api_util';
-import { fetchProject } from '../../util/project_api_util';
+import { fetchProject, fetchProjectsByWorkspace } from '../../util/project_api_util';
 
 class Detail extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = { assignee: {}, project: {}, selected: false,
-                   author: {}, task: {},
+                   projects: [],
+                   author: {}, task: {}, project_id: undefined,
                    title: '',
                    description: ''}
 
@@ -21,6 +24,7 @@ class Detail extends React.Component {
     this.renderDescription = this.renderDescription.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.closeDetail = this.closeDetail.bind(this);
+    this.fetchProjectsByWorkspace = fetchProjectsByWorkspace.bind(this)
   }
 
   componentWillMount() {
@@ -90,10 +94,21 @@ class Detail extends React.Component {
 
   renderProject() {
     const project = this.state.project.name ? this.state.project.name : 'NO PROJECT'
+    const workspaceId = parseInt(this.props.params.workspaceId)
+    let projectList;
 
-    // Let's render a dropdown of different projects here.
+    this.fetchProjectsByWorkspace((workspaceId), (projects) => {
+      console.log(projects)
+      projectList = projects
+    }, (e) => console.log(e))
+
+    // debugger
+    console.log(projectList);
+    // console.log(this.state.projects);
     return(<div className='task-detail-project'>
-          {project}
+      <DropDownMenu value={this.state.project_id} onChange={this.handleChange('project_id')} style={style}>
+         <MenuItem value={undefined} primaryText={'NO PROJECT'} />
+      </DropDownMenu>
           </div>)
   }
 
@@ -166,3 +181,8 @@ class Detail extends React.Component {
 }
 
 export default withRouter(Detail);
+
+const style = {
+  color: '#76e0f1',
+  backgroundColor: '76e0f1'
+}
