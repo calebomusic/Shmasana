@@ -5,7 +5,7 @@ import merge from 'lodash/merge'
 const TaskReducer = (oldState = {}, action) => {
   switch (action.type) {
     case RECEIVE_TASK:
-      return action.task
+      return action.task;
     case REMOVE_TASK:
       return {};
     default:

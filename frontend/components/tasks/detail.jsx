@@ -1,6 +1,6 @@
 import React from 'react';
-import { withRouter } from 'react-router';
-
+import { withRouter, hashHistory } from 'react-router';
+import Trash from 'material-ui/svg-icons/action/delete';
 import { fetchUser } from '../../util/user_api_util';
 import { fetchProject } from '../../util/project_api_util';
 
@@ -34,6 +34,8 @@ class Detail extends React.Component {
         this.setState({assignee: assignee} ),
           (error) => console.log(error) )
       )
+    } else {
+      this.setState({assignee: {}} )
     }
 
     if (newProps.task.project_id) {
@@ -61,7 +63,7 @@ class Detail extends React.Component {
     return(<div className='task-detail-header'>
       <div className='task-detail-username'>{assignee}</div>
       <div className='task-detail-due-date'>{dueDate}</div>
-      <div className='task-detail-options'>TRASHCAN</div>
+      <div className='task-detail-options'><Trash /></div>
       <div className='task-detail-close' onTouchTap={this.closeDetail}>x</div>
     </div>)
   }

@@ -96,14 +96,16 @@ class UserDropdown extends React.Component {
   render() {
     if (this.state.modal) {
       return(
-        <div>
+        <div className='create-workspace-modal'>
           <div className='header-user-dropdown' onTouchTap={this.handleTouchTap}>
             <p>{this.props.user.username}</p>
           <FloatingActionButton mini={true} style={buttonStyle} >
           </FloatingActionButton>
         </div>
-          <CreateWorkspaceModal
-          createWorkspace={this.props.createWorkspace} />
+          <div className='create-workspace-modal'>
+            <CreateWorkspaceModal
+            createWorkspace={this.props.createWorkspace} />
+          </div>
         </div>)
     } else {
       return(<div>

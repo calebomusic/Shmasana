@@ -8,7 +8,7 @@ import TaskListItem from './task_list_item'
 class WorkspaceTaskList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {tasks: [], taskId: undefined}
+    this.state = {tasks: [], taskId: '', task: {}}
 
     this.createTask = this.createTask.bind(this);
     this.componentWillReceiveAndMount = this.componentWillReceiveAndMount.bind(this);
@@ -29,6 +29,7 @@ class WorkspaceTaskList extends React.Component {
 
     if (props.task) {
       this.setState({taskId: props.task.id});
+      this.setState({task: props.task})
     }
 
     fetchTasksByUserAndWorkspace(userId, workspaceId, (tasks) =>

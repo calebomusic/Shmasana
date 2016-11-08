@@ -69,7 +69,7 @@ class CreateWorkspaceModal extends React.Component {
 
   render(){
     return(
-      <div className='create-workspace-modal'>
+      <div>
           <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal} >
             <div>
             <div className='create-workspace-header'>

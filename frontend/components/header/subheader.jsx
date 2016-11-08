@@ -6,7 +6,7 @@ class SubHeader extends React.Component {
   constructor(props) {
     super(props)
     this.state = {workspace: {}, projectName: ''}
-
+    // debugger
     this.fetchWorkspace = fetchWorkspace.bind(this);
     this.subheaderChange = this.subheaderChange.bind(this);
     this.fetchProject = this.props.fetchProject.bind(this);
@@ -17,13 +17,17 @@ class SubHeader extends React.Component {
     this.subheaderChange(this.props);
   }
 
+  componentDidMount() {
+    // debugger
+  }
+
   componentWillReceiveProps(newProps) {
     this.subheaderChange(newProps);
   }
 
   subheaderChange(props) {
+    // debugger
     let projectId = props.params.projectId
-
     if (projectId) {
       if (props.project.name) {
         this.setState({projectName: props.project.name});
@@ -37,7 +41,7 @@ class SubHeader extends React.Component {
       this.setState({workspaceName: props.workspace.name,
                     projectName: undefined});
       this.removeProject()
-    } else if (!this.state.workspace.name ||
+    } else if (!props.workspace || !this.state.workspace.name ||
       props.workspace && parseInt(props.workspace.id) !== this.state.workspace.id) {
       const workspaceId = parseInt(props.params.workspaceId);
       this.fetchWorkspace(workspaceId, props.currentUser, (workspace) => {

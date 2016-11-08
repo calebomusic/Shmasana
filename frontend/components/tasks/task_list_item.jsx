@@ -24,6 +24,7 @@ class TaskListItem extends React.Component {
 
   componentWillReceiveProps(newProps) {
     this.setLocation(newProps)
+    this.setState({title: newProps.task.title})
   }
 
   setLocation(props) {
@@ -72,19 +73,19 @@ class TaskListItem extends React.Component {
     }
 
     if (this.state.selected) {
-      className = 'selected' + className;
+      className = 'selected-' + className;
     }
     // check location to toggle selected?
 
     return(<li className={className}>
       <button onClick={this.toggleComplete}
-        className='task-list-check'>√</button>
-      <input value={this.state.title} onChange={this.handleChange}
-        onFocus={this.updateFocus} onBlur={this.updateBlur} placeholder='New Task'>
+        className='task-list-check'></button>
+      <input className='task-list-item-title' value={this.state.title}
+        onChange={this.handleChange} onFocus={this.updateFocus}
+        onBlur={this.updateBlur} placeholder=''>
       </input>
     </li>)
   }
 }
-// <CheckedCircle />
 
 export default TaskListItem;
