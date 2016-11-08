@@ -14,31 +14,36 @@ class SubHeader extends React.Component {
   }
 
   componentWillMount() {
+    // debugger
     this.subheaderChange(this.props);
   }
 
-  componentDidMount() {
-    // debugger
-  }
-
   componentWillReceiveProps(newProps) {
+    // debugger
     this.subheaderChange(newProps);
   }
 
   subheaderChange(props) {
-    // debugger
     let projectId = props.params.projectId
+
+    // console.log(`projId: ${projectId}`);
+    // console.log(`workspace: ${props.workspace}`);
+
     if (projectId) {
       if (props.project.name) {
         this.setState({projectName: props.project.name});
+        // console.log(`logged ${this.state.projectName}`);
       } else {
         projectId = parseInt(projectId);
         this.fetchProject(projectId, (project) => {
           this.setState({projectName: project.name})
+          // console.log(`logged ${this.state.projectName} FROM THE INSIDE`);
+
         });
+        // console.log(`logged ${this.state.projectName} FROM THE OUTSIDE`);
       }
     } else if(props.workspace) {
-      this.setState({workspaceName: props.workspace.name,
+      this.setState({workspace: props.workspace,
                     projectName: undefined});
       this.removeProject()
     } else if (!props.workspace || !this.state.workspace.name ||
@@ -49,6 +54,7 @@ class SubHeader extends React.Component {
                         projectName: null});
       this.removeProject()
     });
+    // console.log(`FROM ALL THE WAY OUT: ${this.state.projectName}`);
   }}
 
   removeProject() {
@@ -65,6 +71,7 @@ class SubHeader extends React.Component {
     } else {
       subheader = this.state.workspace.name
     }
+    // console.log("HEADER: " + subheader)
     return(
       <div className='subheader'>
         My tasks in {subheader}

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute, withRouter} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { lightBlue200, lightBlue500 } from 'material-ui/styles/colors';
+import { lightBlue200, lightBlue500, lightRed200 } from 'material-ui/styles/colors';
 
 import App from './app';
 import SessionFormContainer from './session/session_form_container';
@@ -73,7 +73,8 @@ const muiTheme = getMuiTheme({
   palette: {
     primaryColor: lightBlue200,
     secondaryColor: lightBlue500,
-    accent1Color: lightBlue200
+    accent1Color: lightBlue200,
+    pickerHeaderColor: lightRed200
   },
   appBar: {
     height: 50,

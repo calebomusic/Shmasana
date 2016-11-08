@@ -13,7 +13,7 @@ const App = ({children, params}) => {
     {children}
     </div>
   } else {
-    TaskList = {children}
+
   }
 
   return(

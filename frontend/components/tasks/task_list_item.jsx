@@ -64,22 +64,24 @@ class TaskListItem extends React.Component {
   }
 
   render() {
-    let className;
+    let className, buttonClassName;
     // debugger
     if (this.props.task.completed) {
-      className = 'completed-task-list-item'
+      className = 'completed-task-list-item';
+      buttonClassName = 'completed-task-list-check';
     } else {
-      className = 'task-list-item'
+      className = 'task-list-item';
+      buttonClassName = 'task-list-check';
     }
 
-    if (this.state.selected) {
+    if (this.state.selected && this.state.completed) {
       className = 'selected-' + className;
     }
     // check location to toggle selected?
 
     return(<li className={className}>
       <button onClick={this.toggleComplete}
-        className='task-list-check'></button>
+        className={buttonClassName}></button>
       <input className='task-list-item-title' value={this.state.title}
         onChange={this.handleChange} onFocus={this.updateFocus}
         onBlur={this.updateBlur} placeholder=''>

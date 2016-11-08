@@ -1,22 +1,28 @@
 import React from 'react';
 import { withRouter, hashHistory } from 'react-router';
 import Trash from 'material-ui/svg-icons/action/delete';
+import DateRange from 'material-ui/svg-icons/action/date-range'
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { fetchUser } from '../../util/user_api_util';
+import DatePicker from 'material-ui/DatePicker';
 import { fetchProject, fetchProjectsByWorkspace } from '../../util/project_api_util';
+import { lightBlue200, lightBlue500, lightRed200 } from 'material-ui/styles/colors';
+
 
 class Detail extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = { assignee: {}, project: {}, selected: false,
-                   projects: [],
+                   projectList: false,
                    author: {}, task: {}, project_id: undefined,
                    title: '',
-                   description: ''}
+                   description: '',
+                   dueDate: ''}
 
     this.renderHeader = this.renderHeader.bind(this);
+    this.toggleComplete = this.toggleComplete.bind(this);
     this.renderProject = this.renderProject.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateFocus = this.updateFocus.bind(this);
@@ -25,10 +31,15 @@ class Detail extends React.Component {
     this.renderFooter = this.renderFooter.bind(this);
     this.closeDetail = this.closeDetail.bind(this);
     this.fetchProjectsByWorkspace = fetchProjectsByWorkspace.bind(this)
+    this.renderProjectList = this.renderProjectList.bind(this);
+    this.openProjectList = this.openProjectList.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchTask(this.props.params.taskId)
+    this.setState({dueDate: this.props.task.due_date })
+    console.log(this.state.dueDate);
   }
 
   componentWillReceiveProps(newProps){
@@ -41,6 +52,16 @@ class Detail extends React.Component {
     } else {
       this.setState({assignee: {}} )
     }
+
+    console.log(newProps.task.due_date);
+    console.log(this.state.dueDate);
+
+    if (!newProps.task.due_date && !this.state.dueDate) {
+      this.setState({dueDate: '' } )
+    } else if (newProps.task.due_date && !this.state.dueDate) {
+      this.setState({dueDate: newProps.task.dueDate})
+    }
+
 
     if (newProps.task.project_id) {
       const projectId = parseInt(newProps.task.project_id)
@@ -62,15 +83,26 @@ class Detail extends React.Component {
   }
 
   renderHeader() {
-    const dueDate = this.props.task.due_date ? this.props.task.due_date : 'Due Date'
+    const dueDate = this.props.task.due_date ? this.parseDate(this.props.task.due_date) : 'Due Date'
     const assignee = this.state.assignee.username ? this.state.assignee.username : 'Unassigned'
+
     return(<div className='task-detail-header'>
       <div className='task-detail-username'>{assignee}</div>
-      <div className='task-detail-due-date'>{dueDate}</div>
+      <div className='task-detail-due-date'>
+        <DateRange />
+        <DatePicker hintText={dueDate} value={this.state.dueDate} onChange={this.handleDateChange}
+          inputStyle={{color: lightBlue200, secondaryTextColor: lightBlue200,
+          textColor: lightBlue200}} textFieldStyle={{
+            color: lightBlue200, textColor: lightBlue200, secondaryTextColor: lightBlue200,
+          width: '65px'}}>
+        </DatePicker>
+      </div>
       <div className='task-detail-options'><Trash /></div>
       <div className='task-detail-close' onTouchTap={this.closeDetail}>x</div>
     </div>)
   }
+
+
 
   closeDetail() {
     this.props.removeTask()
@@ -94,24 +126,49 @@ class Detail extends React.Component {
 
   renderProject() {
     const project = this.state.project.name ? this.state.project.name : 'NO PROJECT'
-    const workspaceId = parseInt(this.props.params.workspaceId)
+
     let projectList;
 
-    this.fetchProjectsByWorkspace((workspaceId), (projects) => {
-      console.log(projects)
-      projectList = projects
-    }, (e) => console.log(e))
+    if (this.state.projectList) {
+      projectList = this.renderProjectList()
+    } else {
+      projectList = <MenuItem value={undefined} primaryText={project} onClick={this.openProjectList} />
+    }
 
-    // debugger
-    console.log(projectList);
-    // console.log(this.state.projects);
     return(<div className='task-detail-project'>
-      <DropDownMenu value={this.state.project_id} onChange={this.handleChange('project_id')} style={style}>
-         <MenuItem value={undefined} primaryText={'NO PROJECT'} />
-      </DropDownMenu>
+            {projectList}
           </div>)
   }
 
+  renderProjectList() {
+    const workspaceId = parseInt(this.props.params.workspaceId)
+    const project = this.state.project.name ? this.state.project.name : 'NO PROJECT'
+
+    let projectList;
+
+    this.fetchProjectsByWorkspace((workspaceId), (projects) => {
+      projectList = projects
+    }, (e) => console.log(e))
+
+    console.log(projectList);
+
+    return(<DropDownMenu value={this.state.project_id}
+      onChange={this.handleChange('project_id')} style={style}>
+        <MenuItem value={undefined} primaryText={'No Project'} />
+    </DropDownMenu>)
+  }
+
+  openProjectList() {
+    this.setState({projectList: true})
+  }
+
+  parseDate(date) {
+    date = new Date(date).toDateString().split(' ');
+    const month = date[1];
+    const day = parseInt(date[2]);
+
+    return month + ' ' + day
+  }
   updateFocus() {
     this.setState({selected: true});
     // this.props.fetchTask(this.props.task.id)
@@ -124,15 +181,27 @@ class Detail extends React.Component {
   handleChange(field) {
     return (e) => {
       this.props.task[field] = e.target.value
-      this.setState({[field]: e.target.value})
+      this.setState({[field]: e.target.value, projectList: false})
       this.props.updateTask(this.props.task);
     }
   }
 
+  handleDateChange(e, date) {
+    this.props.task.due_date = date
+    // this.setState({dueDate: date})
+    this.props.updateTask(this.props.task);
+  }
+
   renderTitle() {
+    let buttonClassname = 'task-list-check-title';
+
+    if (this.props.task && this.props.task.completed) {
+      buttonClassname = 'completed-task-list-check-title'
+    }
+
     return(<div className='task-detail-title-button'>
     <button onClick={this.toggleComplete}
-      className='task-list-check-title'></button>
+      className={buttonClassname}></button>
     <input className='task-detail-title' value={this.state.title} onChange={this.handleChange('title')}
         onFocus={this.updateFocus} onBlur={this.updateBlur} placeholder='New Task'>
       </input>
@@ -153,13 +222,10 @@ class Detail extends React.Component {
   }
 
   renderFooter(){
-    const milliseconds = Date.parse(this.props.task.created_at);
-    const date = new Date(milliseconds).toDateString().split(' ');
-    const month = date[1];
-    const day = parseInt(date[2]);
+    const date = this.parseDate(this.props.task.created_at)
 
     return(<footer className='task-detail-footer'>
-    {this.state.author.username} created task. {month} {day}
+    {this.state.author.username} created task. {date}
     </footer>)
   }
 

@@ -149,6 +149,51 @@
   box-shadow: 0px 0px 0px 2px #3BF7D1;
 }
 
+.completed-task-list-check {
+  display:inline-block;
+  background-color: #b3fcd1;
+  min-width: 22px;
+  min-height:22px;
+  background: #b3fcd1;
+  border-radius:50%;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+  border: 1px solid;
+  border-color: #b3fcd1;
+}
+
+.completed-task-list-check:before{
+  content:"";
+  position: absolute;
+  min-width:3px;
+  min-height:9px;
+  background-color: white;
+  left:11px;
+  top:6px;
+}
+
+.completed-task-list-check:after {
+  content:"";
+  position: absolute;
+  min-width:3px;
+  min-height:3px;
+  background-color: white;
+  left:8px;
+  top:12px;
+}
+
+
+.completed-task-list-item {
+  border-bottom: 1px solid;
+  border-color: #d3d3d3;
+  color: #B9BCC0;
+  width: 92%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition: all .2s;
+}
+
 .task-list-item-title {
   padding-left: 10px;
   font-size: 14px;
