@@ -7,7 +7,6 @@ const ProjectReducer = (oldState = {}, action) => {
     case RECEIVE_PROJECT:
       return action.project;
     case REMOVE_PROJECT:
-      console.log('Removed project');
       return {};
     default:
       return oldState;

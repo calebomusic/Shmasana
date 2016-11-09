@@ -48,13 +48,11 @@ const Root = ({store}) => {
     const currentUser = store.getState().session.currentUser;
     const workspaceId = parseInt(nextState.params.workspaceId);
 
-    debugger
     if(!currentUser) {
       hashHistory.replace('/')
     } else if (!currentUser.workspaces.includes(workspaceId)) {
       hashHistory.push('/');
     } else {
-      debugger
       store.dispatch(fetchWorkspace(workspaceId));
       store.dispatch(removeProject());
     }

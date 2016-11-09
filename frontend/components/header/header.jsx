@@ -27,7 +27,8 @@ const Header = (props) => {
   }
   // debugger
   const redirectToWorkspace = () => {
-    hashHistory.push(`${props.router.params.userId}/${props.router.params.workspaceId}`)
+    hashHistory.push(`${props.router.params.userId}/${props.router.params.workspaceId}`);
+    props.removeProject();
   }
   // const myTasks = `/${props.currentUser.id}/${props.workspace.id}`;
   const currentUserId = props.currentUser.id

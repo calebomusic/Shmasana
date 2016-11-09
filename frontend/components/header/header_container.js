@@ -4,6 +4,7 @@ import { logout } from '../../actions/session_actions';
 import { createWorkspace, fetchWorkspaces, fetchWorkspace } from '../../actions/workspace_actions';
 import { openSidebar } from '../../actions/sidebar_actions'
 import { createTask } from '../../actions/task_actions'
+import { removeProject } from '../../actions/project_actions'
 
 const mapStateToProps = (state) => {
   return({
@@ -22,7 +23,8 @@ const mapDispatchToProps = (dispatch) => (
     createWorkspace: (workspace) => dispatch(createWorkspace(workspace)),
     fetchWorkspace: (id) => dispatch(fetchWorkspace(id)),
     fetchWorkspaces: () => dispatch(fetchWorkspaces()),
-    openSidebar: () => dispatch(openSidebar())
+    openSidebar: () => dispatch(openSidebar()),
+    removeProject: () => dispatch(removeProject())
   }
 )
 
