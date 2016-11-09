@@ -25,7 +25,7 @@ const SessionMiddleware = store => next => action => {
   const successfulLogout = (user) => {}
 
   const errors = (errors) => store.dispatch(receiveErrors(errors))
-
+  
   switch (action.type) {
     case LOGIN:
       login(action.user, successfulLogin, errors);

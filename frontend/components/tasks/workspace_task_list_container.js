@@ -10,13 +10,15 @@ import { createTask,
          fetchTask } from '../../actions/task_actions';
 
 import WorkspaceTaskList from './workspace_task_list'
+import { receiveView } from '../../actions/view_actions'
 
 const mapStateToProps = (state) => {
   return({
     currentUser: state.session.currentUser,
     sidebar: state.sidebar,
     task: state.task,
-    tasks: state.tasks
+    tasks: state.tasks,
+    view: state.view
   })
 }
 
@@ -26,7 +28,8 @@ const mapDispatchToProps = (dispatch) => {
     updateTask: (task) => dispatch(updateTask(task)),
     fetchTasksByUserAndWorkspace: (userId, workspaceId) => {
       dispatch(fetchTasksByUserAndWorkspace(userId, workspaceId)) },
-    fetchTask: (id) => dispatch(fetchTask(id))
+    fetchTask: (id) => dispatch(fetchTask(id)),
+    receiveView: (view) => dispatch(receiveView(view))
   })
 }
 

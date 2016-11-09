@@ -5,6 +5,7 @@ import SidebarReducer from './sidebar_reducer';
 import ProjectReducer from './project_reducer';
 import TaskReducer from './task_reducer';
 import TasksReducer from './tasks_reducer';
+import ViewReducer from './view_reducer';
 
 const RootReducer = combineReducers({
   session: SessionReducer,
@@ -12,7 +13,8 @@ const RootReducer = combineReducers({
   sidebar: SidebarReducer,
   project: ProjectReducer,
   task: TaskReducer,
-  tasks: TasksReducer
+  tasks: TasksReducer,
+  view: ViewReducer
 })
 
 export default RootReducer;

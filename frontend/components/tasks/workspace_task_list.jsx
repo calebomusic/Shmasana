@@ -25,11 +25,53 @@ class WorkspaceTaskList extends React.Component {
   }
 
   componentWillMount() {
-    this.componentWillReceiveAndMount(this.props)
+    if (this.props.view) {
+      this.props.receiveView(this.props.view)
+    } else {
+      this.props.receiveView('all')
+    }
+
+    debugger
+
+    const userId = parseInt(this.props.params.userId);
+    const workspaceId = parseInt(this.props.params.workspaceId);
+
+    let selectedTasks;
+
+    fetchTasksByUserAndWorkspace(userId, workspaceId, (tasks) =>
+      {
+        if (this.props.view === 'completed') {
+          selectedTasks = this.selectTasks(tasks, true);
+          this.setState({tasks: selectedTasks});
+        } else if (this.props.view === 'incomplete') {
+          selectedTasks = this.selectTasks(tasks, true);
+          this.setState({tasks: selectedTasks});
+        } else {
+          this.setState({tasks: tasks})
+        }
+      }
+    )
   }
 
   componentWillReceiveProps(newProps) {
-    this.componentWillReceiveAndMount(newProps);
+    const userId = parseInt(this.props.params.userId);
+    const workspaceId = parseInt(this.props.params.workspaceId);
+
+    let selectedTasks;
+
+    fetchTasksByUserAndWorkspace(userId, workspaceId, (tasks) =>
+      {
+        if (this.props.view === 'completed') {
+          selectedTasks = this.selectTasks(tasks, true);
+          this.setState({tasks: selectedTasks});
+        } else if (this.props.view === 'incomplete') {
+          selectedTasks = this.selectTasks(tasks, false);
+          this.setState({tasks: selectedTasks});
+        } else {
+          this.setState({tasks: tasks})
+        }
+      }
+    )
   }
 
   componentWillReceiveAndMount(props) {
@@ -41,7 +83,8 @@ class WorkspaceTaskList extends React.Component {
       this.setState({task: props.task})
     }
 
-    this.updateView(undefined, undefined, 'all')
+    debugger
+    // this.updateView(undefined, undefined, this.props.view)
   }
 
   createTask() {
@@ -73,6 +116,10 @@ class WorkspaceTaskList extends React.Component {
   updateView(e, i, view) {
     let tasks;
 
+    debugger
+
+    this.props.receiveView(view);
+
     const userId = parseInt(this.props.params.userId);
     const workspaceId = parseInt(this.props.params.workspaceId);
 
@@ -95,7 +142,7 @@ class WorkspaceTaskList extends React.Component {
 
   selectTasks(tasks, completed) {
     let selectedTasks = [];
-    debugger
+
     tasks.forEach((task) => {
       if (completed && task.completed) {
         selectedTasks.push(task);
