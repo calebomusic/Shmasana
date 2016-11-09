@@ -31,21 +31,19 @@ class SideBar extends React.Component {
   }
 
   componentWillMount() {
-    const workspaceId = parseInt(this.props.router.params.workspaceId)
-
-    fetchProjectsByWorkspace(workspaceId, (projects) => {
-      this.setState({projects: projects});
-    });
+    // const workspaceId = parseInt(this.props.router.params.workspaceId)
+    //
+    // fetchProjectsByWorkspace(workspaceId, (projects) => {
+    //   this.setState({projects: projects});
+    // });
   }
 
   // Don't forget to fetch new projects on prop change.
   componentWillReceiveProps(newProps) {
-    this.setState({projectId: newProps.project.id });
-
-    const workspaceId = parseInt(this.props.router.params.workspaceId)
-    fetchProjectsByWorkspace(workspaceId, (projects) => {
-      this.setState({projects: projects});
-    });
+    // const workspaceId = parseInt(this.props.router.params.workspaceId)
+    // fetchProjectsByWorkspace(workspaceId, (projects) => {
+    //   this.setState({projects: projects});
+    // });
   }
 
   handleToggle() {
@@ -109,14 +107,16 @@ class SideBar extends React.Component {
     const userId = this.props.router.params.userId
     const workspaceId = this.props.router.params.workspaceId
     const url = `/${userId}/${workspaceId}/`
+
     // debugger
-    return this.state.projects.map( (project) => {
+
+    return this.props.workspace.projects.map( (project) => {
       let projectURL = `${url}${project.id}`;
       const updateProject = this.updateProject.bind(this, project)
       let className = 'project-list-item';
       let liClassName = 'project-list-li'
-      
-      if (this.state.projectId && this.state.projectId === project.id ) {
+
+      if (this.props.project && this.props.project.id === project.id ) {
         className = 'project-list-item-selected';
         liClassName = 'project-list-li-selected'
       }
@@ -128,7 +128,7 @@ class SideBar extends React.Component {
   }
 
   render() {
-    if (this.props.sidebar) {
+    if (this.props.sidebar && this.props.workspace) {
       return this.renderOpenSidebar();
     } else {
       return(<div></div>)

@@ -48,25 +48,15 @@ const Root = ({store}) => {
     const currentUser = store.getState().session.currentUser;
     const workspaceId = parseInt(nextState.params.workspaceId);
 
-    // debugger
+    debugger
     if(!currentUser) {
       hashHistory.replace('/')
     } else if (!currentUser.workspaces.includes(workspaceId)) {
       hashHistory.push('/');
     } else {
+      debugger
       store.dispatch(fetchWorkspace(workspaceId));
       store.dispatch(removeProject());
-    }
-  }
-
-  const _OnEnterFetchProjectOrWorkspace = (nextState) => {
-    const projectId = parseInt(nextState.params.projectId);
-
-    if (projectId) {
-      store.dispatch(fetchProject(projectId))
-    } else {
-      const workspaceId = parseInt(nextState.params.workspaceId);
-      store.dispatch(fetchWorkspace(workspaceId))
     }
   }
 

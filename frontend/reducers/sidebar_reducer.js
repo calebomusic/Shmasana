@@ -3,7 +3,7 @@ import merge from 'lodash/merge';
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR} from '../actions/sidebar_actions'
 
 
-const SidebarReducer = (oldState = false, action) => {
+const SidebarReducer = (oldState = true, action) => {
   switch (action.type) {
     case OPEN_SIDEBAR:
       return true;

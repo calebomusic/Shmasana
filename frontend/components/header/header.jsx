@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router';
+import { Link, withRouter, hashHistory } from 'react-router';
 
 import ActionDropdown from './action_dropdown';
 import UserDropdown from './user_dropdown';
@@ -26,7 +26,9 @@ const Header = (props) => {
     </span>
   }
   // debugger
-  const workspaceUrl = `${props.router.params.userId}/${props.router.params.workspaceId}`
+  const redirectToWorkspace = () => {
+    hashHistory.push(`${props.router.params.userId}/${props.router.params.workspaceId}`)
+  }
   // const myTasks = `/${props.currentUser.id}/${props.workspace.id}`;
   const currentUserId = props.currentUser.id
 
@@ -34,7 +36,7 @@ const Header = (props) => {
   <div className='home-header-left'>
     {sidebarButton}
     <p>
-      <Link to={workspaceUrl}>My Tasks</Link>
+      <button onClick={redirectToWorkspace}>My Tasks</button>
     </p>
     <ActionDropdown createTask={props.createTask} />
   </div>

@@ -61,7 +61,6 @@ const WorkspacesMiddleware = store => next => action => {
     const locationWorkspaceId = parseInt(hashHistory.getCurrentLocation().pathname.split('/')[2])
 
     if (locationWorkspaceId !== workspaceId) {
-      debugger
       hashHistory.push(`${currentUserId}/${workspaceId}`)
     }
   }

@@ -13,7 +13,8 @@ const mapStateToProps = (state) => {
     // user team mates
     currentUser: state.session.currentUser,
     sidebar: state.sidebar,
-    project: state.project
+    project: state.project,
+    workspace: state.workspace[Object.keys(state.workspace)]
   })
 }
 

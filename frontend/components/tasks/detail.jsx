@@ -45,7 +45,7 @@ class Detail extends React.Component {
     this.toggleAssigneeList = this.toggleAssigneeList.bind(this);
     this.renderAssigneeList = this.renderAssigneeList.bind(this);
     this.fetchAssignees = this.fetchAssignees.bind(this);
-    this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.handleAssigneeChange = this.handleAssigneeChange.bind(this);
     // this.deleteTask = this.deleteTask.bind(this);
     // this.determineRedirectLocation = this.determineRedirectLocation.bind(this);
   }
@@ -159,7 +159,7 @@ class Detail extends React.Component {
 
     // Needs a handle change
     return(<DropDownMenu value={this.state.assignee} style={assigneeStyle}
-      onChange={this.handleDropdownChange('assignee_id')} autoWidth={false}
+      onChange={this.handleAssigneeChange('assignee_id')} autoWidth={false}
       openImmediately={true}>
         <MenuItem value={''} primaryText='Unassigned' />
         {assignees}
@@ -277,25 +277,46 @@ class Detail extends React.Component {
   }
 
   handleProjectChange(e, i, project) {
-    // debugger
-    this.props.task.project_id = project.id;
+
+    let projectId;
+
+    if (project) {
+      projectId = project.id;
+    } else {
+      projectId = null;
+    }
+
+    this.props.task.project_id = projectId;
     this.props.updateTask(this.props.task)
+
+    const redirectUserId = this.props.task.author_id
+    const redirectWorkspaceId = this.props.task.workspace_id
+    if (project) {
+      hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/${projectId}/${this.props.task.id}`)
+    } else {
+      hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/list/${this.props.task.id}`)
+    }
   }
 
-  handleDropdownChange(field) {
+  handleAssigneeChange(field) {
     return (e, i, value) => {
+      // Left over from general handleDropdownChange method
       if (field === 'assignee_id') {
         this.toggleAssigneeList();
       } else {
         this.toggleProjectList();
       }
 
-      debugger
+      // debugger
+      let assigneeId
 
       if (value) {
-        value = value.id
+        assigneeId = value.id
+      } else {
+        assigneeId = null
       }
-      this.props.task[field] = value;
+
+      this.props.task[field] = assigneeId;
       this.props.updateTask(this.props.task);
     }
   }
