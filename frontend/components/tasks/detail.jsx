@@ -46,6 +46,8 @@ class Detail extends React.Component {
     this.renderAssigneeList = this.renderAssigneeList.bind(this);
     this.fetchAssignees = this.fetchAssignees.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    // this.deleteTask = this.deleteTask.bind(this);
+    // this.determineRedirectLocation = this.determineRedirectLocation.bind(this);
   }
 
   componentWillMount() {
@@ -105,7 +107,7 @@ class Detail extends React.Component {
           width: '65px'}}>
         </DatePicker>
       </div>
-      <div className='task-detail-options'><Trash /></div>
+      <div className='task-detail-delete' onTouchTap={this.deleteTask}><Trash /></div>
       <div className='task-detail-close' onTouchTap={this.closeDetail}>x</div>
     </div>)
   }
@@ -162,6 +164,11 @@ class Detail extends React.Component {
         <MenuItem value={''} primaryText='Unassigned' />
         {assignees}
     </DropDownMenu>)
+  }
+
+  deleteTask() {
+    this.props.removeTask()
+
   }
 
   closeDetail() {
@@ -258,7 +265,7 @@ class Detail extends React.Component {
     return (e) => {
       // debugger
       this.props.task[field] = e.target.value
-      this.setState({[field]: e.target.value, projectList: false})
+      // this.setState({[field]: e.target.value, projectList: false})
       this.props.updateTask(this.props.task);
     }
   }

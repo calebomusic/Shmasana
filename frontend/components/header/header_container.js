@@ -3,6 +3,7 @@ import Header from './header';
 import { logout } from '../../actions/session_actions';
 import { createWorkspace, fetchWorkspaces, fetchWorkspace } from '../../actions/workspace_actions';
 import { openSidebar } from '../../actions/sidebar_actions'
+import { createTask } from '../../actions/task_actions'
 
 const mapStateToProps = (state) => {
   return({

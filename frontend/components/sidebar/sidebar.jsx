@@ -115,6 +115,7 @@ class SideBar extends React.Component {
       const updateProject = this.updateProject.bind(this, project)
       let className = 'project-list-item';
       let liClassName = 'project-list-li'
+      
       if (this.state.projectId && this.state.projectId === project.id ) {
         className = 'project-list-item-selected';
         liClassName = 'project-list-li-selected'

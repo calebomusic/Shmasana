@@ -49,6 +49,10 @@ class ActionDropdown extends React.Component {
     const workspaceId = parseInt(this.props.params.workspaceId);
     const task = {workspace_id: workspaceId, author_id: userId}
 
+    console.log(userId);
+    console.log(workspaceId);
+    console.log(task);
+
     this.props.createTask(task)
   }
 

@@ -12,7 +12,9 @@ import ProjectsContainer from './project/project_container';
 import TaskDetailContainer from './tasks/detail_container';
 import { receiveErrors } from '../actions/session_actions';
 import { fetchUserWorkspacesOnLogin, fetchUserWorkspaceOnLogin } from '../actions/workspace_actions';
-import { fetchWorkspace } from '../util/workspace_api_util';
+
+import { fetchWorkspace } from '../actions/workspace_actions';
+import { fetchProject, removeProject } from '../actions/project_actions';
 
 const Root = ({store}) => {
 
@@ -29,7 +31,7 @@ const Root = ({store}) => {
     store.dispatch(receiveErrors({errors: []}))
   }
 
-  // This is not woring
+  // This is not working
   const _redirectToSignUpHomeIfNotLoggedIn = (ownProps) => {
     const currentUser = store.getState().session.currentUser;
     const workspaceId = parseInt(ownProps.params.workspaceId)
@@ -40,6 +42,37 @@ const Root = ({store}) => {
     } else if (!currentUser.workspaces.includes(workspaceId)) {
       hashHistory.push('/')
     }
+  }
+
+  const _redirectToSignUpHomeIfNotLoggedInAndFetchWorkspace = (nextState) => {
+    const currentUser = store.getState().session.currentUser;
+    const workspaceId = parseInt(nextState.params.workspaceId);
+
+    // debugger
+    if(!currentUser) {
+      hashHistory.replace('/')
+    } else if (!currentUser.workspaces.includes(workspaceId)) {
+      hashHistory.push('/');
+    } else {
+      store.dispatch(fetchWorkspace(workspaceId));
+      store.dispatch(removeProject());
+    }
+  }
+
+  const _OnEnterFetchProjectOrWorkspace = (nextState) => {
+    const projectId = parseInt(nextState.params.projectId);
+
+    if (projectId) {
+      store.dispatch(fetchProject(projectId))
+    } else {
+      const workspaceId = parseInt(nextState.params.workspaceId);
+      store.dispatch(fetchWorkspace(workspaceId))
+    }
+  }
+
+  const _FetchProject = (nextState) => {
+    const projectId = parseInt(nextState.params.projectId);
+    store.dispatch(fetchProject(projectId))
   }
 
   return(<MuiThemeProvider muiTheme={muiTheme}>
@@ -54,11 +87,12 @@ const Root = ({store}) => {
       <Route path="/:userId"
         onEnter={_redirectToSignUpHomeIfNotLoggedIn}>
         <Route path="/:userId/:workspaceId" component={App}
-          onEnter={_redirectToSignUpHomeIfNotLoggedIn}>
-          <Route path="/:userId/:workspaceId/list/:taskId" component={TaskDetailContainer}/>
-          <Route path="/:userId/:workspaceId/:projectId" component={ProjectsContainer} >
-            <Route path="/:userId/:workspaceId/:projectId/:taskId" component={TaskDetailContainer} />
-          </Route>
+          onEnter={_redirectToSignUpHomeIfNotLoggedInAndFetchWorkspace}>
+          // May need to fetch project here
+          <Route path="/:userId/:workspaceId/list/:taskId" component={TaskDetailContainer}
+            />
+          <Route path="/:userId/:workspaceId/:projectId" onEnter={_FetchProject}/>
+          <Route path="/:userId/:workspaceId/:projectId/:taskId" component={TaskDetailContainer} onEnter={_FetchProject} />
         </Route>
       </Route>
     </Router>

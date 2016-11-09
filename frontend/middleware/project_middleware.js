@@ -24,7 +24,14 @@ const ProjectMiddleware = store => next => action => {
 
   const successfulProjectFetch = (project) => {
     store.dispatch(receiveProject(project));
-    redirectToProject(project);
+    // unless already at the project
+    const locationProjectId = parseInt(hashHistory.getCurrentLocation().pathname.split('/')[3])
+    const projectId = project.id
+
+    if (projectId !== locationProjectId) {
+      // debugger
+      redirectToProject(project);
+    }
   }
 
   const redirectToProject = (project) => {

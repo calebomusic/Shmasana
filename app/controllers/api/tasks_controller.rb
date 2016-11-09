@@ -1,14 +1,23 @@
 class Api::TasksController < ApplicationController
   def index
+    # All tasks in workspace
     if params[:workspace_id] && !params[:user_id]
       @tasks = Task.where(workspace_id: params[:workspace_id])
+
+    # Created or assigned, project less tasks in workspace
     elsif params[:workspace_id] && params[:user_id]
-      @tasks = Task.where(workspace_id: params[:workspace_id]).where(author_id: params[:user_id])
+      @tasks = Task.where("author_id = ? or assignee_id = ?", params[:user_id], params[:user_id]).where(project_id: nil)
+
+    # All assigned or created tasks
     elsif params[:user_id] && !params[:project_id]
-      @tasks = Task.where(assignee_id: params[:user_id])
+      @tasks = Task.where("author_id = ? or assignee_id = ?", params[:user_id])
+
+    # Created or assigned, tasks in project
     elsif params[:user_id] && params[:project_id]
       @tasks = Task.where(assignee_id: params[:user_id]).where(project_id: params[:project_id])
-    else
+
+    # All tasks in project
+    elsif params[:project_id]
       @tasks = Task.where(project_id: params[:project_id])
     end
 
@@ -33,7 +42,7 @@ class Api::TasksController < ApplicationController
 
   def update
     @task = Task.find_by_id(params[:id])
-    
+
     if @task.update(task_params)
       render :show
     else

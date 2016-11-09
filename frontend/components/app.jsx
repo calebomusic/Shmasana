@@ -3,6 +3,8 @@ import React from 'react';
 import AllHeaders from './header/all_headers';
 import SideBarContainer from './sidebar/sidebar_container'
 import WorkspaceTaskListContainer from './tasks/workspace_task_list_container'
+import ProjectsTaskListContainer from './project/projects_task_list_container';
+
 
 const App = ({children, params}) => {
   let TaskList;
@@ -13,7 +15,10 @@ const App = ({children, params}) => {
     {children}
     </div>
   } else {
-
+    TaskList = <div className='tasks'>
+      <ProjectsTaskListContainer />
+      {children}
+    </div>
   }
 
   return(

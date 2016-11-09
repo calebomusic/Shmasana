@@ -23,7 +23,7 @@ const TaskMiddleware = store => next => action => {
     const redirect = (task) => {
       const authorId = task.author_id;
       const workspaceId = task.workspace_id;
-
+      // debugger
       if (task.project_id) {
         const projectId = task.project_id;
         hashHistory.push(`${authorId}/${workspaceId}/${projectId}/${task.id}`)
@@ -42,6 +42,7 @@ const TaskMiddleware = store => next => action => {
 
   switch (action.type) {
     case CREATE_TASK:
+      // debugger
       createTask(action.task, action.task.workspace_id, successfulCreateOrUpdate);
       return next(action);
     case UPDATE_TASK:

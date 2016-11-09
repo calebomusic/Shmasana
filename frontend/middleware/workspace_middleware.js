@@ -58,7 +58,12 @@ const WorkspacesMiddleware = store => next => action => {
     }
 
     const workspaceId = workspace.id;
-    hashHistory.push(`${currentUserId}/${workspaceId}`)
+    const locationWorkspaceId = parseInt(hashHistory.getCurrentLocation().pathname.split('/')[2])
+
+    if (locationWorkspaceId !== workspaceId) {
+      debugger
+      hashHistory.push(`${currentUserId}/${workspaceId}`)
+    }
   }
 
   let removeWorkspaceSuccess = workspace => store.dispatch(removeWorkspace(workspace));

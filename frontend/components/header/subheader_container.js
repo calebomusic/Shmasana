@@ -3,7 +3,7 @@ import SubHeader from './subheader';
 import { fetchWorkspace } from '../../actions/workspace_actions';
 import { fetchProject, removeProject } from '../../actions/project_actions';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   let workspace
   if (Object.keys(state.workspace).length > 0) {
     workspace = state.workspace[Object.keys(state.workspace)[0]]

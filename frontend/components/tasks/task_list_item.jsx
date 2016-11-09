@@ -44,7 +44,7 @@ class TaskListItem extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({title: e.target.value})
+    // this.setState({title: e.target.value})
     this.props.task.title = e.target.value
     this.props.updateTask(this.props.task);
   }
