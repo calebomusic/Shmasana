@@ -9,6 +9,16 @@
 .create-workspace-close-modal {
   font-size: 20px;
   margin-right: 30px;
+  margin-top: 10px;
+  float: right;
+  position: relative;
+  bottom: 30px;
+  left: 20px;
+  font-size: 35px;
+  font-style: oblique;
+  font-weight: lighter;
+  color: #b9bcc0;
+  cursor: pointer;
 }
 
 .create-workspace-label {

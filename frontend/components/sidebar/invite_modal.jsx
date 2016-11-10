@@ -57,7 +57,6 @@ class InviteModal extends React.Component {
         this.props.fetchWorkspace(this.props.workspace.id)
       }, (errors) => console.log(errors))
     } else {
-      debugger
       this.setState({ errors: 'Woops, no member to invite with that username.'})
     }
   }

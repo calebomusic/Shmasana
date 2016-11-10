@@ -7,6 +7,7 @@ class Api::TasksController < ApplicationController
     # Created or assigned, project less tasks in workspace
     elsif params[:workspace_id] && params[:user_id]
       @tasks = Task.where("author_id = ? or assignee_id = ?", params[:user_id], params[:user_id]).where(project_id: nil)
+      @tasks = @tasks.where(workspace_id: params[:workspace_id])
 
     # All assigned or created tasks
     elsif params[:user_id] && !params[:project_id]

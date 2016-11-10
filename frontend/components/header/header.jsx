@@ -39,7 +39,8 @@ const Header = (props) => {
     <p>
       <button onClick={redirectToWorkspace}>My Tasks</button>
     </p>
-    <ActionDropdown createTask={props.createTask} />
+    <ActionDropdown createTask={props.createTask}
+      createProject={props.createProject} project={props.project} />
   </div>
     <div className='home-header-right'>
       <UserDropdown currentUser={props.currentUser}

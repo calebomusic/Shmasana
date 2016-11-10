@@ -20,7 +20,7 @@ class Detail extends React.Component {
 
     this.state = { project: {}, selected: false,
                    projectListOpen: false, assignees: [],
-                   projects: [], author: {}, task: {},
+                   projects: [], task: {},
                    title: '',
                    description: '',
                    dueDate: '', assigneeListOpen: false}
@@ -72,12 +72,12 @@ class Detail extends React.Component {
     //       (error) => console.log(error))
     // }
 
-    if (newProps.task.author_id) {
-      const authorId = parseInt(newProps.task.author_id)
-      fetchUser( authorId, (author) => (
-        this.setState({author: author} )),
-          (error) => console.log(error))
-    }
+    // if (newProps.task.author_id) {
+    //   const authorId = parseInt(newProps.task.author_id)
+    //   fetchUser( authorId, (author) => (
+    //     this.setState({author: author} )),
+    //       (error) => console.log(error))
+    // }
 
     const title = newProps.task.title ? newProps.task.title : '';
     const description = newProps.task.description ? newProps.task.description : '';

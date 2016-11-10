@@ -34,11 +34,7 @@ class CreateWorkspaceModal extends React.Component {
       name: this.state.name
     };
 
-    // Need someway to handle emails
-    // const emails = this.state.email.split(',').map( (email) => (
-    //   email.trim()
-    // ))
-
+    this.closeModal();
     this.props.createWorkspace(workspace);
   }
 
@@ -83,13 +79,6 @@ class CreateWorkspaceModal extends React.Component {
                   placeholder='Company or Team Name'
                   onChange={this.updateForm('name')}></input>
                 </div>
-
-                <div className='create-workspace-label-input'>
-                <label className='create-workspace-label'>MEMBERS</label>
-                  <textarea cols='40' rows='5' className='create-workspace-input-area' type='text-area'
-                    placeholder='separate emails with commas'></textarea>
-                </div>
-
                   <PrimaryButton className='create-workspace-button' type='submit' label='Create'
                    disabled={this.disableButton()} />
               </form>

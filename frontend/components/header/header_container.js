@@ -4,13 +4,14 @@ import { logout } from '../../actions/session_actions';
 import { createWorkspace, fetchWorkspaces, fetchWorkspace } from '../../actions/workspace_actions';
 import { openSidebar } from '../../actions/sidebar_actions'
 import { createTask } from '../../actions/task_actions'
-import { removeProject } from '../../actions/project_actions'
+import { createProject, removeProject } from '../../actions/project_actions'
 
 const mapStateToProps = (state) => {
   return({
     currentUser: state.session.currentUser,
     workspace: state.workspace[Object.keys(state.workspace)],
-    sidebar: state.sidebar
+    sidebar: state.sidebar,
+    project: state.project
   })
 }
 
@@ -24,7 +25,8 @@ const mapDispatchToProps = (dispatch) => (
     fetchWorkspace: (id) => dispatch(fetchWorkspace(id)),
     fetchWorkspaces: () => dispatch(fetchWorkspaces()),
     openSidebar: () => dispatch(openSidebar()),
-    removeProject: () => dispatch(removeProject())
+    removeProject: () => dispatch(removeProject()),
+    createProject: (project) => dispatch(createProject(project))
   }
 )
 

@@ -85,7 +85,7 @@ class UserDropdown extends React.Component {
   }
 
   openModalAndClose() {
-    this.setState({['modal']: true})
+    this.setState({modal: true})
     this.handleRequestClose();
   }
 

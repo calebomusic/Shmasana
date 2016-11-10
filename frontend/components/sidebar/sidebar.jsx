@@ -42,22 +42,6 @@ class SideBar extends React.Component {
     this.renderAvatars = this.renderAvatars.bind(this)
   }
 
-  componentWillMount() {
-    // const workspaceId = parseInt(this.props.router.params.workspaceId)
-    //
-    // fetchProjectsByWorkspace(workspaceId, (projects) => {
-    //   this.setState({projects: projects});
-    // });
-  }
-
-  // Don't forget to fetch new projects on prop change.
-  componentWillReceiveProps(newProps) {
-    // const workspaceId = parseInt(this.props.router.params.workspaceId)
-    // fetchProjectsByWorkspace(workspaceId, (projects) => {
-    //   this.setState({projects: projects});
-    // });
-  }
-
   handleToggle() {
     this.setState({open: !this.state.open})
   }
