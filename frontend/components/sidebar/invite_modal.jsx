@@ -31,7 +31,7 @@ class InviteModal extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    // Check if user is an actual user. If not render some error message.
+    // Check if user is an actual user. If not render some error message
 
     fetchUserByUsername(this.state.username, (user) => {
         invite(user.id, this.props.workspace.id, window.setInterval(() => this.closeModal(), 2500), (errors) => console.log(errors));

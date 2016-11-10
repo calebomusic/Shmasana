@@ -5,7 +5,11 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+import Avatar from 'material-ui/Avatar';
 import { Link, hashHistory } from 'react-router';
+import {
+  red500, blue500, redA400, pink400, deepPurple50
+} from 'material-ui/styles/colors';
 
 import { fetchUserWorkspaces } from '../../util/workspace_api_util'
 
@@ -27,7 +31,11 @@ const menuStyle = {
   hoverBackgroundColor: 'blue'
 }
 
-// const colors = [red500, blue500, redA400, pink400];
+const avatarStyle = {
+  marginTop: '4px'
+}
+
+const colors = [red500, blue500, redA400, pink400];
 
 class UserDropdown extends React.Component {
   constructor(props) {
@@ -46,7 +54,7 @@ class UserDropdown extends React.Component {
     this.closeAndFetchWorkspace = this.closeAndFetchWorkspace.bind(this);
   }
   componentWillMount() {
-    const userId = this.props.user.id
+    const userId = this.props.currentUser.id
     this.fetchUserWorkspaces(userId, (workspaces) => {
       this.setState({workspaces: workspaces});
     });
@@ -97,13 +105,22 @@ class UserDropdown extends React.Component {
   }
 
   render() {
+    let letter = this.props.currentUser.username[0];
+    let color = colors[letter.charCodeAt() % 4];
+
     if (this.state.modal) {
       return(
         <div className='create-workspace-modal'>
           <div className='header-user-dropdown' onTouchTap={this.handleTouchTap}>
-            <p>{this.props.user.username}</p>
-          <FloatingActionButton mini={true} style={buttonStyle} >
-          </FloatingActionButton>
+            <p>{this.props.currentUser.username}</p>
+          <Avatar
+            color={deepPurple50}
+            backgroundColor={color}
+            size={30}
+            style={avatarStyle}
+          >
+          {letter}
+          </Avatar>
         </div>
           <div className='create-workspace-modal'>
             <CreateWorkspaceModal
@@ -113,9 +130,15 @@ class UserDropdown extends React.Component {
     } else {
       return(<div>
         <div className='header-user-dropdown' onTouchTap={this.handleTouchTap}>
-          <p>{this.props.user.username}</p>
-        <FloatingActionButton mini={true} style={buttonStyle} >
-        </FloatingActionButton>
+          <p>{this.props.currentUser.username}</p>
+        <Avatar
+          color={deepPurple50}
+          backgroundColor={color}
+          size={30}
+          style={avatarStyle}
+        >
+        {letter}
+        </Avatar>
         </div>
         <Popover
           open={this.state.open}
@@ -129,8 +152,6 @@ class UserDropdown extends React.Component {
             {this.renderTeams()}
             <Divider />
             <MenuItem primaryText="Create Workspace" onTouchTap={this.openModalAndClose}/>
-            <Divider />
-            <MenuItem primaryText='Settings' />
             <Divider />
             <MenuItem primaryText="Logout" onClick={this.logoutRedirect}/>
           </Menu>

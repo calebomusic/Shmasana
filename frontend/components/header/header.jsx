@@ -42,7 +42,7 @@ const Header = (props) => {
     <ActionDropdown createTask={props.createTask} />
   </div>
     <div className='home-header-right'>
-      <UserDropdown user={props.currentUser}
+      <UserDropdown currentUser={props.currentUser}
         logout={props.logout} fetchWorkspaces={props.fetchWorkspaces}
         createWorkspace={props.createWorkspace} fetchWorkspace={props.fetchWorkspace}
         />
