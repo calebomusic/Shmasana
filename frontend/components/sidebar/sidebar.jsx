@@ -2,11 +2,17 @@ import React from 'react';
 import { withRouter, Link, hashHistory } from 'react-router';
 import DrawerIcon from 'material-ui/svg-icons/action/reorder';
 import FlatButton from 'material-ui/FlatButton';
+import List from 'material-ui/List/List';
+import ListItem from 'material-ui/List/ListItem';
+import Avatar from 'material-ui/Avatar';
+
+import {
+  red500, blue500, redA400, pink400, deepPurple50
+} from 'material-ui/styles/colors';
 
 import CreateProjectModal from './create_project_modal';
 
 import { fetchProjectsByWorkspace, fetchProject } from '../../util/project_api_util';
-
 
 const style = {
   width: '400px',
@@ -15,6 +21,9 @@ const style = {
   borderRight: '1px solid',
   borderColor: '#EFF0F1',
 }
+
+const avatarStyle = {margin: 0};
+const colors = [red500, blue500, redA400, pink400]
 
 class SideBar extends React.Component {
 
@@ -28,6 +37,7 @@ class SideBar extends React.Component {
     this.renderProjectList = this.renderProjectList.bind(this);
     this.updateProject = this.updateProject.bind(this);
     this.fetchProject = fetchProject.bind(this);
+    this.renderAvatars = this.renderAvatars.bind(this)
   }
 
   componentWillMount() {
@@ -62,12 +72,29 @@ class SideBar extends React.Component {
       </div>
     )
   }
+  renderAvatars() {
+    return this.props.workspace.team.map( (user, i) => {
+      let letter = user[0][0];
+      let color = colors[letter.charCodeAt() % 4]
+
+      return(
+            <Avatar
+              color={deepPurple50}
+              backgroundColor={color}
+              size={30}
+              style={avatarStyle}
+            >
+            {letter}
+            </Avatar>
+          )
+    });
+  }
 
   renderTeamates() {
     // return 'invite people' w/ up to 3 pictures and the + sign. Else return + sign with 6 pictures
     return(<div className='sidebar-teammates'>
       <div className='teammates-left'>
-        x
+        {this.renderAvatars()}
       </div>
       <div className='teammates-right'>
           <p>Invite People</p>
@@ -107,8 +134,6 @@ class SideBar extends React.Component {
     const userId = this.props.router.params.userId
     const workspaceId = this.props.router.params.workspaceId
     const url = `/${userId}/${workspaceId}/`
-
-    // debugger
 
     return this.props.workspace.projects.map( (project) => {
       let projectURL = `${url}${project.id}`;

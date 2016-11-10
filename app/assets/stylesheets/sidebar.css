@@ -44,13 +44,13 @@
   height: 100px;
 }
 
-/*.teammates-left {
-  margin-left: 18px;
+.teammates-left {
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 18px;
   width: 50%;
   height: 100%;
-  background-color: blue;
-  /*color*/
-/*}*/
+}
 
 .teammates-right {
   width: 50%;
