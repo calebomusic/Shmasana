@@ -7,7 +7,6 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import { Link, hashHistory } from 'react-router';
 
-
 import { fetchUserWorkspaces } from '../../util/workspace_api_util'
 
 import CreateWorkspaceModal  from './create_workspace_modal';
@@ -27,6 +26,8 @@ const menuStyle = {
   hoverColor: '#FFFFFF',
   hoverBackgroundColor: 'blue'
 }
+
+// const colors = [red500, blue500, redA400, pink400];
 
 class UserDropdown extends React.Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class UserDropdown extends React.Component {
       this.setState({workspaces: workspaces});
     });
   }
+
   handleTouchTap(e) {
     e.preventDefault();
     this.setState({

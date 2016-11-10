@@ -47,9 +47,9 @@
 .teammates-left {
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 18px;
-  width: 50%;
+  width: 40%;
   height: 100%;
+  margin: 18px;
 }
 
 .teammates-right {
@@ -101,6 +101,7 @@
 }
 
 .projects-title-and-button {
+  margin-top: 15px;
   display: flex;
   justify-content: space-between;
   align-items: baseline;

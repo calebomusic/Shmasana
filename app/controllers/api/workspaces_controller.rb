@@ -29,7 +29,6 @@ class Api::WorkspacesController < ApplicationController
 
   def update
     @workspace = Workspace.find_by_id(params[:id])
-
     if @workspace.update(workspace_params)
       render :show
     else

@@ -28,7 +28,7 @@ class SignUpFormModal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    
+
     const user = {
       username: this.state.username,
       email: this.state.email,

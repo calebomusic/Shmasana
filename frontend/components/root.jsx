@@ -77,8 +77,7 @@ const Root = ({store}) => {
         <Route path="/:userId/:workspaceId" component={App}
           onEnter={_redirectToSignUpHomeIfNotLoggedInAndFetchWorkspace}>
           // May need to fetch project here
-          <Route path="/:userId/:workspaceId/list/:taskId" component={TaskDetailContainer}
-            />
+          <Route path="/:userId/:workspaceId/list/:taskId" component={TaskDetailContainer} />
           <Route path="/:userId/:workspaceId/:projectId" onEnter={_FetchProject}/>
           <Route path="/:userId/:workspaceId/:projectId/:taskId" component={TaskDetailContainer} onEnter={_FetchProject} />
         </Route>

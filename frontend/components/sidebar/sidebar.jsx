@@ -10,6 +10,8 @@ import {
   red500, blue500, redA400, pink400, deepPurple50
 } from 'material-ui/styles/colors';
 
+import InviteModal from './invite_modal';
+
 import CreateProjectModal from './create_project_modal';
 
 import { fetchProjectsByWorkspace, fetchProject } from '../../util/project_api_util';
@@ -96,11 +98,11 @@ class SideBar extends React.Component {
       <div className='teammates-left'>
         {this.renderAvatars()}
       </div>
-      <div className='teammates-right'>
-          <p>Invite People</p>
-        <button className='larger-sidebar-button'>+</button>
-      </div>
-    </div>)
+        <InviteModal updateWorkspace={this.props.updateWorkspace}
+          workspace={this.props.workspace}
+          fetchWorkspace={this.props.fetchWorkspace}
+          />
+      </div>)
   }
 
   renderProjects() {

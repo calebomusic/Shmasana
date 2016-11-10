@@ -15,3 +15,21 @@ export const fetchUsersByWorkspace = (workspaceId, success, error) => {
     error
   })
 }
+
+export const invite = (userId, workspaceId, success, error) => {
+  $.ajax({
+    type: 'GET',
+    url: `invite/${userId}/${workspaceId}`,
+    success,
+    error
+  })
+}
+
+export const fetchUserByUsername = (username, success, error) => {
+  $.ajax({
+    type: 'GET',
+    url: `users/${username}`,
+    success,
+    error
+  })
+}

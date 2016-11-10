@@ -6,6 +6,7 @@ import { createProject,
   fetchProject,
   removeProject } from '../../actions/project_actions';
 
+import { updateWorkspace, fetchWorkspace } from '../../actions/workspace_actions';
 
 const mapStateToProps = (state) => {
   return({
@@ -25,8 +26,9 @@ const mapDispatchToProps = (dispatch) => {
     createProject: (project) => dispatch(createProject(project)),
     receiveProject: (project) => dispatch(receiveProject(project)),
     fetchProject: (project) => dispatch(fetchProject(project)),
-    removeProject: () => dispatch(removeProject())
-  })
+    removeProject: () => dispatch(removeProject()),
+    updateWorkspace: (workspace) => dispatch(updateWorkspace()),
+    fetchWorkspace: (id) => dispatch(fetchWorkspace(id))})
 }
 
 export default connect(

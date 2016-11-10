@@ -2,7 +2,7 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 
 import RaisedButton from 'material-ui/RaisedButton';
-import {GetStarted, Login, Demo} from './signup_home_buttons';
+import { GetStarted, Login, Demo } from './signup_home_buttons';
 import SignUpFormModal from './signup_form_modal';
 
 class SignUpHome extends React.Component {

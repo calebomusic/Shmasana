@@ -30,5 +30,9 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
   end
 
+  get 'invite/:user_id/:workspace_id', to: 'api/users#invite'
+
+  get 'users/:username', to: 'api/users#find_user_by_username'
+
   root to: "static_pages#root"
 end
