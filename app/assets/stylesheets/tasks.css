@@ -5,22 +5,20 @@
   display: flex;
   justify-content: space-around;;
   align-items: center;
-  padding-left: 25px;
-  padding-right: 25px;
   width: 100%;
-  transition: all .2s;
+  -webkit-transition: width 2s; /* Safari 3.1 to 6.0 */
+  transition: width 2s;
 }
 
 .task-list {
-  background-color: green;
   height: 96%;
-  width: 49%;
+  width: 65%;
+  min-width: 600px;
   border: 1px solid;
   border-color: #EFF0F1;
   background-color: white;
   margin-top: 2%;
-  min-width: 60px;
-  /*margin-left: 10px;*/
+  margin-left: 25px;
   /*margin-right: 10px;*/
   display: flex;
   flex-direction: column;
@@ -184,7 +182,6 @@
   left:8px;
   top:12px;
 }
-
 
 .completed-task-list-item {
   border-bottom: 1px solid;
