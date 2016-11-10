@@ -15,9 +15,9 @@
 
 .task-detail-header {
   padding-top: 25px;
-  vertical-align: center;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 90%;
   padding-left: 45px;
   padding-right: 20px;
@@ -31,9 +31,27 @@
 }
 .task-detail-username {}
 
-.task-detail-due-date {}
+.task-detail-due-date {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  cursor: pointer;
+  border: 1px solid;
+  border-color: white;
+}
 
-.task-detail-options {}
+.task-detail-due-date:hover {
+}
+
+.task-detail-delete {
+  cursor: pointer;
+}
+
+.task-detail-delete:hover {
+  border: 1px;
+  border-radius: 50%;
+  background-image: linear-gradient(to top right, #fc7279 20%, #ff7b9c 45%, #ffc019 80%);
+}
 
 .task-detail-close {
     padding: 5px;
@@ -47,6 +65,9 @@
   color: #00c5e4;
 }
 
+.task-detail-assignee {
+  cursor: pointer;
+}
 
 .task-detail-body {
   display: flex;
@@ -78,9 +99,17 @@
 .task-detail-description {
   font-size: 14px;
   line-height: 20px;
-  padding: 20px;
+  padding: 10px;
   width: 100%;
+  height: 75%;
   margin-bottom: 4px;
+}
+
+.task-detail-description-text-area {
+  border: 1px solid;
+  border-color: red;
+  min-width: 100%;
+  min-height: 20%;
 }
 
 .task-detail-description:hover, .task-detail-description:focus  {
@@ -101,6 +130,8 @@
 .task-detail-title {
   padding: 20px;
   height: 68px;
+  width: 100%;
+  text-overflow: ellipsis;
   z-index: auto;
   position: relative;
   line-height: 28px;

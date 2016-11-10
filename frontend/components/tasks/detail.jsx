@@ -6,13 +6,25 @@ import DateRange from 'material-ui/svg-icons/action/date-range'
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import DatePicker from 'material-ui/DatePicker';
+import TextField from 'material-ui/TextField';
 import { fetchProject, fetchProjectsByWorkspace } from '../../util/project_api_util';
-import { lightBlue200, lightBlue500, lightRed200 } from 'material-ui/styles/colors';
+import {
+  lightBlue200, lightBlue500, lightRed200, grey50, grey600, deepPurple50, red500, blue500, redA400, pink400
+} from 'material-ui/styles/colors';
+
 import Divider from 'material-ui/Divider';
 import Popover from 'material-ui/Popover';
+import Avatar from 'material-ui/Avatar';
 
 import { fetchUser, fetchUsersByWorkspace } from '../../util/user_api_util';
 
+const colors = [red500, blue500, redA400, pink400]
+const avatarStyle = {margin: 0};
+
+const titleStyle = {
+  fontSize: '24px',
+  padding: '20px'
+}
 
 class Detail extends React.Component {
   constructor(props) {
@@ -39,7 +51,6 @@ class Detail extends React.Component {
     this.renderProjectList = this.renderProjectList.bind(this);
     this.toggleProjectList = this.toggleProjectList.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
-    this.fetchProjectList = this.fetchProjectList.bind(this);
     this.handleProjectChange = this.handleProjectChange.bind(this);
     this.renderAssignee = this.renderAssignee.bind(this);
     this.toggleAssigneeList = this.toggleAssigneeList.bind(this);
@@ -47,6 +58,7 @@ class Detail extends React.Component {
     this.fetchAssignees = this.fetchAssignees.bind(this);
     this.handleAssigneeChange = this.handleAssigneeChange.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.renderAvatar = this.renderAvatar.bind(this);
   }
 
   componentWillMount() {
@@ -91,15 +103,17 @@ class Detail extends React.Component {
     return(<div className='task-detail-header'>
       <div className='task-detail-username'>{this.renderAssignee()}</div>
       <div className='task-detail-due-date'>
-        <DateRange />
-        <DatePicker hintText={dueDate} value={this.state.dueDate} onChange={this.handleDateChange}
+        <DatePicker hintText={dueDate} value={this.state.dueDate}
+          onChange={this.handleDateChange} container="inline"
           inputStyle={{color: lightBlue200, secondaryTextColor: lightBlue200,
           textColor: lightBlue200}} textFieldStyle={{
-            color: lightBlue200, textColor: lightBlue200, secondaryTextColor: lightBlue200,
-          width: '65px'}}>
+            color: lightBlue200, textColor: grey600, secondaryTextColor: lightBlue200,
+          width: '65px'}}  defaultDate={this.props.task.due_date}>
         </DatePicker>
       </div>
-      <div className='task-detail-delete' onTouchTap={this.deleteTask}><Trash /></div>
+      <div className='task-detail-delete' onTouchTap={this.deleteTask}>
+        <Trash color={grey600} hoverColor={grey50}/>
+        </div>
       <div className='task-detail-close' onTouchTap={this.closeDetail}>x</div>
     </div>)
   }
@@ -109,17 +123,37 @@ class Detail extends React.Component {
 
     let assingneeList;
 
-    // debugger
-
     if (this.state.assigneeListOpen) {
-      assingneeList = this.fetchAssignees()
+      assingneeList = this.renderAssigneeList();
     } else {
-      assingneeList = <MenuItem value={undefined} primaryText={assignee} onClick={this.toggleAssigneeList} />
+      assingneeList = this.renderAvatar();
     }
 
     return(<div className='task-detail-assignee'>
             {assingneeList}
           </div>)
+  }
+
+  renderAvatar() {
+    if (this.props.task.assignee) {
+      let letter = this.props.task.assignee.username[0]
+      let color = colors[letter.charCodeAt() % 4]
+
+      return(
+            <Avatar
+              color={deepPurple50}
+              backgroundColor={color}
+              size={40}
+              style={avatarStyle}
+              onTouchTap={this.toggleAssigneeList}
+            >
+            {letter}
+            </Avatar>
+          )
+    } else {
+      return(<MenuItem value={undefined} primaryText={'Unassigned'}
+        onClick={this.toggleAssigneeList} />)
+    }
   }
 
   toggleAssigneeList() {
@@ -144,8 +178,8 @@ class Detail extends React.Component {
   renderAssigneeList() {
     let assignees
 
-    if (this.state.assignees) {
-      assignees = this.state.assignees.map( (assignee) => (
+    if (this.props.workspace) {
+      assignees = this.props.workspace.team.map( (assignee) => (
         <MenuItem value={assignee} primaryText={assignee.username} />
       ))
     }
@@ -191,7 +225,7 @@ class Detail extends React.Component {
     let projectList;
 
     if (this.state.projectListOpen) {
-      projectList = this.fetchProjectList()
+      projectList = this.renderProjectList();
     } else {
       projectList = <MenuItem value={undefined} primaryText={project} onClick={this.toggleProjectList} />
     }
@@ -201,19 +235,19 @@ class Detail extends React.Component {
           </div>)
   }
 
-  fetchProjectList() {
-    // debugger
-    const workspaceId = parseInt(this.props.params.workspaceId)
-
-    if (this.state.projects.length === 0) {
-      this.fetchProjectsByWorkspace((workspaceId), (projects) => {
-        this.setState({projects: projects})
-      }, (e) => console.log(e))
-    }
-
-
-    return this.renderProjectList()
-  }
+  // fetchProjectList() {
+  //   // debugger
+  //   const workspaceId = parseInt(this.props.params.workspaceId)
+  //
+  //   if (this.state.projects.length === 0) {
+  //     this.fetchProjectsByWorkspace((workspaceId), (projects) => {
+  //       this.setState({projects: projects})
+  //     }, (e) => console.log(e))
+  //   }
+  //
+  //
+  //   return this.renderProjectList()
+  // }
 
   renderProjectList() {
     // debugger
@@ -226,18 +260,23 @@ class Detail extends React.Component {
       ))
     }
 
+    let project;
+
+    if (this.props.task.project) {
+      project = this.props.task.project.name;
+    }
     // <MenuItem value={undefined} primaryText={'No Project'} />
 
-    return(<DropDownMenu value={this.state.project_id} style={popoverStyle}
+    return(<DropDownMenu value={this.props.task.project.name} style={popoverStyle}
       onChange={this.handleProjectChange} autoWidth={false}
       openImmediately={true}>
-        <MenuItem value={undefined} primaryText={this.props.task.project.name} />
+        <MenuItem value={undefined} primaryText={'No Project'} />
         {projects}
     </DropDownMenu>)
   }
 
   toggleProjectList() {
-    this.setState({projectListOpen: true})
+    this.setState({projectListOpen: !this.state.projectListOpen})
   }
 
   parseDate(date) {
@@ -288,12 +327,12 @@ class Detail extends React.Component {
     const redirectUserId = this.props.task.author_id
     const redirectWorkspaceId = this.props.task.workspace_id
     if (project) {
-      hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/${projectId}/${this.props.task.id}`)
       this.toggleProjectList();
+      hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/${projectId}/${this.props.task.id}`)
     } else {
-      hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/list/${this.props.task.id}`)
       this.toggleProjectList();
       this.props.removeProject();
+      hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/list/${this.props.task.id}`)
     }
   }
 
@@ -329,21 +368,30 @@ class Detail extends React.Component {
     return(<div className='task-detail-title-button'>
     <button onClick={this.toggleComplete}
       className={buttonClassname}></button>
-    <input className='task-detail-title' value={this.state.title} onChange={this.handleChange('title')}
+
+      <input className='task-detail-title' value={this.state.title} onChange={this.handleChange('title')}
         onFocus={this.updateFocus} onBlur={this.updateBlur} placeholder='New Task'>
-      </input>
+        </input>
     </div>)
   }
 
   renderDescription() {
     return(<div className='task-detail-description'>
-    <textarea
-      value={this.state.description} onChange={this.handleChange('description')}
-      onFocus={this.updateFocus} onBlur={this.updateBlur} placeholder='Description'>
-    </textarea>
+      <TextField
+      hintText="Description"
+      value={this.state.description}
+      onChange={this.handleChange('description')}
+      multiLine={true} underlineShow={false}
+      rows={4}
+      rowsMax={10}
+      fullWidth = {true} />
     </div>)
   }
 
+  // <textarea className='task-detail-description-text-area' contentEditable="true"
+  //   value={this.state.description} onChange={this.handleChange('description')}
+  //   onFocus={this.updateFocus} onBlur={this.updateBlur} placeholder='Description'>
+  // </textarea>
   toggleComplete() {
     this.props.task.completed = !this.props.task.completed
 

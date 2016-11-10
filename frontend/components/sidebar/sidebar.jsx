@@ -25,6 +25,7 @@ const style = {
 }
 
 const avatarStyle = {margin: 0};
+
 const colors = [red500, blue500, redA400, pink400]
 
 class SideBar extends React.Component {
@@ -60,7 +61,7 @@ class SideBar extends React.Component {
   }
   renderAvatars() {
     return this.props.workspace.team.map( (user, i) => {
-      let letter = user[0][0];
+      let letter = user.username[0];
       let color = colors[letter.charCodeAt() % 4]
 
       return(

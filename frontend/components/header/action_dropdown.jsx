@@ -94,7 +94,7 @@ class ActionDropdown extends React.Component {
             style={popoverStyle}
             >
             <Menu style={style} >
-              <MenuItem primaryText="Add Task" onClick={this.createTask} />
+              <MenuItem primaryText="Task" onClick={this.createTask} />
               <Divider />
               <MenuItem primaryText="Project" onTouchTap={this.openModalAndClose}/>
             </Menu>
