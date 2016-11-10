@@ -12,7 +12,12 @@ class Api::UsersController < ApplicationController
 
   def index
     workspace_id = params[:workspace_id]
-    @users = User.includes(:workspaces).where(workspaces: {id: workspace_id})
+
+    if workspace_id
+      @users = User.includes(:workspaces).where(workspaces: {id: workspace_id})
+    else
+      @users = User.all
+    end
   end
 
   def show
