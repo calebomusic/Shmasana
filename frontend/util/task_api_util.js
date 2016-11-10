@@ -68,6 +68,7 @@ export const fetchTask = (id, success, errors) => {
 
 export const deleteTask = (id, success, errors) => {
   $.ajax({
+    type: 'delete',
     url: `api/tasks/${id}`,
     success,
     errors

@@ -9,6 +9,8 @@ import { createTask,
          fetchTasksByUserAndWorkspace,
          fetchTask } from '../../actions/task_actions';
 
+import { receiveView } from '../../actions/view_actions';
+
 import ProjectTaskList from './projects_task_list'
 
 const mapStateToProps = (state) => {
@@ -16,7 +18,8 @@ const mapStateToProps = (state) => {
     currentUser: state.session.currentUser,
     sidebar: state.sidebar,
     task: state.task,
-    tasks: state.tasks
+    tasks: state.tasks,
+    view: state.view
   })
 }
 
@@ -26,7 +29,8 @@ const mapDispatchToProps = (dispatch) => {
     updateTask: (task) => dispatch(updateTask(task)),
     fetchTasksByUserAndWorkspace: (userId, workspaceId) => {
       dispatch(fetchTasksByUserAndWorkspace(userId, workspaceId)) },
-    fetchTask: (id) => dispatch(fetchTask(id))
+    fetchTask: (id) => dispatch(fetchTask(id)),
+    receiveView: (view) => dispatch(receiveView(view))
   })
 }
 

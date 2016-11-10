@@ -51,6 +51,11 @@ class TaskListItem extends React.Component {
 
   toggleComplete() {
     this.props.task.completed = !this.props.task.completed
+    if (this.props.task.completed) {
+      this.props.task.completed_at = new Date();
+    } else {
+      this.props.task.completed_at = null;
+    }
     this.props.updateTask(this.props.task);
   }
 

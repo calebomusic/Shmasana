@@ -18,9 +18,9 @@ class Detail extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { assignee: {}, project: {}, selected: false,
+    this.state = { project: {}, selected: false,
                    projectListOpen: false, assignees: [],
-                   projects: [], author: {}, task: {}, project_id: undefined,
+                   projects: [], author: {}, task: {},
                    title: '',
                    description: '',
                    dueDate: '', assigneeListOpen: false}
@@ -46,8 +46,7 @@ class Detail extends React.Component {
     this.renderAssigneeList = this.renderAssigneeList.bind(this);
     this.fetchAssignees = this.fetchAssignees.bind(this);
     this.handleAssigneeChange = this.handleAssigneeChange.bind(this);
-    // this.deleteTask = this.deleteTask.bind(this);
-    // this.determineRedirectLocation = this.determineRedirectLocation.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   componentWillMount() {
@@ -56,16 +55,9 @@ class Detail extends React.Component {
   }
 
   componentWillReceiveProps(newProps){
-    if (newProps.task.assignee_id) {
-      const assigneeId = parseInt(newProps.task.assignee_id)
-      fetchUser( assigneeId, (assignee) => (
-        this.setState({assignee: assignee} ),
-          (error) => console.log(error) )
-      )
-    } else {
-      this.setState({assignee: {}} )
-    }
+    // Refractor to avoid seting state.
 
+    // Refractor low-priority
     if (!newProps.task.due_date && !this.state.dueDate) {
       this.setState({dueDate: '' } )
     } else if (newProps.task.due_date && !this.state.dueDate) {
@@ -73,12 +65,12 @@ class Detail extends React.Component {
     }
 
 
-    if (newProps.task.project_id) {
-      const projectId = parseInt(newProps.task.project_id)
-      fetchProject( projectId, (project) => (
-        this.setState({project: project} )),
-          (error) => console.log(error))
-    }
+    // if (newProps.task.project_id) {
+    //   const projectId = parseInt(newProps.task.project_id)
+    //   fetchProject( projectId, (project) => (
+    //     this.setState({project: project} )),
+    //       (error) => console.log(error))
+    // }
 
     if (newProps.task.author_id) {
       const authorId = parseInt(newProps.task.author_id)
@@ -94,7 +86,7 @@ class Detail extends React.Component {
 
   renderHeader() {
     const dueDate = this.props.task.due_date ? this.parseDate(this.props.task.due_date) : 'Due Date'
-    const assignee = this.state.assignee.username ? this.state.assignee.username : 'Unassigned'
+    const assignee = this.props.task.assignee ? this.props.task.assignee.username : 'Unassigned'
 
     return(<div className='task-detail-header'>
       <div className='task-detail-username'>{this.renderAssignee()}</div>
@@ -113,7 +105,7 @@ class Detail extends React.Component {
   }
 
   renderAssignee() {
-    const assignee = this.state.assignee.username ? this.state.assignee.username : 'Unassigned';
+    const assignee = this.props.task.assignee ? this.props.task.assignee.username : 'Unassigned';
 
     let assingneeList;
 
@@ -134,6 +126,7 @@ class Detail extends React.Component {
     this.setState({assigneeListOpen: !this.state.assigneeListOpen})
   }
 
+  // This fetches all possible assignees. Should do this through workspace
   fetchAssignees() {
     const workspaceId = parseInt(this.props.params.workspaceId)
 
@@ -167,8 +160,9 @@ class Detail extends React.Component {
   }
 
   deleteTask() {
-    this.props.removeTask()
-
+    this.closeDetail();
+    this.props.deleteTask(this.props.task.id);
+    this.props.removeTask();
   }
 
   closeDetail() {
@@ -192,7 +186,7 @@ class Detail extends React.Component {
 
   renderProject() {
     // debugger
-    const project = this.state.project.name ? this.state.project.name : 'NO PROJECT'
+    const project = this.props.task.project ? this.props.task.project.name : 'NO PROJECT'
 
     let projectList;
 
@@ -226,16 +220,18 @@ class Detail extends React.Component {
 
     let projects;
 
-    if (this.state.projects) {
-      projects = this.state.projects.map( (project) => (
+    if (this.props.workspace) {
+      projects = this.props.workspace.projects.map( (project) => (
         <MenuItem value={project} primaryText={project.name} />
       ))
     }
 
+    // <MenuItem value={undefined} primaryText={'No Project'} />
+
     return(<DropDownMenu value={this.state.project_id} style={popoverStyle}
       onChange={this.handleProjectChange} autoWidth={false}
       openImmediately={true}>
-        <MenuItem value={undefined} primaryText={'No Project'} />
+        <MenuItem value={undefined} primaryText={this.props.task.project.name} />
         {projects}
     </DropDownMenu>)
   }
@@ -287,14 +283,17 @@ class Detail extends React.Component {
     }
 
     this.props.task.project_id = projectId;
-    this.props.updateTask(this.props.task)
+    this.props.updateTask(this.props.task);
 
     const redirectUserId = this.props.task.author_id
     const redirectWorkspaceId = this.props.task.workspace_id
     if (project) {
       hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/${projectId}/${this.props.task.id}`)
+      this.toggleProjectList();
     } else {
       hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/list/${this.props.task.id}`)
+      this.toggleProjectList();
+      this.props.removeProject();
     }
   }
 
@@ -307,7 +306,6 @@ class Detail extends React.Component {
         this.toggleProjectList();
       }
 
-      // debugger
       let assigneeId
 
       if (value) {
@@ -339,22 +337,47 @@ class Detail extends React.Component {
 
   renderDescription() {
     return(<div className='task-detail-description'>
-    <input value={this.state.description} onChange={this.handleChange('description')}
+    <textarea
+      value={this.state.description} onChange={this.handleChange('description')}
       onFocus={this.updateFocus} onBlur={this.updateBlur} placeholder='Description'>
-    </input>
+    </textarea>
     </div>)
   }
 
   toggleComplete() {
     this.props.task.completed = !this.props.task.completed
+
+    if (this.props.task.completed) {
+      this.props.task.completed_at = new Date();
+    } else {
+      this.props.task.completed_at = null;
+    }
+    this.props.updateTask(this.props.task);
     this.props.updateTask(this.props.task);
   }
 
   renderFooter(){
-    const date = this.parseDate(this.props.task.created_at)
+    const date = this.parseDate(this.props.task.created_at);
+    let created, completed;
+
+    if (this.props.task.author) {
+      created = `${this.props.task.author.username} created task. ${date}`;
+    }
+
+    let completor = this.props.task.assignee ? this.props.task.assignee.username
+                                             : this.props.task.author
+                                              ? this.props.task.author.username
+                                              : '';
+
+    if (this.props.task.completed) {
+      const completedAt = this.parseDate(this.props.task.completed_at);
+      completed = `${completor} ` + 'completed this task. ' + `${completedAt}`;
+    }
 
     return(<footer className='task-detail-footer'>
-    {this.state.author.username} created task. {date}
+    {created}
+    <br />
+    {completed}
     </footer>)
   }
 

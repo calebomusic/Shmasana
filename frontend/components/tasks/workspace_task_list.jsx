@@ -14,11 +14,11 @@ import TaskListItem from './task_list_item'
 class WorkspaceTaskList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {tasks: [], taskId: '', task: {}, view: 'all'}
+    this.state = { tasks: [], task: {}, view: 'all'}
 
     this.createTask = this.createTask.bind(this);
-    this.componentWillReceiveAndMount = this.componentWillReceiveAndMount.bind(this);
     this.renderTasks = this.renderTasks.bind(this);
+
     this.updateView = this.updateView.bind(this);
     this.selectTasks = this.selectTasks.bind(this);
     this.renderViewDropdown = this.renderViewDropdown.bind(this);
@@ -30,8 +30,6 @@ class WorkspaceTaskList extends React.Component {
     } else {
       this.props.receiveView('all')
     }
-
-    debugger
 
     const userId = parseInt(this.props.params.userId);
     const workspaceId = parseInt(this.props.params.workspaceId);
@@ -74,19 +72,6 @@ class WorkspaceTaskList extends React.Component {
     )
   }
 
-  componentWillReceiveAndMount(props) {
-    const userId = parseInt(this.props.params.userId)
-    const workspaceId = parseInt(this.props.params.workspaceId)
-
-    if (props.task) {
-      this.setState({taskId: props.task.id});
-      this.setState({task: props.task})
-    }
-
-    debugger
-    // this.updateView(undefined, undefined, this.props.view)
-  }
-
   createTask() {
     const userId = parseInt(this.props.params.userId)
     const workspaceId = parseInt(this.props.params.workspaceId)
@@ -115,8 +100,6 @@ class WorkspaceTaskList extends React.Component {
 
   updateView(e, i, view) {
     let tasks;
-
-    debugger
 
     this.props.receiveView(view);
 
@@ -159,7 +142,9 @@ class WorkspaceTaskList extends React.Component {
     <div className='task-list'>
       <div className='task-list-top'>
         <button className='task-list-top-left' onTouchTap={this.createTask}>Add Task</button>
-        {this.renderViewDropdown()}
+        <button className='task-list-top-right'>
+          {this.renderViewDropdown()}
+        </button>
       </div>
       <div className='task-list-list'>
         {this.renderTasks()}
