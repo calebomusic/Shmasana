@@ -7,7 +7,9 @@ Rails.application.routes.draw do
       resources :projects, only: [:show] do
         resources :tasks, only: [:index]
       end
-      resources :tasks, only: [:index]
+      resources :tasks, only: [:index] do
+        resources :comments, only: [:create, :index, :show]
+      end
     end
 
     # Allow the ability to show all projects?

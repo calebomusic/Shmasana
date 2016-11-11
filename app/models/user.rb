@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   validate :email, :valid_email?
 
   def valid_email?
-
     unless self.email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
       errors.add(:email, "looks invalid, oops")
     end
@@ -27,6 +26,8 @@ class User < ActiveRecord::Base
   has_many :created_tasks,
     class_name: :Task,
     foreign_key: :author_id
+
+  has_many :comments
 
   attr_reader :password
   after_initialize :ensure_session_token, :ensure_username
