@@ -6,8 +6,10 @@ import { receiveCurrentUser,
        } from '../actions/session_actions';
 
 import { login, signup, logout } from '../util/session_api_util';
-// May not need all of the below
-import { createWorkspace, fetchUserWorkspaces, fetchUserWorkspaceOnLogin } from '../actions/workspace_actions';
+
+import { createWorkspace,
+         fetchUserWorkspaces,
+         fetchUserWorkspaceOnLogin } from '../actions/workspace_actions';
 
 const SessionMiddleware = store => next => action => {
 

@@ -29,7 +29,6 @@ class SideBar extends React.Component {
     this.renderProjectList = this.renderProjectList.bind(this);
     this.updateProject = this.updateProject.bind(this);
     this.renderAvatars = this.renderAvatars.bind(this);
-    this.avatarMouseOver = this.avatarMouseOver.bind(this);
   }
 
   handleToggle() {

@@ -37,8 +37,6 @@ const WorkspacesMiddleware = store => next => action => {
 
   // Dispatches receive workspace on login in order to direct user to
   // their last workspace on login
-
-  // This is now the same as rws below
     let receiveWorkspaceOnLoginSuccess = workspace => {
       store.dispatch(receiveWorkspace(workspace));
       redirectToNewWorkspace(workspace)
