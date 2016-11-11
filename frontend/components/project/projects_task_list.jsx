@@ -77,7 +77,7 @@ class WorkspaceTaskList extends React.Component {
 
   renderViewDropdown() {
     return(<DropDownMenu value={this.props.view} style={style}
-      onChange={this.updateView} autoWidth={false}
+      onChange={this.updateView} autoWidth={false} labelStyle={labelStyle}
       openImmediately={false}>
         <MenuItem value={'all'} primaryText='All Tasks' />
         <MenuItem value={'incomplete'} primaryText='Incomplete' />
@@ -166,6 +166,10 @@ const style = {
   width: '200px',
   display: 'flex',
   flexDirection: 'column',
-  fontSize: '12px',
-  textAlign: 'center'
+  fontSize: '100px'
+}
+
+const labelStyle = {
+  fontSize: '20px',
+  marginLeft: '25px'
 }

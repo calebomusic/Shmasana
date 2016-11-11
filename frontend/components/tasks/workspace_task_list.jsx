@@ -9,7 +9,19 @@ import Divider from 'material-ui/Divider';
 import DropDownMenu from 'material-ui/DropDownMenu';
 
 
-import TaskListItem from './task_list_item'
+import TaskListItem from './task_list_item';
+
+const style = {
+  width: '200px',
+  display: 'flex',
+  flexDirection: 'column',
+  fontSize: '100px'
+}
+
+const labelStyle = {
+  fontSize: '16px',
+  marginLeft: '32.5px'
+}
 
 class WorkspaceTaskList extends React.Component {
   constructor(props) {
@@ -89,7 +101,7 @@ class WorkspaceTaskList extends React.Component {
   }
 
   renderViewDropdown() {
-    return(<DropDownMenu value={this.state.view} style={style}
+    return(<DropDownMenu value={this.state.view} style={style} labelStyle={labelStyle}
       onChange={this.updateView} autoWidth={false}
       openImmediately={false}>
         <MenuItem value={'all'} primaryText='All Tasks' />
@@ -154,11 +166,3 @@ class WorkspaceTaskList extends React.Component {
 }
 
 export default withRouter(WorkspaceTaskList);
-
-const style = {
-  width: '200px',
-  display: 'flex',
-  flexDirection: 'column',
-  fontSize: '12px',
-  textAlign: 'center'
-}

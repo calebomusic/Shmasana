@@ -28,11 +28,17 @@
 .task-list-top {
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 87.5%;
+  margin-left: 20px;
   padding-left: 45px;
   padding-right: 20px;
   padding-top: 25px;
   /*margin-left: 10px;*/
+}
+
+.task-list-top-right {
+  float: right;
+  padding-right: 20px;
 }
 
 .task-list-top-left {
@@ -60,6 +66,7 @@
   padding-left: 45px;
   padding-right: 20px;
   padding-top: 10px;
+  margin-left: 20px;
 }
 
 .task-list-item {
@@ -197,4 +204,5 @@
   padding-left: 10px;
   font-size: 14px;
   color: #1B2432;
+  width: 100%;
 }

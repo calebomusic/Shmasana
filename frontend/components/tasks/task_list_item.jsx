@@ -1,6 +1,8 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
 
+import TextField from 'material-ui/TextField';
+
 class TaskListItem extends React.Component {
   constructor(props) {
     super(props)
@@ -94,5 +96,10 @@ class TaskListItem extends React.Component {
     </li>)
   }
 }
+
+// <input className='task-list-item-title' value={this.state.title}
+//   onChange={this.handleChange} onFocus={this.updateFocus}
+//   onBlur={this.updateBlur} placeholder=''>
+// </input>
 
 export default TaskListItem;

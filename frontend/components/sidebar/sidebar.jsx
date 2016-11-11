@@ -24,6 +24,12 @@ const style = {
   borderColor: '#EFF0F1',
 }
 
+const labelStyle = {
+  fontSize: '16px',
+  marginLeft: '32.5px'
+}
+
+
 const avatarStyle = {margin: 0};
 
 const colors = [red500, blue500, redA400, pink400]
@@ -59,6 +65,7 @@ class SideBar extends React.Component {
       </div>
     )
   }
+
   renderAvatars() {
     return this.props.workspace.team.map( (user, i) => {
       let letter = user.username[0];

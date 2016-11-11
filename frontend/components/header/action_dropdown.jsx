@@ -61,15 +61,11 @@ class ActionDropdown extends React.Component {
     const projectId = this.props.params.projectId;
 
     if (projectId) {
-      task.project_id = parseInt(projectId)
+      task.project_id = parseInt(projectId);
     }
 
-    console.log(userId);
-    console.log(workspaceId);
-    console.log(projectId);
-    console.log(task);
-
-    this.props.createTask(task)
+    this.props.createTask(task);
+    this.handleRequestClose();
   }
 
   openModalAndClose() {
