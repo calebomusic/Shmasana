@@ -7,16 +7,10 @@ Rails.application.routes.draw do
       resources :projects, only: [:show] do
         resources :tasks, only: [:index]
       end
-      resources :tasks, only: [:index] do
-        resources :comments, only: [:create, :index, :show]
-      end
+      resources :tasks, only: [:index]
     end
 
-    # Allow the ability to show all projects?
-
-    # resources :workspaces, only: [:index] do
-    #   resources :projects, only: [:index]
-    # end
+    resources :commments, only: [:show]
 
     resources :workspaces, only: [:show] do
       resources :projects, only: [:create, :index, :show]
@@ -28,7 +22,10 @@ Rails.application.routes.draw do
     resources :projects, only: [:show] do
       resources :tasks, only: [:update, :index]
     end
-    resources :tasks, only: [:show, :destroy]
+    resources :tasks, only: [:show, :destroy] do
+      resources :comments, only: [:create, :index, :show]
+    end
+    
     resource :session, only: [:create, :destroy]
   end
 

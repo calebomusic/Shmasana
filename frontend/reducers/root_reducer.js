@@ -16,7 +16,7 @@ const RootReducer = combineReducers({
   task: TaskReducer,
   tasks: TasksReducer,
   view: ViewReducer,
-  loading: MainContentSpinnerReducer
+  loading: MainContentSpinnerReducer,
 })
 
 export default RootReducer;

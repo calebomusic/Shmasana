@@ -11,7 +11,9 @@ import { fetchProject, fetchProjectsByWorkspace } from '../../util/project_api_u
 import {
   lightBlue200, lightBlue500, lightRed200, grey50, grey600, deepPurple50, red500, blue500, redA400, pink400
 } from 'material-ui/styles/colors';
+
 import Spinner from '../spinner';
+import CommentFormContainer from './comments/comment_form_container';
 
 import Divider from 'material-ui/Divider';
 import Popover from 'material-ui/Popover';
@@ -389,10 +391,6 @@ class Detail extends React.Component {
     </div>)
   }
 
-  // <textarea className='task-detail-description-text-area' contentEditable="true"
-  //   value={this.state.description} onChange={this.handleChange('description')}
-  //   onFocus={this.updateFocus} onBlur={this.updateBlur} placeholder='Description'>
-  // </textarea>
   toggleComplete() {
     this.props.task.completed = !this.props.task.completed
 
@@ -450,6 +448,7 @@ class Detail extends React.Component {
             </div>
           </div>
           {this.renderFooter()}
+          <CommentFormContainer />
         </div>
       )
     }

@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
     class_name: :Task,
     foreign_key: :author_id
 
-  has_many :comments
+  has_many :comments, foreign_key: :author_id
 
   attr_reader :password
   after_initialize :ensure_session_token, :ensure_username

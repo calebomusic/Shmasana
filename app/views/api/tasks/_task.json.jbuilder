@@ -3,4 +3,4 @@ json.extract! task, :author_id, :assignee_id, :project_id, :title, :description,
 json.assignee task.assignee
 json.author task.author
 json.project task.project
-# json.workspace task.workspace
+json.comments task.comments

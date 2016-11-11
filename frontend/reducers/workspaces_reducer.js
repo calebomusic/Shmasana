@@ -17,8 +17,6 @@ const WorkspacesReducer = (oldState = {}, action) => {
     case RECEIVE_PROJECT:
       let id = Object.keys(newState);
 
-      console.log(newState[id]);
-
       if (newState[id]) {
         let projectIds = newState[id].projects.map((project) => project.id)
         if (!projectIds.includes(action.project.id)) {
