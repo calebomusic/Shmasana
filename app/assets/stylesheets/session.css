@@ -1,4 +1,3 @@
-
 /*Session Form*/
 .session {
   display: flex;
@@ -14,11 +13,11 @@
 
 .session-logo {
   margin-top: 15px;
-  /*padding-top: 30px*/
   margin-bottom: 28px;
   font-size: 24px;
   color: white;
 }
+
 .session-form {
   width: 450px;
   height: 450px;
@@ -89,7 +88,6 @@
   margin-bottom: 30px;
   margin-top: 5px;
 }
-
 
 .errors {
   font-size: 14px;

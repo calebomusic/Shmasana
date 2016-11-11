@@ -1,5 +1,4 @@
 /*Sign Up Home*/
-
 .signup-home {
   background: #ff6d92 radial-gradient(circle at center,#f5b200 0,#fc636b 30%,#ff6d92 70%);
   background-image: radial-gradient(circle at center,#f5b200 0,#fc636b 30%,#ff6d92 70%);
@@ -28,11 +27,6 @@
   font-weight: bolder;
 }
 
-.signup-home-right {
-  /*display: block;
-  float: right;*/
-}
-
 .message {
   width: 600px;
   height: 365px;
@@ -58,15 +52,6 @@
   margin-top: 20px;
   text-align: center;
   font-size: 1.375em;
-}
-
-.signup-form-modal {
-  /*display: flex;
-  justify-content: center;*/
-}
-
-.signup {
-
 }
 
 .signup-form {

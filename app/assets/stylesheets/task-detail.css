@@ -141,18 +141,18 @@
 
 
 .task-list-check-title {
-    margin-left: 2px;
-    display:inline-block;
-    min-width: 36px;
-    min-height:36px;
-    background: white;
-    border-radius:50%;
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-    transform: rotate(45deg);
-    border: 1px solid;
-    border-color: #898E95;
-    box-shadow: 0px 0px 0px 0px #0ff;
+  margin-left: 2px;
+  display:inline-block;
+  min-width: 36px;
+  min-height:36px;
+  background: white;
+  border-radius:50%;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+  border: 1px solid;
+  border-color: #898E95;
+  box-shadow: 0px 0px 0px 0px #0ff;
 }
 
 .task-list-check-title:focus {
@@ -161,24 +161,24 @@
 }
 
 .task-list-check-title:before{
-    content:"";
-    position: absolute;
-    min-width:4px;
-    min-height:18px;
-    background-color: #898E95;
-    left: 17px;
-    top: 6.5px;
+  content:"";
+  position: absolute;
+  min-width:4px;
+  min-height:18px;
+  background-color: #898E95;
+  left: 17px;
+  top: 6.5px;
 }
 
 .task-list-check-title:after{
-    content:"";
-    color: #898E95;
-    position: absolute;
-    min-width:7px;
-    min-height:5px;
-    background-color: #898E95;
-    left:12px;
-    top: 19.5px;
+  content:"";
+  color: #898E95;
+  position: absolute;
+  min-width:7px;
+  min-height:5px;
+  background-color: #898E95;
+  left:12px;
+  top: 19.5px;
 }
 
 
@@ -193,46 +193,46 @@
 }
 
 .task-list-check-title:hover {
-    border-color: #3BF7D1;
-    color: #9DFBE8;
-    box-shadow: 0px 0px 0px 2px #3BF7D1;
+  border-color: #3BF7D1;
+  color: #9DFBE8;
+  box-shadow: 0px 0px 0px 2px #3BF7D1;
 }
 
 /*Completed*/
 
 .completed-task-list-check-title {
-    margin-left: 2px;
-    display:inline-block;
-    min-width: 36px;
-    min-height:36px;
-    background: white;
-    border-radius:50%;
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-    transform: rotate(45deg);
-    border: 1px solid;
-    border-color: #b3fcd1;
-    background-color: #b3fcd1;
-    box-shadow: 0px 0px 0px 0px #0ff;
+  margin-left: 2px;
+  display:inline-block;
+  min-width: 36px;
+  min-height:36px;
+  background: white;
+  border-radius:50%;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+  border: 1px solid;
+  border-color: #b3fcd1;
+  background-color: #b3fcd1;
+  box-shadow: 0px 0px 0px 0px #0ff;
 }
 
 .completed-task-list-check-title:before{
-    content:"";
-    position: absolute;
-    min-width:4px;
-    min-height:18px;
-    background-color: white;
-    left: 17px;
-    top: 6.5px;
+  content:"";
+  position: absolute;
+  min-width:4px;
+  min-height:18px;
+  background-color: white;
+  left: 17px;
+  top: 6.5px;
 }
 
 .completed-task-list-check-title:after{
-    content:"";
-    color: #white;
-    position: absolute;
-    min-width:7px;
-    min-height:5px;
-    background-color: white;
-    left:12px;
-    top: 19.5px;
+  content:"";
+  color: #white;
+  position: absolute;
+  min-width:7px;
+  min-height:5px;
+  background-color: white;
+  left:12px;
+  top: 19.5px;
 }
