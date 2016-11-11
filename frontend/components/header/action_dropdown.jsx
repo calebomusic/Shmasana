@@ -76,7 +76,10 @@ class ActionDropdown extends React.Component {
 
   render() {
     if (this.state.modal) {
-      return(<CreateProjectModal createProject={this.props.createProject} />)
+      return(<div>
+            <button className='action-dropdown-button' onTouchTap={this.handleTouchTap}>+</button>
+            <CreateProjectModal createProject={this.props.createProject} />
+          </div>)
     } else {
       return (
         <div>

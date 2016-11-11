@@ -19,7 +19,8 @@ const mapStateToProps = (state) => {
     sidebar: state.sidebar,
     task: state.task,
     tasks: state.tasks,
-    view: state.view
+    view: state.view,
+    loading: state.loading
   })
 }
 

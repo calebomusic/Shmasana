@@ -1,9 +1,10 @@
 .create-workspace-modal {
   /*This wraps the user dropdown button and the modal (but doesn't allow for modal resizing)*/
+  width: 100%;
 }
 
 .create-workspace-form {
-
+  margin-left: 10px;
 }
 
 .create-workspace-close-modal {
@@ -21,8 +22,12 @@
   cursor: pointer;
 }
 
-.create-workspace-label {
+.create-workspace-close-modal:hover {
+  color: #1AAFD0;
+}
 
+.create-workspace-label {
+  width: 100%;
 }
 
 .create-workspace-input {
@@ -56,7 +61,8 @@
   font-size: 16px;
 }
 
-.create-workspace-button {}
+.create-workspace-button {
+}
 
 .create-workspace-label-input {
   width: 100%;
@@ -67,11 +73,12 @@
 .create-workspace-header {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   flex-direction: row;
   border-bottom: 1px solid;
   border-color: #b9bcc0;
+  margin-bottom: 20px;
 }
 
 .create-workspace-title {
-
 }

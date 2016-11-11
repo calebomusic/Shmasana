@@ -41,7 +41,7 @@ class UserDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false, modal: false, workspaces: []
+      open: false, modal: true, workspaces: []
     };
 
     this.handleTouchTap = this.handleTouchTap.bind(this)
@@ -110,7 +110,7 @@ class UserDropdown extends React.Component {
 
     if (this.state.modal) {
       return(
-        <div className='create-workspace-modal'>
+        <div>
           <div className='header-user-dropdown' onTouchTap={this.handleTouchTap}>
             <p>{this.props.currentUser.username}</p>
           <Avatar

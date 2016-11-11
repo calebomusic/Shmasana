@@ -50,6 +50,7 @@
   width: 40%;
   height: 100%;
   margin-left: 18px;
+  cursor: pointer;
 }
 
 .teammates-right {

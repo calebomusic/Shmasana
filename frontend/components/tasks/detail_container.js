@@ -7,7 +7,8 @@ const mapStateToProps = (state) => (
   {
     currentUser: state.session.currentUser,
     workspace: state.workspace[Object.keys(state.workspace)],
-    task: state.task
+    task: state.task,
+    loading: state.loading
   }
 )
 

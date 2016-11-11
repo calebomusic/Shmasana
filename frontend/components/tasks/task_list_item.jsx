@@ -2,6 +2,10 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 
 import TextField from 'material-ui/TextField';
+import Snackbar from 'material-ui/Snackbar';
+import {
+  lightBlue200, lightBlue500, lightRed200, grey50, grey600, deepPurple50, red500, blue500, redA400, pink400
+} from 'material-ui/styles/colors';
 
 class TaskListItem extends React.Component {
   constructor(props) {
@@ -10,7 +14,7 @@ class TaskListItem extends React.Component {
     const title = this.props.task.title ? this.props.task.title : ''
 
     this.state = { location: '', selected: false,
-      title: title}
+      title: title, open: false}
 
     this.setLocation = this.setLocation.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -54,8 +58,10 @@ class TaskListItem extends React.Component {
   toggleComplete() {
     this.props.task.completed = !this.props.task.completed
     if (this.props.task.completed) {
+      this.setState({open: true})
       this.props.task.completed_at = new Date();
     } else {
+      this.setState({open: false})
       this.props.task.completed_at = null;
     }
     this.props.updateTask(this.props.task);
@@ -86,6 +92,8 @@ class TaskListItem extends React.Component {
     }
     // check location to toggle selected?
 
+    const message = `Task completed!`;
+
     return(<li className={className}>
       <button onClick={this.toggleComplete}
         className={buttonClassName}></button>
@@ -93,13 +101,20 @@ class TaskListItem extends React.Component {
         onChange={this.handleChange} onFocus={this.updateFocus}
         onBlur={this.updateBlur} placeholder=''>
       </input>
+      <Snackbar
+        open={this.state.open}
+        message={message}
+        autoHideDuration={3000}
+        onRequestClose={this.handleRequestClose}
+        bodyStyle={snackbarStyle}
+      />
     </li>)
   }
 }
 
-// <input className='task-list-item-title' value={this.state.title}
-//   onChange={this.handleChange} onFocus={this.updateFocus}
-//   onBlur={this.updateBlur} placeholder=''>
-// </input>
+const snackbarStyle = {
+  backgroundColor: lightBlue200,
+  color: lightBlue200
+}
 
 export default TaskListItem;

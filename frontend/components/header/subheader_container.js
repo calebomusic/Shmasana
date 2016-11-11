@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
   return({
     currentUser: state.session.currentUser,
     workspace: workspace,
-    project: state.project
+    project: state.project,
+    loading: state.loading
   })
 }
 

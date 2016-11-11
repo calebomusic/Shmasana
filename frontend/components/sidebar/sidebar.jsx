@@ -46,7 +46,8 @@ class SideBar extends React.Component {
     this.renderProjectList = this.renderProjectList.bind(this);
     this.updateProject = this.updateProject.bind(this);
     this.fetchProject = fetchProject.bind(this);
-    this.renderAvatars = this.renderAvatars.bind(this)
+    this.renderAvatars = this.renderAvatars.bind(this);
+    this.avatarMouseOver = this.avatarMouseOver.bind(this);
   }
 
   handleToggle() {
@@ -72,6 +73,7 @@ class SideBar extends React.Component {
       let color = colors[letter.charCodeAt() % 4]
 
       return(
+          <div>
             <Avatar
               color={deepPurple50}
               backgroundColor={color}
@@ -80,8 +82,13 @@ class SideBar extends React.Component {
             >
             {letter}
             </Avatar>
+          </div>
           )
     });
+  }
+
+  avatarMouseOver(user) {
+
   }
 
   renderTeamates() {

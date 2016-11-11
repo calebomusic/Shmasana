@@ -11,6 +11,7 @@ import { fetchProject, fetchProjectsByWorkspace } from '../../util/project_api_u
 import {
   lightBlue200, lightBlue500, lightRed200, grey50, grey600, deepPurple50, red500, blue500, redA400, pink400
 } from 'material-ui/styles/colors';
+import Spinner from '../spinner';
 
 import Divider from 'material-ui/Divider';
 import Popover from 'material-ui/Popover';
@@ -430,19 +431,28 @@ class Detail extends React.Component {
   }
 
   render() {
-    return(
-      <div className='task-detail'>
+    if (this.props.loading) {
+      return(<div className='task-detail'>
         {this.renderHeader()}
-        <div className='task-detail-body'>
-          {this.renderProject()}
-          <div className='task-detail-content'>
-            {this.renderTitle()}
-            {this.renderDescription()}
-          </div>
+        <div className='detail-spinner'>
+          <Spinner />
         </div>
-        {this.renderFooter()}
-      </div>
-    )
+      </div>)
+    } else {
+      return(
+        <div className='task-detail'>
+          {this.renderHeader()}
+          <div className='task-detail-body'>
+            {this.renderProject()}
+            <div className='task-detail-content'>
+              {this.renderTitle()}
+              {this.renderDescription()}
+            </div>
+          </div>
+          {this.renderFooter()}
+        </div>
+      )
+    }
   }
 }
 
