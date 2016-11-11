@@ -96,7 +96,7 @@ class WorkspaceTaskList extends React.Component {
       <TaskListItem task={task}
         updateTask={this.props.updateTask}
         fetchTask={this.props.fetchTask}
-        key={task.id}/>
+        key={task.id + task.title}/>
     ))
   }
 

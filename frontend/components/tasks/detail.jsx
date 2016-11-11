@@ -109,7 +109,7 @@ class Detail extends React.Component {
           inputStyle={{color: lightBlue200, secondaryTextColor: lightBlue200,
           textColor: lightBlue200}} textFieldStyle={{
             color: lightBlue200, textColor: grey600, secondaryTextColor: lightBlue200,
-          width: '65px'}}  defaultDate={this.props.task.due_date}>
+          width: '65px'}}>
         </DatePicker>
       </div>
       <div className='task-detail-delete' onTouchTap={this.deleteTask}>

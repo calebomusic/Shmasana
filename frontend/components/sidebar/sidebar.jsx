@@ -45,7 +45,6 @@ class SideBar extends React.Component {
     this.renderTeamates = this.renderTeamates.bind(this);
     this.renderProjectList = this.renderProjectList.bind(this);
     this.updateProject = this.updateProject.bind(this);
-    this.fetchProject = fetchProject.bind(this);
     this.renderAvatars = this.renderAvatars.bind(this);
     this.avatarMouseOver = this.avatarMouseOver.bind(this);
   }
@@ -79,6 +78,7 @@ class SideBar extends React.Component {
               backgroundColor={color}
               size={30}
               style={avatarStyle}
+              key={user.username}
             >
             {letter}
             </Avatar>
@@ -117,8 +117,6 @@ class SideBar extends React.Component {
   }
 
   updateProject(newProject) {
-    // debugger
-
     // This flashes the workspace and project name a few times
     this.props.fetchProject(newProject.id)
 
@@ -147,7 +145,7 @@ class SideBar extends React.Component {
         liClassName = 'project-list-li-selected'
       }
 
-      return(<li onTouchTap={updateProject} key={project.id} className={liClassName}>
+      return(<li onTouchTap={updateProject} key={project.id + project.name} className={liClassName}>
               <p className={className}>{project.name}</p>
             </li>)
     });
