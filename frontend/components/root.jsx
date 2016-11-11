@@ -36,7 +36,7 @@ const Root = ({store}) => {
     const currentUser = store.getState().session.currentUser;
     const workspaceId = parseInt(ownProps.params.workspaceId)
     let workspace;
-    // debugger
+    
     if(!currentUser) {
       hashHistory.replace('/')
     } else if (!currentUser.workspaces.includes(workspaceId)) {
@@ -54,13 +54,18 @@ const Root = ({store}) => {
       hashHistory.push('/');
     } else {
       store.dispatch(fetchWorkspace(workspaceId));
-      store.dispatch(removeProject());
+
+      if (store.getState().project.id) {
+        store.dispatch(removeProject());
+      }
     }
   }
 
   const _FetchProject = (nextState) => {
     const projectId = parseInt(nextState.params.projectId);
-    store.dispatch(fetchProject(projectId))
+    if (!store.getState().project.id) {
+      store.dispatch(fetchProject(projectId))
+    }
   }
 
   return(<MuiThemeProvider muiTheme={muiTheme}>

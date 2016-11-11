@@ -1,12 +1,12 @@
 .sidebar {
   background-color: #2e3c54;
   height: 100%;
-  width: 15%;
   min-width: 242px;
   display: flex;
   flex-direction: column;
   -webkit-transition: width 10s, height 10s, -webkit-transform 10s;
    transition: width 10s, height 10s, transform 10s;
+   overflow: hidden;
 }
 
 .logo-exit {

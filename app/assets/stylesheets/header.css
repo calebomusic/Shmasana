@@ -28,6 +28,10 @@
   /*margin-left: 40px*/
 }
 
+.home-header-right {
+  margin-right: 10px;
+}
+
 .home-header-left {
   display: flex;
   align-items: center;

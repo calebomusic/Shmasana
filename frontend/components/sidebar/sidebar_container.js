@@ -20,7 +20,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  // debugger
   return({
     closeSidebar: () => dispatch(closeSidebar()),
     createProject: (project) => dispatch(createProject(project)),

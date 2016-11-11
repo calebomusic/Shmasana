@@ -79,7 +79,7 @@ class TaskListItem extends React.Component {
 
   render() {
     let className, buttonClassName;
-    // debugger
+    
     if (this.props.task.completed) {
       className = 'completed-task-list-item';
       buttonClassName = 'completed-task-list-check';

@@ -19,13 +19,13 @@ const style = {
 
 const Header = (props) => {
   let sidebarButton;
-  // debugger
+
   if (!props.sidebar) {
     sidebarButton = <span className='sidebar-button' onTouchTap={props.openSidebar}>
       <FlatButton style={style} ><DrawerIcon /></FlatButton>
     </span>
   }
-  // debugger
+
   const redirectToWorkspace = () => {
     hashHistory.push(`${props.router.params.userId}/${props.router.params.workspaceId}`);
     props.removeProject();

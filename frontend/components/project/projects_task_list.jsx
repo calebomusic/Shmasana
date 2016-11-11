@@ -30,7 +30,6 @@ class WorkspaceTaskList extends React.Component {
   }
 
   componentWillMount() {
-    // debugger
     if (this.props.view) {
       this.props.receiveView(this.props.view)
     } else {
@@ -57,7 +56,6 @@ class WorkspaceTaskList extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // debugger
     const projectId = parseInt(this.props.params.projectId);
     let selectedTasks;
 

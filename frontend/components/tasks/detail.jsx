@@ -59,7 +59,6 @@ class Detail extends React.Component {
     this.renderAssignee = this.renderAssignee.bind(this);
     this.toggleAssigneeList = this.toggleAssigneeList.bind(this);
     this.renderAssigneeList = this.renderAssigneeList.bind(this);
-    this.fetchAssignees = this.fetchAssignees.bind(this);
     this.handleAssigneeChange = this.handleAssigneeChange.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.renderAvatar = this.renderAvatar.bind(this);
@@ -123,8 +122,6 @@ class Detail extends React.Component {
   }
 
   renderAssignee() {
-    const assignee = this.props.task.assignee ? this.props.task.assignee.username : 'Unassigned';
-
     let assingneeList;
 
     if (this.state.assigneeListOpen) {
@@ -155,28 +152,20 @@ class Detail extends React.Component {
             </Avatar>
           )
     } else {
-      return(<MenuItem value={undefined} primaryText={'Unassigned'}
-        onClick={this.toggleAssigneeList} />)
+      return(<Avatar
+        color={deepPurple50}
+        backgroundColor={grey50}
+        size={40}
+        style={avatarStyle}
+        onTouchTap={this.toggleAssigneeList}
+      >
+      ?
+      </Avatar>)
     }
   }
 
   toggleAssigneeList() {
     this.setState({assigneeListOpen: !this.state.assigneeListOpen})
-  }
-
-  // This fetches all possible assignees. Should do this through workspace
-  fetchAssignees() {
-    const workspaceId = parseInt(this.props.params.workspaceId)
-
-    let projectList;
-
-    if (this.state.assignees.length === 0) {
-      this.fetchUsersByWorkspace((workspaceId), (assignees) => {
-        this.setState({assignees: assignees})
-      }, (e) => console.log(e))
-    }
-
-    return this.renderAssigneeList()
   }
 
   renderAssigneeList() {
@@ -188,7 +177,6 @@ class Detail extends React.Component {
       ))
     }
 
-    // Needs a handle change
     return(<DropDownMenu value={this.state.assignee} style={assigneeStyle}
       onChange={this.handleAssigneeChange('assignee_id')} autoWidth={false}
       openImmediately={true}>
@@ -223,7 +211,6 @@ class Detail extends React.Component {
   }
 
   renderProject() {
-    // debugger
     const project = this.props.task.project ? this.props.task.project.name : 'NO PROJECT'
 
     let projectList;
@@ -239,23 +226,7 @@ class Detail extends React.Component {
           </div>)
   }
 
-  // fetchProjectList() {
-  //   // debugger
-  //   const workspaceId = parseInt(this.props.params.workspaceId)
-  //
-  //   if (this.state.projects.length === 0) {
-  //     this.fetchProjectsByWorkspace((workspaceId), (projects) => {
-  //       this.setState({projects: projects})
-  //     }, (e) => console.log(e))
-  //   }
-  //
-  //
-  //   return this.renderProjectList()
-  // }
-
   renderProjectList() {
-    // debugger
-
     let projects;
 
     if (this.props.workspace) {
@@ -269,7 +240,6 @@ class Detail extends React.Component {
     if (this.props.task.project) {
       project = this.props.task.project.name;
     }
-    // <MenuItem value={undefined} primaryText={'No Project'} />
 
     return(<DropDownMenu value={this.props.task.project.name} style={popoverStyle}
       onChange={this.handleProjectChange} autoWidth={false}
@@ -302,7 +272,6 @@ class Detail extends React.Component {
 
   handleChange(field) {
     return (e) => {
-      // debugger
       this.props.task[field] = e.target.value
       // this.setState({[field]: e.target.value, projectList: false})
       this.props.updateTask(this.props.task);
@@ -432,7 +401,7 @@ class Detail extends React.Component {
   render() {
     if (this.props.loading) {
       return(<div className='task-detail'>
-        {this.renderHeader()}
+
         <div className='detail-spinner'>
           <Spinner />
         </div>

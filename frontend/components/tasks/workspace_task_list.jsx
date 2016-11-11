@@ -8,7 +8,6 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import DropDownMenu from 'material-ui/DropDownMenu';
 
-
 import TaskListItem from './task_list_item';
 
 const style = {
@@ -34,7 +33,6 @@ class WorkspaceTaskList extends React.Component {
     this.updateView = this.updateView.bind(this);
     this.selectTasks = this.selectTasks.bind(this);
     this.renderViewDropdown = this.renderViewDropdown.bind(this);
-    this.fetchTasksByUserAndWorkspace = fetchTasksByUserAndWorkspace.bind(this)
   }
 
   componentWillMount() {
@@ -49,16 +47,16 @@ class WorkspaceTaskList extends React.Component {
 
     let selectedTasks;
 
-    this.fetchTasksByUserAndWorkspace(userId, workspaceId, (tasks) =>
+    fetchTasksByUserAndWorkspace(userId, workspaceId, (tasks) =>
       {
         if (this.props.view === 'completed') {
           selectedTasks = this.selectTasks(tasks, true);
           this.setState({tasks: selectedTasks});
         } else if (this.props.view === 'incomplete') {
-          selectedTasks = this.selectTasks(tasks, true);
+          selectedTasks = this.selectTasks(tasks, false);
           this.setState({tasks: selectedTasks});
         } else {
-          this.setState({tasks: tasks})
+          this.setState({tasks: selectedTasks});
         }
       }
     )
@@ -69,7 +67,7 @@ class WorkspaceTaskList extends React.Component {
     const workspaceId = parseInt(this.props.params.workspaceId);
 
     let selectedTasks;
-
+    
     fetchTasksByUserAndWorkspace(userId, workspaceId, (tasks) =>
       {
         if (this.props.view === 'completed') {
@@ -93,12 +91,14 @@ class WorkspaceTaskList extends React.Component {
   }
 
   renderTasks() {
-    return this.state.tasks.map( (task) => (
-      <TaskListItem task={task}
-        updateTask={this.props.updateTask}
-        fetchTask={this.props.fetchTask}
-        key={task.id + task.title}/>
-    ))
+    if (this.state.tasks) {
+      return this.state.tasks.map( (task) => (
+        <TaskListItem task={task}
+          updateTask={this.props.updateTask}
+          fetchTask={this.props.fetchTask}
+          key={task.id + task.title}/>
+      ))
+    }
   }
 
   renderViewDropdown() {
@@ -138,7 +138,7 @@ class WorkspaceTaskList extends React.Component {
 
   selectTasks(tasks, completed) {
     let selectedTasks = [];
-    debugger
+
     tasks.forEach((task) => {
       if (completed && task.completed) {
         selectedTasks.push(task);
@@ -151,7 +151,6 @@ class WorkspaceTaskList extends React.Component {
   }
 
   render() {
-    console.log(this.state.tasks);
     return(
     <div className='task-list'>
       <div className='task-list-top'>

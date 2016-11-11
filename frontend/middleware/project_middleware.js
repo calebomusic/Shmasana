@@ -29,7 +29,6 @@ const ProjectMiddleware = store => next => action => {
     const projectId = project.id
 
     if (projectId !== locationProjectId) {
-      // debugger
       redirectToProject(project);
     }
   }

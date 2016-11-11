@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-around;;
   align-items: center;
-  width: 100%;
+  /*width: 100%;*/
   -webkit-transition: width 2s; /* Safari 3.1 to 6.0 */
   transition: width 2s;
 }

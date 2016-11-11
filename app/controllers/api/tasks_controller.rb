@@ -28,7 +28,6 @@ class Api::TasksController < ApplicationController
   end
 
   def show
-    # debugger
     @task = Task.find_by_id(params[:id])
     # @task.includes(:comments)
   end

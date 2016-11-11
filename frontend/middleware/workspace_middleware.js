@@ -50,12 +50,7 @@ const WorkspacesMiddleware = store => next => action => {
   }
 
   let redirectToNewWorkspace = (workspace) => {
-    let currentUserId
-    if (store.getState().session.currentUserId) {
-      currentUserId = store.getState().session.currentUser;
-    } else {
-      currentUserId = workspace.users[0];
-    }
+    const currentUserId = store.getState().session.currentUser.id;
 
     const workspaceId = workspace.id;
     const locationWorkspaceId = parseInt(hashHistory.getCurrentLocation().pathname.split('/')[2])

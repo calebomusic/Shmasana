@@ -16,11 +16,9 @@ const mapStateToProps = (state) => {
   return({
     currentUser: state.session.currentUser,
     sidebar: state.sidebar,
-    task: state.task,
     tasks: state.tasks,
-    view: state.view,
-    loading: state.loading
-  })
+    view: state.view
+    })
 }
 
 const mapDispatchToProps = (dispatch) => {
