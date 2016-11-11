@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { withRouter } from 'react-router';
-import { fetchTasksByUserAndWorkspace, updateTask } from '../../util/task_api_util';
 
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -10,17 +8,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 
 import TaskListItem from './task_list_item';
 
-const style = {
-  width: '200px',
-  display: 'flex',
-  flexDirection: 'column',
-  fontSize: '100px'
-}
-
-const labelStyle = {
-  fontSize: '16px',
-  marginLeft: '32.5px'
-}
+import { fetchTasksByUserAndWorkspace, updateTask } from '../../util/task_api_util';
 
 class WorkspaceTaskList extends React.Component {
   constructor(props) {
@@ -29,7 +17,6 @@ class WorkspaceTaskList extends React.Component {
 
     this.createTask = this.createTask.bind(this);
     this.renderTasks = this.renderTasks.bind(this);
-
     this.updateView = this.updateView.bind(this);
     this.selectTasks = this.selectTasks.bind(this);
     this.renderViewDropdown = this.renderViewDropdown.bind(this);
@@ -37,9 +24,9 @@ class WorkspaceTaskList extends React.Component {
 
   componentWillMount() {
     if (this.props.view) {
-      this.props.receiveView(this.props.view)
+      this.props.receiveView(this.props.view);
     } else {
-      this.props.receiveView('all')
+      this.props.receiveView('all');
     }
 
     const userId = parseInt(this.props.params.userId);
@@ -67,7 +54,7 @@ class WorkspaceTaskList extends React.Component {
     const workspaceId = parseInt(this.props.params.workspaceId);
 
     let selectedTasks;
-    
+
     fetchTasksByUserAndWorkspace(userId, workspaceId, (tasks) =>
       {
         if (this.props.view === 'completed') {
@@ -102,13 +89,20 @@ class WorkspaceTaskList extends React.Component {
   }
 
   renderViewDropdown() {
-    return(<DropDownMenu value={this.state.view} style={style} labelStyle={labelStyle}
-      onChange={this.updateView} autoWidth={false}
-      openImmediately={false}>
-        <MenuItem value={'all'} primaryText='All Tasks' />
-        <MenuItem value={'incomplete'} primaryText='Incomplete' />
-        <MenuItem value={'completed'} primaryText='Completed' />
-    </DropDownMenu>)
+    return(
+      <DropDownMenu value={this.state.view}
+                    style={style}
+                    labelStyle={labelStyle}
+                    onChange={this.updateView}
+                    autoWidth={false}
+                    openImmediately={false}>
+        <MenuItem value={'all'}
+                  primaryText='All Tasks' />
+        <MenuItem value={'incomplete'}
+                  primaryText='Incomplete' />
+        <MenuItem value={'completed'}
+                  primaryText='Completed' />
+      </DropDownMenu>)
   }
 
   updateView(e, i, view) {
@@ -143,7 +137,7 @@ class WorkspaceTaskList extends React.Component {
       if (completed && task.completed) {
         selectedTasks.push(task);
       } else if (!completed && !task.completed) {
-        selectedTasks.push(task)
+        selectedTasks.push(task);
       }
     })
 
@@ -154,7 +148,10 @@ class WorkspaceTaskList extends React.Component {
     return(
     <div className='task-list'>
       <div className='task-list-top'>
-        <button className='task-list-top-left' onTouchTap={this.createTask}>Add Task</button>
+        <button className='task-list-top-left'
+                onTouchTap={this.createTask}>
+                  Add Task
+        </button>
         <button className='task-list-top-right'>
           {this.renderViewDropdown()}
         </button>
@@ -165,5 +162,17 @@ class WorkspaceTaskList extends React.Component {
     </div>)
   }
 }
+
+  const style = {
+    width: '200px',
+    display: 'flex',
+    flexDirection: 'column',
+    fontSize: '100px'
+  }
+
+  const labelStyle = {
+    fontSize: '16px',
+    marginLeft: '32.5px'
+  }
 
 export default withRouter(WorkspaceTaskList);

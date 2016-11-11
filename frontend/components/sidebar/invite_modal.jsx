@@ -1,13 +1,11 @@
 import React from 'react';
 import Modal from 'react-modal';
-
 import { withRouter } from 'react-router';
-
-import { invite, fetchUserByUsername, fetchUsers } from '../../util/user_api_util';
 
 import { PrimaryButton } from '../session/session_form_buttons';
 import AutoComplete from 'material-ui/AutoComplete';
 
+import { invite, fetchUserByUsername, fetchUsers } from '../../util/user_api_util';
 
 class InviteModal extends React.Component {
   constructor(props) {
@@ -50,10 +48,11 @@ class InviteModal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // Check if user is an actual user or is not on the team. If not render some error message
     if (this.state.users.includes(this.state.username)) {
       fetchUserByUsername(this.state.username, (user) => {
-        invite(user.id, this.props.workspace.id, window.setTimeout(() => this.closeModal(), 2500), (errors) => console.log(errors));
+        invite(user.id, this.props.workspace.id,
+               window.setTimeout(() => this.closeModal(), 2500),
+               (errors) => console.log(errors));
         this.props.fetchWorkspace(this.props.workspace.id)
       }, (errors) => console.log(errors))
     } else {
@@ -86,20 +85,32 @@ class InviteModal extends React.Component {
     return(
       <div className='teammates-right'>
           <p onClick={this.openModal}>Invite People</p>
-        <button onClick={this.openModal} className='larger-sidebar-button'>+</button>
-          <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal} className='create-project-form-modal'>
+        <button onClick={this.openModal}
+                className='larger-sidebar-button'>
+                  +
+        </button>
+          <Modal isOpen={this.state.modalOpen}
+                 onRequestClose={this.closeModal}
+                 className='create-project-form-modal'>
             <div>
               <div className='signup-form'>
-                <div className='signup-close-modal' onTouchTap={this.closeModal}>x</div>
+                <div className='signup-close-modal'
+                     onTouchTap={this.closeModal}>x</div>
                 <h1 className='signup-title'>Invite</h1>
                 {this.renderErrors()}
                 <form onSubmit={this.handleSubmit}>
                   <AutoComplete floatingLabelText="SEARCH BY MEMBER USERNAME"
-                      filter={AutoComplete.fuzzyFilter} dataSource={this.state.users}
-                      maxSearchResults={5} fullWidth={false} textFieldStyle={textField}
-                      onUpdateInput={this.updateForm} onNewRequest={this.updateForm}/>
-                  <PrimaryButton className='login-form-button' type='submit' label='Invite'
-                    disabled={this.disableButton()}/>
+                                filter={AutoComplete.fuzzyFilter}
+                                dataSource={this.state.users}
+                                maxSearchResults={5}
+                                fullWidth={false}
+                                textFieldStyle={textField}
+                                onUpdateInput={this.updateForm}
+                                onNewRequest={this.updateForm}/>
+                  <PrimaryButton className='login-form-button'
+                                 type='submit'
+                                 label='Invite'
+                                 disabled={this.disableButton()}/>
                 </form>
               </div>
             </div>
@@ -109,12 +120,12 @@ class InviteModal extends React.Component {
   }
 }
 
-const textField = {
-  display: 'block',
-  padding: '10px',
-  borderRadius: '3px',
-  marginTop: '5px',
-  width: '96%'
-}
+  const textField = {
+    display: 'block',
+    padding: '10px',
+    borderRadius: '3px',
+    marginTop: '5px',
+    width: '96%'
+  }
 
 export default withRouter(InviteModal);

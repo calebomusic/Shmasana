@@ -1,41 +1,24 @@
 import React from 'react';
 import { withRouter, Link, hashHistory } from 'react-router';
+
 import DrawerIcon from 'material-ui/svg-icons/action/reorder';
 import FlatButton from 'material-ui/FlatButton';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
-
 import {
-  red500, blue500, redA400, pink400, deepPurple50
-} from 'material-ui/styles/colors';
+  red500,
+  blue500,
+  redA400,
+  pink400,
+  deepPurple50 } from 'material-ui/styles/colors';
 
 import InviteModal from './invite_modal';
-
 import CreateProjectModal from './create_project_modal';
 
 import { fetchProjectsByWorkspace, fetchProject } from '../../util/project_api_util';
 
-const style = {
-  width: '400px',
-  height: '40px',
-  verticalAlign: 'center',
-  borderRight: '1px solid',
-  borderColor: '#EFF0F1',
-}
-
-const labelStyle = {
-  fontSize: '16px',
-  marginLeft: '32.5px'
-}
-
-
-const avatarStyle = {margin: 0};
-
-const colors = [red500, blue500, redA400, pink400]
-
 class SideBar extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {projects: [], projectId: this.props.project.id, open: true};
@@ -58,7 +41,10 @@ class SideBar extends React.Component {
       <div className='sidebar'>
         <div className='logo-exit'>
           <span className='sidebar-logo'>shmasana</span>
-          <span className='sidebar-exit' onTouchTap={this.props.closeSidebar}>x</span>
+          <span className='sidebar-exit'
+                onTouchTap={this.props.closeSidebar}>
+            x
+          </span>
         </div>
           {this.renderTeamates()}
           {this.renderProjects()}
@@ -78,76 +64,67 @@ class SideBar extends React.Component {
               backgroundColor={color}
               size={30}
               style={avatarStyle}
-              key={user.username}
-            >
-            {letter}
+              key={user.username}>
+              {letter}
             </Avatar>
           </div>
           )
     });
   }
 
-  avatarMouseOver(user) {
-
-  }
-
   renderTeamates() {
-    // return 'invite people' w/ up to 3 pictures and the + sign. Else return + sign with 6 pictures
-    return(<div className='sidebar-teammates'>
-      <div className='teammates-left'>
-        {this.renderAvatars()}
-      </div>
-        <InviteModal updateWorkspace={this.props.updateWorkspace}
-          workspace={this.props.workspace}
-          fetchWorkspace={this.props.fetchWorkspace}
-          />
+    return(
+      <div className='sidebar-teammates'>
+        <div className='teammates-left'>
+          {this.renderAvatars()}
+        </div>
+          <InviteModal updateWorkspace={this.props.updateWorkspace}
+                       workspace={this.props.workspace}
+                       fetchWorkspace={this.props.fetchWorkspace} />
       </div>)
   }
 
   renderProjects() {
-    return(<div className='sidebar-projects'>
-    <div className='projects-title-and-button'>
-      <p className='project-list-title'>PROJECTS</p>
-      <CreateProjectModal createProject={this.props.createProject}/>
-    </div>
-      <ul className='project-list'>
-        {this.renderProjectList()}
-      </ul>
-    </div>)
+    return(
+      <div className='sidebar-projects'>
+        <div className='projects-title-and-button'>
+          <p className='project-list-title'>PROJECTS</p>
+          <CreateProjectModal createProject={this.props.createProject}/>
+        </div>
+          <ul className='project-list'>
+            {this.renderProjectList()}
+          </ul>
+      </div>)
   }
 
   updateProject(newProject) {
-    // This flashes the workspace and project name a few times
-    this.props.fetchProject(newProject.id)
-
-    // This doesn't allow one to select other projects in the sidebar and update accordingly
-      // this.fetchProject(newProject.id, (project) => {
-    //   const currentUserId = this.props.currentUser.id;
-    //   const workspaceId = project.workspace_id;
-    //
-    //   hashHistory.push(`${currentUserId}/${workspaceId}/${project.id}`)
-    // })
+    this.props.fetchProject(newProject.id);
   }
 
   renderProjectList() {
-    const userId = this.props.router.params.userId
-    const workspaceId = this.props.router.params.workspaceId
-    const url = `/${userId}/${workspaceId}/`
+    const userId = this.props.router.params.userId;
+    const workspaceId = this.props.router.params.workspaceId;
+    const url = `/${userId}/${workspaceId}/`;
 
     return this.props.workspace.projects.map( (project) => {
       let projectURL = `${url}${project.id}`;
       const updateProject = this.updateProject.bind(this, project)
       let className = 'project-list-item';
-      let liClassName = 'project-list-li'
+      let liClassName = 'project-list-li';
 
       if (this.props.project && this.props.project.id === project.id ) {
         className = 'project-list-item-selected';
-        liClassName = 'project-list-li-selected'
+        liClassName = 'project-list-li-selected';
       }
 
-      return(<li onTouchTap={updateProject} key={project.id + project.name} className={liClassName}>
-              <p className={className}>{project.name}</p>
-            </li>)
+      return(
+        <li onTouchTap={updateProject}
+             key={project.id + project.name}
+             className={liClassName}>
+          <p className={className}>
+            {project.name}
+          </p>
+        </li>)
     });
   }
 
@@ -159,5 +136,22 @@ class SideBar extends React.Component {
     }
   }
 }
+
+  const style = {
+    width: '400px',
+    height: '40px',
+    verticalAlign: 'center',
+    borderRight: '1px solid',
+    borderColor: '#EFF0F1',
+  }
+
+  const labelStyle = {
+    fontSize: '16px',
+    marginLeft: '32.5px'
+  }
+
+  const avatarStyle = {margin: 0};
+
+  const colors = [red500, blue500, redA400, pink400]
 
 export default withRouter(SideBar);

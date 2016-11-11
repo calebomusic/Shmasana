@@ -11,14 +11,14 @@ const App = ({children, params}) => {
 
   if (!parseInt(params.projectId)) {
     TaskList = <div className='tasks'>
-    <WorkspaceTaskListContainer />
-    {children}
-    </div>
+                <WorkspaceTaskListContainer />
+                {children}
+               </div>
   } else {
     TaskList = <div className='tasks'>
-      <ProjectsTaskListContainer />
-      {children}
-    </div>
+                <ProjectsTaskListContainer />
+                {children}
+               </div>
   }
 
   return(

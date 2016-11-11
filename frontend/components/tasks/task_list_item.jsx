@@ -4,7 +4,16 @@ import { hashHistory } from 'react-router';
 import TextField from 'material-ui/TextField';
 import Snackbar from 'material-ui/Snackbar';
 import {
-  lightBlue200, lightBlue500, lightRed200, grey50, grey600, deepPurple50, red500, blue500, redA400, pink400
+  lightBlue200,
+  lightBlue500,
+  lightRed200,
+  grey50,
+  grey600,
+  deepPurple50,
+  red500,
+  blue500,
+  redA400,
+  pink400
 } from 'material-ui/styles/colors';
 
 class TaskListItem extends React.Component {
@@ -13,8 +22,7 @@ class TaskListItem extends React.Component {
 
     const title = this.props.task.title ? this.props.task.title : ''
 
-    this.state = { location: '', selected: false,
-      title: title, open: false}
+    this.state = { location: '', selected: false, title: title, open: false}
 
     this.setLocation = this.setLocation.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -79,7 +87,7 @@ class TaskListItem extends React.Component {
 
   render() {
     let className, buttonClassName;
-    
+
     if (this.props.task.completed) {
       className = 'completed-task-list-item';
       buttonClassName = 'completed-task-list-check';
@@ -91,16 +99,18 @@ class TaskListItem extends React.Component {
     if (this.state.selected && this.state.completed) {
       className = 'selected-' + className;
     }
-    // check location to toggle selected?
 
     const message = `Task completed!`;
 
     return(<li className={className}>
       <button onClick={this.toggleComplete}
-        className={buttonClassName}></button>
-      <input className='task-list-item-title' value={this.state.title}
-        onChange={this.handleChange} onFocus={this.updateFocus}
-        onBlur={this.updateBlur} placeholder=''>
+              className={buttonClassName}></button>
+      <input className='task-list-item-title'
+             value={this.state.title}
+             onChange={this.handleChange}
+             onFocus={this.updateFocus}
+             onBlur={this.updateBlur}
+             placeholder=''>
       </input>
       <Snackbar
         open={this.state.open}
@@ -113,9 +123,9 @@ class TaskListItem extends React.Component {
   }
 }
 
-const snackbarStyle = {
-  backgroundColor: lightBlue200,
-  color: lightBlue200
-}
+  const snackbarStyle = {
+    backgroundColor: lightBlue200,
+    color: lightBlue200
+  }
 
 export default TaskListItem;

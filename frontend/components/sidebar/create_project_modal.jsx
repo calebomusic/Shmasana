@@ -31,6 +31,7 @@ class CreateProjectModal extends React.Component {
       name: this.state.name,
       workspace_id: parseInt(this.props.router.params.workspaceId)
     };
+
     this.closeModal();
     this.props.createProject(project);
   }
@@ -51,27 +52,37 @@ class CreateProjectModal extends React.Component {
   render(){
     return(
       <div className='create-project-modal'>
-        <button className='smaller-sidebar-button' onTouchTap={this.openModal}>
+        <button className='smaller-sidebar-button'
+                onTouchTap={this.openModal}>
           +
         </button>
-      <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal} className='create-project-form-modal'>
+      <Modal isOpen={this.state.modalOpen}
+             onRequestClose={this.closeModal}
+             className='create-project-form-modal'>
         <div>
           <div className='signup-form'>
-            <div className='signup-close-modal' onTouchTap={this.closeModal}>x</div>
+            <div className='signup-close-modal'
+                 onTouchTap={this.closeModal}>
+                  x
+            </div>
             <h1 className='signup-title'>New Project</h1>
 
             <form onSubmit={this.handleSubmit}>
               <label className='session-label'>PROJECT NAME</label>
-              <input className='signup-input' value={this.state.username}
-                onChange={this.updateForm('name')}></input>
+              <input className='signup-input'
+                     value={this.state.username}
+                     onChange={this.updateForm('name')}>
+              </input>
 
-              <PrimaryButton className='login-form-button' type='submit' label='Create'
-                disabled={this.disableButton()}/>
+              <PrimaryButton className='login-form-button'
+                             type='submit'
+                             label='Create'
+                             disabled={this.disableButton()}/>
             </form>
           </div>
         </div>
       </Modal>
-    </div>
+      </div>
     )
   }
 }
