@@ -2,7 +2,6 @@ class Api::CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.author_id = current_user.id
-    @comment.task_id = params[:task_id]
 
     @comment.save
     render :show

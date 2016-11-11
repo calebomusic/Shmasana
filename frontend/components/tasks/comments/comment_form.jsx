@@ -32,11 +32,13 @@ class CommentForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    
+
     const taskId = this.props.task.id
     const body = this.state.body;
 
-    const comment = {body: body, taskId: taskId}
+    const comment = {body: body, task_id: taskId};
+
+    this.setState({body: ''});
 
     this.props.createComment(comment);
   }
@@ -50,14 +52,12 @@ class CommentForm extends React.Component {
       color = colors[letter.charCodeAt() % 4];
     }
 
-
     return(
           <Avatar
             color={deepPurple50}
             backgroundColor={color}
             size={30}
             style={avatarStyle}
-            onTouchTap={this.toggleAssigneeList}
           >
           {letter}
           </Avatar>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { withRouter } from 'react-router';
-import { fetchTasksByUserAndWorkspace } from '../../util/task_api_util';
+import { fetchTasksByUserAndWorkspace, updateTask } from '../../util/task_api_util';
 
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -34,6 +34,7 @@ class WorkspaceTaskList extends React.Component {
     this.updateView = this.updateView.bind(this);
     this.selectTasks = this.selectTasks.bind(this);
     this.renderViewDropdown = this.renderViewDropdown.bind(this);
+    this.fetchTasksByUserAndWorkspace = fetchTasksByUserAndWorkspace.bind(this)
   }
 
   componentWillMount() {
@@ -48,7 +49,7 @@ class WorkspaceTaskList extends React.Component {
 
     let selectedTasks;
 
-    fetchTasksByUserAndWorkspace(userId, workspaceId, (tasks) =>
+    this.fetchTasksByUserAndWorkspace(userId, workspaceId, (tasks) =>
       {
         if (this.props.view === 'completed') {
           selectedTasks = this.selectTasks(tasks, true);
@@ -137,7 +138,7 @@ class WorkspaceTaskList extends React.Component {
 
   selectTasks(tasks, completed) {
     let selectedTasks = [];
-
+    debugger
     tasks.forEach((task) => {
       if (completed && task.completed) {
         selectedTasks.push(task);
@@ -150,6 +151,7 @@ class WorkspaceTaskList extends React.Component {
   }
 
   render() {
+    console.log(this.state.tasks);
     return(
     <div className='task-list'>
       <div className='task-list-top'>

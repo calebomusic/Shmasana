@@ -69,6 +69,7 @@ class TaskListItem extends React.Component {
 
   updateFocus() {
     this.setState({selected: true});
+    console.log('task-list-item');
     this.props.fetchTask(this.props.task.id)
   }
 

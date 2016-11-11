@@ -8,7 +8,7 @@ const CommentMiddleware = store => next => action => {
 
   switch (action.type) {
     case CREATE_COMMENT:
-      createComment(action.comment, action.taskId, successfulCreate);
+      createComment(action.comment, action.task_id, successfulCreate);
       return next(action);
     default:
       return next(action);

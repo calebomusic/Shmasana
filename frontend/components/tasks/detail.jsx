@@ -14,6 +14,7 @@ import {
 
 import Spinner from '../spinner';
 import CommentFormContainer from './comments/comment_form_container';
+import CommentListContainer from './comments/comment_list_container';
 
 import Divider from 'material-ui/Divider';
 import Popover from 'material-ui/Popover';
@@ -448,6 +449,7 @@ class Detail extends React.Component {
             </div>
           </div>
           {this.renderFooter()}
+          <CommentListContainer />
           <CommentFormContainer />
         </div>
       )

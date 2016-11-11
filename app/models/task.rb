@@ -6,5 +6,5 @@ class Task < ActiveRecord::Base
   belongs_to :workspace
   belongs_to :assignee, class_name: :User
   has_one :workspace, through: :project
-  has_many :comments
+  has_many :comments, class_name: :Comment
 end
