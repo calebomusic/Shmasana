@@ -9,7 +9,7 @@ import { PrimaryButton } from '../session/session_form_buttons';
 class CreateWorkspaceModal extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { name: "", modalOpen: false }
+    this.state = { name: "", modalOpen: true }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);

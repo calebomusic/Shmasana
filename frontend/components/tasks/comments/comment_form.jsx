@@ -76,8 +76,8 @@ class CommentForm extends React.Component {
         value={this.state.body}
         onChange={this.updateForm}
         multiLine={true} underlineShow={false}
-        rows={1}
-        rowsMax={4}
+        rows={2}
+        rowsMax={2}
         fullWidth = {true} />
       </div>
       <button type='submit' className='comment-button'>COMMENT</button>

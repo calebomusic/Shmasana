@@ -5,7 +5,7 @@
   background: #F8F8F9;
   border-top: 1px solid;
   border-color: #D3D3D3;
-  margin-top: 30px;
+  max-height: 442px;
 }
 
 .comment-form-avatar {
@@ -19,7 +19,7 @@
 }
 
 .comment-button {
-  margin-top: 10px;
+  margin-top: 8%;
   margin-bottom: 4px;
   margin-left: 2px;
   display: inline-block;
@@ -33,6 +33,7 @@
   box-shadow: 0px 0px 0px 0px #0ff;
   transition: all 0.2s;
   background-color: white;
+  height: 20px;
 }
 
 .comment-button:hover {
@@ -82,12 +83,13 @@
   align-items: flex-start;;
   margin-left: 20px;
 }
+
 .comment-list {
   margin-left: 42px;
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 200px;
+  height: 400px;
   overflow: scroll;
 }
 

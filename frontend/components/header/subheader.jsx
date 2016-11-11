@@ -18,9 +18,9 @@ class SubHeader extends React.Component {
   }
 
   setSubheader(params) {
-    if (params.projectId) {
+    if (params.projectId && this.props.project.name !== undefined) {
       return 'My tasks in ' + this.props.project.name
-    } else if (this.props.workspace) {
+    } else if (this.props.workspace && this.props.workspace.name !== undefined) {
       return 'My tasks in ' + this.props.workspace.name
     } else {
       return '';

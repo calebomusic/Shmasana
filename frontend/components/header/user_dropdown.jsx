@@ -41,7 +41,7 @@ class UserDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false, modal: true, workspaces: []
+      open: false, modal: false, workspaces: []
     };
 
     this.handleTouchTap = this.handleTouchTap.bind(this)
