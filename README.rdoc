@@ -1,8 +1,6 @@
 # Shmasana
 
-[Shmasana live][heroku]
-
-[heroku]: http://shmasana.herokuapp.com/
+[Shmasana live][http://shmasana.herokuapp.com/]
 
 Shmasana is a single-page full-stack web application inspired by Asana!
 It is made with Ruby on Rails on the backend, a PostgresSQL database, and React.js with a Redux architectural framework on the frontend.
