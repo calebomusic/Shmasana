@@ -27,6 +27,7 @@ const successfulSignup = (user) => {
   store.dispatch(createWorkspace({name: user.username}))
 }
 ```
+
 ### Tasks
 
 Upon arriving at a workspace the user may create additional workspaces, projects, and tasks.
