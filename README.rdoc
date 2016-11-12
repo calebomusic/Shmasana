@@ -1,6 +1,6 @@
 # Shmasana
 
-[Shmasana live][heroku] **NB:** This should be a link to your production site
+[Shmasana live][heroku]
 
 [heroku]: http://shmasana.herokuapp.com/
 
