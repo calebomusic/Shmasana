@@ -8,35 +8,7 @@ import SignUpFormModal from './signup_form_modal';
 class SignUpHome extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {email: '', password: '', username: ''};
-
-    this.disableButton = this.disableButton.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.updateForm = this.updateForm.bind(this);
   };
-
-  handleSubmit(e) {
-    e.preventDefault();
-    const user = this.state;
-    this.props.processForm({user});
-  }
-
-  updateForm(property){
-    return (e) => this.setState({[property]: e.target.value})
-  }
-
-  disableButton(){
-    if(this.state.email.length > 0 && this.state.password.length > 0) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  logIn(e) {
-    e.preventDefault();
-    hashHistory.replace('/login');
-  }
 
   renderErrors() {
     if(this.props.errors && this.props.errors.length > 0) {

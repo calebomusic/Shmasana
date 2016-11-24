@@ -25,13 +25,16 @@ const demoStyle = {
 
 export const GetStarted = (props) => (
   <RaisedButton label='Get Started for Free'
-    backgroundColor='#6a67ce' labelColor='white'
-    style={getStartedStyle} onTouchTap={props.onTouchTap} />
+                backgroundColor='#6a67ce'
+                labelColor='white'
+                style={getStartedStyle}
+                onTouchTap={props.onTouchTap} />
 )
 
 export const Demo = (props) => {
   const _loginDemoUser = () => {
-    props.login({user: { email: 'shmalebomusic@gmail.com', password: 'password'}});
+    props.login({ user: { email: 'shmalebomusic@gmail.com',
+                          password: 'password'}});
   }
 
   return(<RaisedButton label='Demo'
@@ -40,8 +43,9 @@ export const Demo = (props) => {
 
 
 export const Login = (props) => (
-  <RaisedButton label='Log In' onTouchTap={_redirectToLogin}
-    style={loginStyle}/>
+  <RaisedButton label='Log In'
+                onTouchTap={_redirectToLogin}
+                style={loginStyle}/>
 )
 
 const _redirectToLogin = () => {

@@ -22,12 +22,16 @@ import RaisedButton from 'material-ui/RaisedButton';
 import React from 'react';
 
 export const PrimaryButton = (props) => (
-  <RaisedButton label={props.label} type={props.type}
-    backgroundColor='#03A9F4' labelColor='white'
-    style={primaryStyle} disabled={props.disabled}/>
+  <RaisedButton label={props.label}
+                type={props.type}
+                backgroundColor='#03A9F4'
+                labelColor='white'
+                style={primaryStyle}
+                disabled={props.disabled}/>
 )
 
 export const FooterButton = (props) => (
-  <RaisedButton label={props.label} onClick={props.onClick}
-    style={style}/>
+  <RaisedButton label={props.label}
+                onClick={props.onClick}
+                style={style}/>
 )
