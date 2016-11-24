@@ -116,5 +116,5 @@ const style = {
     height                      : '301px',
   }
 }
-// Add way to add members!
+
 export default withRouter(CreateWorkspaceModal);

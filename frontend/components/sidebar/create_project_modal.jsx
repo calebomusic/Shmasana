@@ -7,13 +7,19 @@ import { PrimaryButton } from '../session/session_form_buttons';
 class CreateProjectModal extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { name: '', modalOpen: false }
+
+    if (this.props.actionDropdown) {
+      this.state = { name: '', modalOpen: true }
+    } else {
+      this.state = { name: '', modalOpen: false }
+    }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.disableButton = this.disableButton.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateForm = this.updateForm.bind(this);
+    this.renderButton = this.renderButton.bind(this);
   }
 
   closeModal() {
@@ -48,34 +54,44 @@ class CreateProjectModal extends React.Component {
     }
   }
 
+  renderButton() {
+    if (!this.props.actionDropdown) {
+      return(
+        <button className='smaller-sidebar-button'
+                      onTouchTap={this.openModal}>
+           +
+        </button>)
+    } else {
+      return(<div></div>)
+    }
+  }
 
   render(){
-    return(
+      return(
       <div className='create-project-modal'>
-        <button className='smaller-sidebar-button'
-                onTouchTap={this.openModal}>
-          +
-        </button>
+        {this.renderButton()}
       <Modal isOpen={this.state.modalOpen}
              onRequestClose={this.closeModal}
-             className='create-project-form-modal'>
+             className='create-project-form-modal'
+             style={style}>
         <div>
-          <div className='signup-form'>
-            <div className='signup-close-modal'
-                 onTouchTap={this.closeModal}>
-                  x
+          <div className='create-project-form'>
+            <div className='create-project-header'>
+              <h1 className='create-project-title'>New Project</h1>
+              <div className='create-project-close'
+                   onTouchTap={this.closeModal}>
+                    x
+              </div>
             </div>
-            <h1 className='signup-title'>New Project</h1>
 
             <form onSubmit={this.handleSubmit}>
               <label className='session-label'>PROJECT NAME</label>
-              <input className='signup-input'
+              <input className='create-project-input'
                      value={this.state.username}
                      onChange={this.updateForm('name')}>
               </input>
 
-              <PrimaryButton className='login-form-button'
-                             type='submit'
+              <PrimaryButton type='submit'
                              label='Create'
                              disabled={this.disableButton()}/>
             </form>
@@ -86,5 +102,32 @@ class CreateProjectModal extends React.Component {
     )
   }
 }
+
+  const style = {
+    overlay : {
+      position          : "fixed",
+      top               : 0,
+      left              : 0,
+      right             : 0,
+      bottom            : 0,
+      backgroundColor   : 'rgba(255, 255, 255, 0.75)',
+    },
+    content : {
+      position                   : 'absolute',
+      top                        : '118px',
+      left                       : '300px',
+      right                      : '40px',
+      bottom                     : '40px',
+      border                     : '1px solid #ccc',
+      background                 : '#fff',
+      overflow                   : 'auto',
+      WebkitOverflowScrolling    : 'touch',
+      borderRadius               : '4px',
+      outline                    : 'none',
+      padding                    : '25px',
+      width                      : '405px',
+      height                      : '200px',
+    }
+  }
 
 export default withRouter(CreateProjectModal);

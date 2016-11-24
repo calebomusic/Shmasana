@@ -29,6 +29,7 @@ class SideBar extends React.Component {
     this.renderProjectList = this.renderProjectList.bind(this);
     this.updateProject = this.updateProject.bind(this);
     this.renderAvatars = this.renderAvatars.bind(this);
+    // this.renderButton = this.renderButton.bind()
   }
 
   handleToggle() {
@@ -88,7 +89,7 @@ class SideBar extends React.Component {
       <div className='sidebar-projects'>
         <div className='projects-title-and-button'>
           <p className='project-list-title'>PROJECTS</p>
-          <CreateProjectModal createProject={this.props.createProject}/>
+          <CreateProjectModal createProject={this.props.createProject} />
         </div>
           <ul className='project-list'>
             {this.renderProjectList()}

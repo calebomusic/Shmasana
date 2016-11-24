@@ -7,17 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import { withRouter } from 'react-router';
 
-import CreateProjectModal from './action_dropdown_create_project';
-
-
-const style = {
-  backgroundColor: 'white'
-};
-
-const popoverStyle = {
-  display: 'flex',
-  flexDirection: 'column'
-}
+import CreateProjectModal from '../sidebar/create_project_modal';
 
 class ActionDropdown extends React.Component {
 
@@ -30,7 +20,7 @@ class ActionDropdown extends React.Component {
     this.handleTouchTap = this.handleTouchTap.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
     this.createTask = this.createTask.bind(this);
-    this.openModalAndClose = this.openModalAndClose.bind(this);
+    this.openModalAndCloseDropdown = this.openModalAndCloseDropdown.bind(this);
   }
 
   handleTouchTap(e) {
@@ -68,34 +58,41 @@ class ActionDropdown extends React.Component {
     this.handleRequestClose();
   }
 
-  openModalAndClose() {
+  openModalAndCloseDropdown() {
     this.setState({modal: true})
     this.handleRequestClose();
   }
 
-
   render() {
     if (this.state.modal) {
       return(<div>
-            <button className='action-dropdown-button' onTouchTap={this.handleTouchTap}>+</button>
-            <CreateProjectModal createProject={this.props.createProject} />
+            <button className='action-dropdown-button'
+                    onTouchTap={this.handleTouchTap}>
+              +
+            </button>
+            <CreateProjectModal createProject={this.props.createProject}
+                                actionDropdown={true}/>
           </div>)
     } else {
       return (
         <div>
-          <button className='action-dropdown-button' onTouchTap={this.handleTouchTap}>+</button>
-          <Popover
-            open={this.state.open}
-            anchorEl={this.state.anchorEl}
-            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-            targetOrigin={{horizontal: 'left', vertical: 'top'}}
-            onRequestClose={this.handleRequestClose}
-            style={popoverStyle}
-            >
+          <button className='action-dropdown-button'
+                  onTouchTap={this.handleTouchTap}>
+            +
+          </button>
+          <Popover open={this.state.open}
+                   anchorEl={this.state.anchorEl}
+                   anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                   targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                   onRequestClose={this.handleRequestClose}
+                   style={popoverStyle}
+                   >
             <Menu style={style} >
-              <MenuItem primaryText="Task" onClick={this.createTask} />
+              <MenuItem primaryText="Task"
+                        onClick={this.createTask} />
               <Divider />
-              <MenuItem primaryText="Project" onTouchTap={this.openModalAndClose}/>
+              <MenuItem primaryText="Project"
+                        onTouchTap={this.openModalAndCloseDropdown}/>
             </Menu>
           </Popover>
         </div>
@@ -104,4 +101,13 @@ class ActionDropdown extends React.Component {
   }
 }
 
+  const style = {
+    backgroundColor: 'white'
+  };
+
+  const popoverStyle = {
+    display: 'flex',
+    flexDirection: 'column'
+  }
+  
 export default withRouter(ActionDropdown);

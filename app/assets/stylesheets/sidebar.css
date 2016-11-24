@@ -193,3 +193,57 @@
   display: flex;
   justify-content: center;
 }
+
+/* Create Project Modal*/
+.create-project-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.create-project-form {
+  width: 400px;
+  height: 450px;
+  margin-bottom: 10px;
+  position: relative;
+  display: block;
+  color: #898E95;
+  border: 1px;
+  border-radius: 3.5px;
+  background-color: white;
+}
+
+.create-project-close {
+  float: right;
+  position: relative;
+  bottom: 30px;
+  padding-top: 5px;
+  font-size: 35px;
+  font-style: oblique;
+  font-weight: lighter;
+  color: #b9bcc0;
+  cursor: pointer;
+}
+
+.create-project-title {
+  text-align: center;
+  color: black;
+  font-size: 20px;
+  font-weight: normal;
+  vertical-align: center;
+  margin-bottom: 10px;
+}
+
+.create-project-input {
+  width: 94%;
+  color: black;
+  border-top: 1px solid #C0B1C7;
+  border: 1px solid #b2b2b2;
+  padding: 10px;
+  border-radius: 3px;
+  -webkit-transition: all 0.30s ease-in-out;
+  background: white;
+  color: #b2b2b2;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
