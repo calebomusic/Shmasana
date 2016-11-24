@@ -17,7 +17,6 @@ class CreateWorkspaceModal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateForm = this.updateForm.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
-
   }
 
   closeModal() {
@@ -66,22 +65,35 @@ class CreateWorkspaceModal extends React.Component {
   render(){
     return(
       <div>
-          <Modal isOpen={this.state.modalOpen} onRequestClose={this.closeModal}
-            style={style} >
+          <Modal isOpen={this.state.modalOpen}
+                 onRequestClose={this.closeModal}
+                 style={style} >
             <div>
             <div className='create-workspace-header'>
-              <div className='create-workspace-title'>Create Your WorkSpace</div>
-              <div className='create-workspace-close-modal' onTouchTap={this.closeModal}>x</div>
+              <div className='create-workspace-title'>
+                Create Your WorkSpace
+              </div>
+              <div className='create-workspace-close-modal'
+                   onTouchTap={this.closeModal}>
+                x
+              </div>
             </div>
-              <form onSubmit={this.handleSubmit} className='create-workspace-form' >
+              <form onSubmit={this.handleSubmit}
+                    className='create-workspace-form' >
                 <div className='create-workspace-label-input'>
-                <label className='create-workspace-label'>WORKSPACE NAME</label>
-                <input className='create-workspace-input' value={this.state.name}
-                  placeholder='Company or Team Name'
-                  onChange={this.updateForm('name')}></input>
+                <label className='create-workspace-label'>
+                  WORKSPACE NAME
+                </label>
+                <input className='create-workspace-input'
+                      value={this.state.name}
+                      placeholder='Company or Team Name'
+                      onChange={this.updateForm('name')}>
+                </input>
                 </div>
-                  <PrimaryButton className='create-workspace-button' type='submit' label='Create'
-                   disabled={this.disableButton()} />
+                  <PrimaryButton className='create-workspace-button'
+                                 type='submit'
+                                 label='Create'
+                                 disabled={this.disableButton()} />
               </form>
               </div>
           </Modal>
@@ -90,31 +102,31 @@ class CreateWorkspaceModal extends React.Component {
   }
 }
 
-const style = {
-  overlay : {
-    position          : "fixed",
-    top               : 0,
-    left              : 0,
-    right             : 0,
-    bottom            : 0,
-    backgroundColor   : 'rgba(255, 255, 255, 0.75)',
-  },
-  content : {
-    position                   : 'absolute',
-    top                        : '40px',
-    left                       : '500px',
-    right                      : '40px',
-    bottom                     : '40px',
-    border                     : '1px solid #ccc',
-    background                 : '#fff',
-    overflow                   : 'auto',
-    WebkitOverflowScrolling    : 'touch',
-    borderRadius               : '4px',
-    outline                    : 'none',
-    padding                    : '20px',
-    width                      : '582px',
-    height                      : '301px',
+  const style = {
+    overlay : {
+      position          : "fixed",
+      top               : 0,
+      left              : 0,
+      right             : 0,
+      bottom            : 0,
+      backgroundColor   : 'rgba(255, 255, 255, 0.75)',
+    },
+    content : {
+      position                   : 'absolute',
+      top                        : '40px',
+      left                       : '500px',
+      right                      : '40px',
+      bottom                     : '40px',
+      border                     : '1px solid #ccc',
+      background                 : '#fff',
+      overflow                   : 'auto',
+      WebkitOverflowScrolling    : 'touch',
+      borderRadius               : '4px',
+      outline                    : 'none',
+      padding                    : '20px',
+      width                      : '582px',
+      height                      : '301px',
+    }
   }
-}
 
 export default withRouter(CreateWorkspaceModal);
