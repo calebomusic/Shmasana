@@ -28,6 +28,7 @@ import CommentFormContainer from './comments/comment_form_container';
 import CommentListContainer from './comments/comment_list_container';
 
 import DetailHeaderContainer from './detail_header_container';
+import DetailProjectContainer from './detail_project_container';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -41,15 +42,11 @@ class Detail extends React.Component {
                    dueDate: '', assigneeListOpen: false}
 
     this.toggleComplete = this.toggleComplete.bind(this);
-    this.renderProject = this.renderProject.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateFocus = this.updateFocus.bind(this);
     this.updateBlur = this.updateBlur.bind(this);
     this.renderDescription = this.renderDescription.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
-    this.renderProjectList = this.renderProjectList.bind(this);
-    this.toggleProjectList = this.toggleProjectList.bind(this);
-    this.handleProjectChange = this.handleProjectChange.bind(this);
   }
 
   componentWillMount() {
@@ -67,59 +64,6 @@ class Detail extends React.Component {
     const title = newProps.task.title ? newProps.task.title : '';
     const description = newProps.task.description ? newProps.task.description : '';
     this.setState({title: title, description: description})
-  }
-
-  renderProject() {
-    const project = this.props.task.project ? this.props.task.project.name : 'NO PROJECT'
-
-    let projectList;
-
-    if (this.state.projectListOpen) {
-      projectList = this.renderProjectList();
-    } else {
-      projectList = <MenuItem value={undefined}
-                              primaryText={project}
-                              onClick={this.toggleProjectList} />
-    }
-
-    return(
-      <div className='task-detail-project'>
-        {projectList}
-      </div>)
-  }
-
-  renderProjectList() {
-    let projects;
-
-    if (this.props.workspace) {
-      projects = this.props.workspace.projects.map( (project) => (
-        <MenuItem value={project}
-                  primaryText={project.name} />
-      ))
-    }
-
-    let project;
-
-    // Gtet an Uncaugt TypeError "cannot read property name of null" here when switching project to no project.
-    if (this.props.task.project) {
-      project = this.props.task.project.name;
-    }
-
-    return(
-      <DropDownMenu
-        value={this.props.task.project.name}
-        style={popoverStyle}
-        onChange={this.handleProjectChange}
-        autoWidth={false}
-        openImmediately={true}>
-          <MenuItem value={undefined}
-                    primaryText={'No Project'} />
-          {projects}
-      </DropDownMenu>)
-  }
-
-  toggleProjectList() {
-    this.setState({projectListOpen: !this.state.projectListOpen})
   }
 
   parseDate(date) {
@@ -148,52 +92,6 @@ class Detail extends React.Component {
   handleDateChange(e, date) {
     this.props.task.due_date = date;
     this.props.updateTask(this.props.task);
-  }
-
-  handleProjectChange(e, i, project) {
-    let projectId;
-
-    if (project) {
-      projectId = project.id;
-    } else {
-      projectId = null;
-    }
-
-    this.props.task.project_id = projectId;
-    this.props.updateTask(this.props.task);
-
-    const redirectUserId = this.props.task.author_id;
-    const redirectWorkspaceId = this.props.task.workspace_id;
-
-    if (project) {
-      this.toggleProjectList();
-      hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/${projectId}/${this.props.task.id}`)
-    } else {
-      this.toggleProjectList();
-      this.props.removeProject();
-      hashHistory.push(`${redirectUserId}/${redirectWorkspaceId}/list/${this.props.task.id}`)
-    }
-  }
-
-  handleAssigneeChange(field) {
-    return (e, i, value) => {
-      if (field === 'assignee_id') {
-        this.toggleAssigneeList();
-      } else {
-        this.toggleProjectList();
-      }
-
-      let assigneeId;
-
-      if (value) {
-        assigneeId = value.id;
-      } else {
-        assigneeId = null;
-      }
-
-      this.props.task[field] = assigneeId;
-      this.props.updateTask(this.props.task);
-    }
   }
 
   renderTitle() {
@@ -282,7 +180,7 @@ class Detail extends React.Component {
         <div className='task-detail'>
           <DetailHeaderContainer />
           <div className='task-detail-body'>
-            {this.renderProject()}
+            <DetailProjectContainer />
             <div className='task-detail-content'>
               {this.renderTitle()}
               {this.renderDescription()}
@@ -302,23 +200,7 @@ class Detail extends React.Component {
     backgroundColor: '76e0f1'
   }
 
-
-  const popoverStyle = {
-    width: '300px',
-    display: 'flex',
-    flexDirection: 'column',
-    hoverColor: '#FFFFFF',
-    hoverBackgroundColor: 'blue'
-  }
-
-  const assigneeStyle = {
-    width: '150px',
-    display: 'flex',
-    flexDirection: 'column'
-  }
-
   const colors = [red500, blue500, redA400, pink400]
-  const avatarStyle = {margin: 0};
 
   const titleStyle = {
     fontSize: '24px',

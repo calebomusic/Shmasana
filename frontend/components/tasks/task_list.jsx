@@ -40,7 +40,6 @@ class TaskList extends React.Component {
   }
 
   configureForSelectTasks(props) {
-    console.log('cfst');
     let selectedTasks;
 
     if (props.view === 'completed') {

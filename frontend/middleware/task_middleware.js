@@ -1,3 +1,5 @@
+import { hashHistory } from 'react-router';
+
 import {  CREATE_TASK,
           UPDATE_TASK,
           FETCH_TASK,
@@ -8,7 +10,7 @@ import { createTask,
          updateTask,
          fetchTask,
          deleteTask } from '../util/task_api_util.js';
-import { hashHistory } from 'react-router';
+import { fetchProject } from '../actions/project_actions';
 import { fetchTasksByUserAndWorkspace,
          fetchTasksByProject } from '../actions/tasks_actions';
 
@@ -16,6 +18,10 @@ const TaskMiddleware = store => next => action => {
     const successfulCreateOrUpdate = (task) => {
       store.dispatch(receiveTask(task));
       fetchTasks();
+    }
+
+    const fetchProjectOnProjectChange = (projectId) => {
+      store.dispatch(fetchProject(projectId));
     }
 
     const successfulFetch = (task) => {
@@ -42,15 +48,20 @@ const TaskMiddleware = store => next => action => {
 
     const fetchTasks = () => {
       const pathname = hashHistory.getCurrentLocation().pathname;
-      const params = pathname.replace(/\D/g, '').split('')
-      console.log(params);
-      if (params.length > 2) {
-        const projectId = parseInt(params[2]);
-        store.dispatch(fetchTasksByProject(projectId));
-      } else {
-        const userId = parseInt(params[0]);
-        const workspaceId = parseInt(params[1]);
+      const params = pathname.split('/')
+
+      if (params[3] === 'list' ) {
+        const userId = parseInt(params[1]);
+        const workspaceId = parseInt(params[2]);
         store.dispatch(fetchTasksByUserAndWorkspace(userId, workspaceId));
+      } else {
+        const projectId = parseInt(params[3]);
+
+        if (store.getState().project.id !== projectId) {
+          fetchProjectOnProjectChange(projectId);
+        } else {
+          store.dispatch(fetchTasksByProject(projectId));
+        }
       }
     }
 
