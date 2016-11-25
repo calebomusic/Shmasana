@@ -9,6 +9,7 @@ import { createProject,
          removeProject } from '../../actions/project_actions';
 import { updateWorkspace,
          fetchWorkspace } from '../../actions/workspace_actions';
+import { fetchTasksByProject } from '../../actions/tasks_actions';
 
 const mapStateToProps = (state) => (
   {
@@ -22,12 +23,13 @@ const mapStateToProps = (state) => (
 const mapDispatchToProps = (dispatch) => (
   {
     closeSidebar: () => dispatch(closeSidebar()),
-    createProject: (project) => dispatch(createProject(project)),
-    receiveProject: (project) => dispatch(receiveProject(project)),
-    fetchProject: (project) => dispatch(fetchProject(project)),
+    createProject: project => dispatch(createProject(project)),
+    receiveProject: project => dispatch(receiveProject(project)),
+    fetchProject: project => dispatch(fetchProject(project)),
     removeProject: () => dispatch(removeProject()),
     updateWorkspace: (workspace) => dispatch(updateWorkspace()),
-    fetchWorkspace: (id) => dispatch(fetchWorkspace(id))
+    fetchWorkspace: id => dispatch(fetchWorkspace(id)),
+    fetchTasksByProject: projectId => dispatch(fetchTasksByProject(projectId))
   }
 )
 

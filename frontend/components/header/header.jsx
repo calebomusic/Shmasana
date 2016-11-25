@@ -27,10 +27,14 @@ const Header = (props) => {
   }
 
   const redirectToWorkspace = () => {
-    hashHistory.push(`${props.router.params.userId}/${props.router.params.workspaceId}`);
+    const workspaceId = props.router.params.workspaceId;
+    const userId = props.router.params.userId;
+
+    hashHistory.push(`${userId}/${workspaceId}`);
+    props.fetchWorkspaceAndTasks(props.router.params.workspaceId);
     props.removeProject();
   }
-  // const myTasks = `/${props.currentUser.id}/${props.workspace.id}`;
+
   const currentUserId = props.currentUser.id
 
   return(<div className='home-header'>

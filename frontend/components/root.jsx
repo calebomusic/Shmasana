@@ -13,9 +13,12 @@ import TaskDetailContainer from './tasks/detail_container';
 
 import { receiveErrors } from '../actions/session_actions';
 import { fetchUserWorkspacesOnLogin,
-         fetchUserWorkspaceOnLogin } from '../actions/workspace_actions';
+         fetchUserWorkspaceOnLogin,
+         fetchWorkspaceAndTasks } from '../actions/workspace_actions';
 import { fetchWorkspace } from '../actions/workspace_actions';
 import { fetchProject, removeProject } from '../actions/project_actions';
+import { fetchTasksByUserAndWorkspace,
+         fetchTasksByProject } from '../actions/tasks_actions';
 
 const Root = ({store}) => {
   const _redirectIfLoggedInAndClearErrors = () => {
@@ -43,27 +46,30 @@ const Root = ({store}) => {
     }
   }
 
-  const _redirectToSignUpHomeIfNotLoggedInAndFetchWorkspace = (nextState) => {
+  const _redirectToSignUpHomeIfNotLoggedInAndFetchWorkspace = (ownProps) => {
     const currentUser = store.getState().session.currentUser;
-    const workspaceId = parseInt(nextState.params.workspaceId);
+    const workspaceId = parseInt(ownProps.params.workspaceId);
 
     if(!currentUser) {
       hashHistory.replace('/');
     } else if (!currentUser.workspaces.includes(workspaceId)) {
       hashHistory.push('/');
+    } else if (!ownProps.params.projectId) {
+      store.dispatch(fetchWorkspaceAndTasks(workspaceId));
     } else {
       store.dispatch(fetchWorkspace(workspaceId));
+    }
 
-      if (store.getState().project.id) {
-        store.dispatch(removeProject());
-      }
+    if (store.getState().project.id) {
+      store.dispatch(removeProject());
     }
   }
 
-  const _FetchProject = (nextState) => {
-    const projectId = parseInt(nextState.params.projectId);
+  const _FetchProject = (ownProps) => {
+    const projectId = parseInt(ownProps.params.projectId);
     if (!store.getState().project.id) {
       store.dispatch(fetchProject(projectId));
+      store.dispatch(fetchTasksByProject(projectId));
     }
   }
 

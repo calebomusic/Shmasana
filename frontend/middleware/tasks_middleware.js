@@ -20,7 +20,6 @@ const TasksMiddleware = store => next => action => {
     store.dispatch(receiveTasks(tasks))
   }
 
-  // Make dif success callbacks to redirect?
   // TODO: for testing
   const errors = (errors) => {
     console.log(errors)

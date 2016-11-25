@@ -27,9 +27,7 @@ class SideBar extends React.Component {
     this.renderOpenSidebar = this.renderOpenSidebar.bind(this);
     this.renderTeamates = this.renderTeamates.bind(this);
     this.renderProjectList = this.renderProjectList.bind(this);
-    this.updateProject = this.updateProject.bind(this);
     this.renderAvatars = this.renderAvatars.bind(this);
-    // this.renderButton = this.renderButton.bind()
   }
 
   handleToggle() {
@@ -97,10 +95,6 @@ class SideBar extends React.Component {
       </div>)
   }
 
-  updateProject(newProject) {
-    this.props.fetchProject(newProject.id);
-  }
-
   renderProjectList() {
     const userId = this.props.router.params.userId;
     const workspaceId = this.props.router.params.workspaceId;
@@ -108,7 +102,7 @@ class SideBar extends React.Component {
 
     return this.props.workspace.projects.map( (project) => {
       let projectURL = `${url}${project.id}`;
-      const updateProject = this.updateProject.bind(this, project)
+      const fetchProject = this.props.fetchProject.bind(this, project.id)
       let className = 'project-list-item';
       let liClassName = 'project-list-li';
 
@@ -118,7 +112,7 @@ class SideBar extends React.Component {
       }
 
       return(
-        <li onTouchTap={updateProject}
+        <li onTouchTap={fetchProject}
              key={project.id + project.name}
              className={liClassName}>
           <p className={className}>

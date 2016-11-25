@@ -1,7 +1,11 @@
 import { connect } from 'react-redux';
 import Header from './header';
 import { logout } from '../../actions/session_actions';
-import { createWorkspace, fetchWorkspaces, fetchWorkspace } from '../../actions/workspace_actions';
+import { createWorkspace,
+         fetchWorkspaces,
+         fetchWorkspace,
+         fetchTasksByUserAndWorkspace,
+         fetchWorkspaceAndTasks } from '../../actions/workspace_actions';
 import { openSidebar } from '../../actions/sidebar_actions'
 import { createTask } from '../../actions/task_actions'
 import { createProject, removeProject } from '../../actions/project_actions'
@@ -17,7 +21,6 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => (
-  // fetch user's teams?
   {
     logout: () => dispatch(logout()),
     createTask: (task) => dispatch(createTask(task)),
@@ -26,6 +29,11 @@ const mapDispatchToProps = (dispatch) => (
     fetchWorkspaces: () => dispatch(fetchWorkspaces()),
     openSidebar: () => dispatch(openSidebar()),
     removeProject: () => dispatch(removeProject()),
+    fetchTasksByUserAndWorkspace: (workspaceId) => {
+      dispatch(fetchTasksByUserAndWorkspace(workspaceId)) },
+    fetchWorkspaceAndTasks: (workspaceId) => {
+      dispatch(fetchWorkspaceAndTasks(workspaceId))
+    },
     createProject: (project) => dispatch(createProject(project))
   }
 )

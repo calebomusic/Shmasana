@@ -12,6 +12,10 @@ import {
   fetchProject
 } from '../util/project_api_util';
 
+import {
+  fetchTasksByProject
+} from '../actions/tasks_actions';
+
 import { hashHistory, Router } from 'react-router';
 
 const ProjectMiddleware = store => next => action => {
@@ -24,6 +28,7 @@ const ProjectMiddleware = store => next => action => {
 
   const successfulProjectFetch = (project) => {
     store.dispatch(receiveProject(project));
+    store.dispatch(fetchTasksByProject(project.id));
     // unless already at the project
     const locationProjectId = parseInt(hashHistory.getCurrentLocation().pathname.split('/')[3])
     const projectId = project.id

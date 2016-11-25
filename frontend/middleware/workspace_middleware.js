@@ -4,6 +4,7 @@ import {
   removeWorkspace,
   FETCH_WORKSPACES,
   FETCH_WORKSPACE,
+  FETCH_WORKSPACE_AND_TASKS,
   FETCH_USER_WORKSPACES,
   FETCH_USER_WORKSPACE_ON_LOGIN,
   FETCH_USER_WORKSPACES_ON_LOGIN,
@@ -20,6 +21,8 @@ import {
   fetchWorkspace,
   fetchUserWorkspaces
 } from '../util/workspace_api_util';
+
+import { fetchTasksByUserAndWorkspace } from '../actions/tasks_actions';
 
 import { hashHistory } from 'react-router';
 
@@ -47,6 +50,16 @@ const WorkspacesMiddleware = store => next => action => {
     redirectToNewWorkspace(workspace);
   }
 
+  const receiveWorkspaceAndFetchTasksSuccess = workspace => {
+    store.dispatch(receiveWorkspace(workspace));
+
+    const workspaceId = workspace.id;
+    const currentUserId = store.getState().session.currentUser.id;
+    store.dispatch(fetchTasksByUserAndWorkspace(currentUserId, workspaceId));
+
+    redirectToNewWorkspace(workspace);
+  }
+
   let redirectToNewWorkspace = (workspace) => {
     const currentUserId = store.getState().session.currentUser.id;
 
@@ -58,7 +71,9 @@ const WorkspacesMiddleware = store => next => action => {
     }
   }
 
-  let removeWorkspaceSuccess = workspace => store.dispatch(removeWorkspace(workspace));
+  let removeWorkspaceSuccess = workspace => (
+    store.dispatch(removeWorkspace(workspace))
+  );
 
   const currentUser = store.getState().session.currentUser
 
@@ -68,6 +83,9 @@ const WorkspacesMiddleware = store => next => action => {
       return next(action);
     case FETCH_WORKSPACE:
       fetchWorkspace(action.id, currentUser, receiveWorkspaceSuccess);
+      return next(action);
+    case FETCH_WORKSPACE_AND_TASKS:
+      fetchWorkspace(action.id, currentUser, receiveWorkspaceAndFetchTasksSuccess);
       return next(action);
     case FETCH_USER_WORKSPACES_ON_LOGIN:
       fetchUserWorkspaces(action.user_id, receiveWorkspaceOnLogin)

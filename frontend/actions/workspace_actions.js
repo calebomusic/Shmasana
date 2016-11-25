@@ -9,6 +9,7 @@ export const DELETE_WORKSPACE = 'DELETE_WORKSPACE';
 export const FETCH_USER_WORKSPACES = 'FETCH_USER_WORKSPACES';
 export const FETCH_USER_WORKSPACE_ON_LOGIN = 'FETCH_USER_WORKSPACE_ON_LOGIN';
 export const FETCH_USER_WORKSPACES_ON_LOGIN = 'FETCH_USER_WORKSPACES_ON_LOGIN';
+export const FETCH_WORKSPACE_AND_TASKS = 'FETCH_WORKSPACE_AND_TASKS';
 
 export const fetchWorkspaces = () => (
   {
@@ -70,5 +71,12 @@ export const removeWorkspace = (workspace) => (
   {
     type: REMOVE_WORKSPACE,
     workspace
+  }
+)
+
+export const fetchWorkspaceAndTasks = (id) => (
+  {
+    type: FETCH_WORKSPACE_AND_TASKS,
+    id
   }
 )
