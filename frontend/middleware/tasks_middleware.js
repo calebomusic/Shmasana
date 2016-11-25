@@ -10,8 +10,7 @@ import { fetchTasksByWorkspace,
          fetchTasksByUser,
          fetchTasksByProject,
          fetchTasksByUserAndProject,
-         fetchTasksByUserAndWorkspace
-       } from '../util/task_api_util';
+         fetchTasksByUserAndWorkspace } from '../util/task_api_util';
 
 import { hashHistory } from 'react-router';
 

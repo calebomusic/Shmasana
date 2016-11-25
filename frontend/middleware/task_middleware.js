@@ -9,10 +9,13 @@ import { createTask,
          fetchTask,
          deleteTask } from '../util/task_api_util.js';
 import { hashHistory } from 'react-router';
+import { fetchTasksByUserAndWorkspace,
+         fetchTasksByProject } from '../actions/tasks_actions';
 
 const TaskMiddleware = store => next => action => {
     const successfulCreateOrUpdate = (task) => {
-      store.dispatch(receiveTask(task))
+      store.dispatch(receiveTask(task));
+      fetchTasks();
     }
 
     const successfulFetch = (task) => {
@@ -33,12 +36,23 @@ const TaskMiddleware = store => next => action => {
     }
 
     const successfulDelete = () => {
-      store.dispatch(removeTask())
-      // Go home.
-      // hashHistory.push()
+      store.dispatch(removeTask());
+      fetchTasks();
     }
 
-    // Errors?
+    const fetchTasks = () => {
+      const pathname = hashHistory.getCurrentLocation().pathname;
+      const params = pathname.replace(/\D/g, '').split('')
+      console.log(params);
+      if (params.length > 2) {
+        const projectId = parseInt(params[2]);
+        store.dispatch(fetchTasksByProject(projectId));
+      } else {
+        const userId = parseInt(params[0]);
+        const workspaceId = parseInt(params[1]);
+        store.dispatch(fetchTasksByUserAndWorkspace(userId, workspaceId));
+      }
+    }
 
   switch (action.type) {
     case CREATE_TASK:
@@ -48,10 +62,10 @@ const TaskMiddleware = store => next => action => {
       updateTask(action.task, action.task.workspace_id, successfulCreateOrUpdate);
       return next(action);
     case FETCH_TASK:
-      fetchTask(action.id, successfulFetch)
+      fetchTask(action.id, successfulFetch);
       return next(action);
     case DELETE_TASK:
-      deleteTask(action.id, successfulDelete)
+      deleteTask(action.id, successfulDelete);
       return next(action);
     default:
       return next(action);

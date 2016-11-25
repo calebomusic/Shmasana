@@ -27,10 +27,7 @@ import Spinner from '../spinner';
 import CommentFormContainer from './comments/comment_form_container';
 import CommentListContainer from './comments/comment_list_container';
 
-import { fetchProject,
-         fetchProjectsByWorkspace } from '../../util/project_api_util';
-import { fetchUser,
-         fetchUsersByWorkspace } from '../../util/user_api_util';
+import DetailHeaderContainer from './detail_header_container';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -43,7 +40,6 @@ class Detail extends React.Component {
                    description: '',
                    dueDate: '', assigneeListOpen: false}
 
-    this.renderHeader = this.renderHeader.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
     this.renderProject = this.renderProject.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -51,19 +47,9 @@ class Detail extends React.Component {
     this.updateBlur = this.updateBlur.bind(this);
     this.renderDescription = this.renderDescription.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
-    this.closeDetail = this.closeDetail.bind(this);
-    this.fetchProjectsByWorkspace = fetchProjectsByWorkspace.bind(this);
-    this.fetchUsersByWorkspace = fetchUsersByWorkspace.bind(this);
     this.renderProjectList = this.renderProjectList.bind(this);
     this.toggleProjectList = this.toggleProjectList.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
     this.handleProjectChange = this.handleProjectChange.bind(this);
-    this.renderAssignee = this.renderAssignee.bind(this);
-    this.toggleAssigneeList = this.toggleAssigneeList.bind(this);
-    this.renderAssigneeList = this.renderAssigneeList.bind(this);
-    this.handleAssigneeChange = this.handleAssigneeChange.bind(this);
-    this.deleteTask = this.deleteTask.bind(this);
-    this.renderAvatar = this.renderAvatar.bind(this);
   }
 
   componentWillMount() {
@@ -81,135 +67,6 @@ class Detail extends React.Component {
     const title = newProps.task.title ? newProps.task.title : '';
     const description = newProps.task.description ? newProps.task.description : '';
     this.setState({title: title, description: description})
-  }
-
-  renderHeader() {
-    const dueDate = this.props.task.due_date ? this.parseDate(this.props.task.due_date) : 'Due Date'
-    const assignee = this.props.task.assignee ? this.props.task.assignee.username : 'Unassigned'
-
-    return(
-      <div className='task-detail-header'>
-        <div className='task-detail-username'>{this.renderAssignee()}</div>
-        <div className='task-detail-due-date'>
-          <DatePicker hintText={dueDate}
-                      value={this.state.dueDate}
-                      onChange={this.handleDateChange}
-                      container="inline"
-                      inputStyle={{
-                        color: lightBlue200,
-                        secondaryTextColor: lightBlue200,
-                        textColor: lightBlue200}}
-                      textFieldStyle={{
-                        color: lightBlue200,
-                        textColor: grey600,
-                        secondaryTextColor: lightBlue200,
-                        width: '65px'}}>
-          </DatePicker>
-        </div>
-        <div className='task-detail-delete'
-             onTouchTap={this.deleteTask}>
-          <Trash color={grey600}
-                 hoverColor={grey50}/>
-          </div>
-        <div className='task-detail-close'
-             onTouchTap={this.closeDetail}>x</div>
-    </div>)
-  }
-
-  renderAssignee() {
-    let assingneeList;
-
-    if (this.state.assigneeListOpen) {
-      assingneeList = this.renderAssigneeList();
-    } else {
-      assingneeList = this.renderAvatar();
-    }
-
-    return(
-      <div className='task-detail-assignee'>
-        {assingneeList}
-      </div>)
-  }
-
-  renderAvatar() {
-    if (this.props.task.assignee) {
-      let letter = this.props.task.assignee.username[0]
-      let color = colors[letter.charCodeAt() % 4]
-
-      return(
-            <Avatar
-              color={deepPurple50}
-              backgroundColor={color}
-              size={40}
-              style={avatarStyle}
-              onTouchTap={this.toggleAssigneeList}
-            >
-            {letter}
-            </Avatar>
-          )
-    } else {
-      return(
-        <Avatar
-          color={deepPurple50}
-          backgroundColor={grey50}
-          size={40}
-          style={avatarStyle}
-          onTouchTap={this.toggleAssigneeList}>
-          ?
-        </Avatar>)
-    }
-  }
-
-  toggleAssigneeList() {
-    this.setState({assigneeListOpen: !this.state.assigneeListOpen})
-  }
-
-  renderAssigneeList() {
-    let assignees
-
-    if (this.props.workspace) {
-      assignees = this.props.workspace.team.map( (assignee) => (
-        <MenuItem value={assignee}
-                  primaryText={assignee.username} />
-      ))
-    }
-
-    return(
-      <DropDownMenu
-        value={this.state.assignee}
-        style={assigneeStyle}
-        onChange={this.handleAssigneeChange('assignee_id')}
-        autoWidth={false}
-        openImmediately={true}>
-          <MenuItem value={''}
-                    primaryText='Unassigned' />
-          {assignees}
-      </DropDownMenu>)
-  }
-
-  deleteTask() {
-    this.closeDetail();
-    this.props.deleteTask(this.props.task.id);
-    this.props.removeTask();
-  }
-
-  closeDetail() {
-    this.props.removeTask()
-
-    const userId = this.props.task.author_id;
-    const workspaceId = this.props.task.workspace_id;
-    const projectId = this.props.task.project_id;
-    const taskId = this.props.task.id;
-
-    let location;
-
-    if (projectId) {
-      location = `${userId}/${workspaceId}/${projectId}`;
-    } else {
-      location = `${userId}/${workspaceId}/`;
-    }
-
-    hashHistory.push(location)
   }
 
   renderProject() {
@@ -243,6 +100,7 @@ class Detail extends React.Component {
 
     let project;
 
+    // Gtet an Uncaugt TypeError "cannot read property name of null" here when switching project to no project.
     if (this.props.task.project) {
       project = this.props.task.project.name;
     }
@@ -422,7 +280,7 @@ class Detail extends React.Component {
     } else {
       return(
         <div className='task-detail'>
-          {this.renderHeader()}
+          <DetailHeaderContainer />
           <div className='task-detail-body'>
             {this.renderProject()}
             <div className='task-detail-content'>

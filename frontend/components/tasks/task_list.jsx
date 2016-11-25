@@ -10,7 +10,7 @@ import TaskListItem from './task_list_item';
 
 import { fetchTasksByUserAndWorkspace, updateTask } from '../../util/task_api_util';
 
-class WorkspaceTaskList extends React.Component {
+class TaskList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { tasks: [], task: {}, view: 'all'}
@@ -40,6 +40,7 @@ class WorkspaceTaskList extends React.Component {
   }
 
   configureForSelectTasks(props) {
+    console.log('cfst');
     let selectedTasks;
 
     if (props.view === 'completed') {
@@ -65,7 +66,7 @@ class WorkspaceTaskList extends React.Component {
 
     this.props.createTask({ workspace_id: workspaceId,
                             author_id: userId,
-                            projectId: projectId })
+                            project_id: projectId })
   }
 
   renderTasks() {
@@ -147,4 +148,4 @@ class WorkspaceTaskList extends React.Component {
     marginLeft: '32.5px'
   }
 
-export default withRouter(WorkspaceTaskList);
+export default withRouter(TaskList);

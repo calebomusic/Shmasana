@@ -17,8 +17,6 @@ import { fetchUserWorkspacesOnLogin,
          fetchWorkspaceAndTasks } from '../actions/workspace_actions';
 import { fetchWorkspace } from '../actions/workspace_actions';
 import { fetchProject, removeProject } from '../actions/project_actions';
-import { fetchTasksByUserAndWorkspace,
-         fetchTasksByProject } from '../actions/tasks_actions';
 
 const Root = ({store}) => {
   const _redirectIfLoggedInAndClearErrors = () => {
@@ -56,12 +54,11 @@ const Root = ({store}) => {
       hashHistory.push('/');
     } else if (!ownProps.params.projectId) {
       store.dispatch(fetchWorkspaceAndTasks(workspaceId));
+      if (store.getState().project.id) {
+        store.dispatch(removeProject());
+      }
     } else {
       store.dispatch(fetchWorkspace(workspaceId));
-    }
-
-    if (store.getState().project.id) {
-      store.dispatch(removeProject());
     }
   }
 
@@ -69,7 +66,6 @@ const Root = ({store}) => {
     const projectId = parseInt(ownProps.params.projectId);
     if (!store.getState().project.id) {
       store.dispatch(fetchProject(projectId));
-      store.dispatch(fetchTasksByProject(projectId));
     }
   }
 

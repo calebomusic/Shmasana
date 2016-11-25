@@ -58,7 +58,6 @@ class TaskListItem extends React.Component {
   }
 
   handleChange(e) {
-    // this.setState({title: e.target.value})
     this.props.task.title = e.target.value
     this.props.updateTask(this.props.task);
   }
@@ -77,7 +76,6 @@ class TaskListItem extends React.Component {
 
   updateFocus() {
     this.setState({selected: true});
-    console.log('task-list-item');
     this.props.fetchTask(this.props.task.id)
   }
 
