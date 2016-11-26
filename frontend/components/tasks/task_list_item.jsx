@@ -103,20 +103,19 @@ class TaskListItem extends React.Component {
     return(<li className={className}>
       <button onClick={this.toggleComplete}
               className={buttonClassName}></button>
-      <input className='task-list-item-title'
-             value={this.state.title}
-             onChange={this.handleChange}
-             onFocus={this.updateFocus}
-             onBlur={this.updateBlur}
-             placeholder=''>
-      </input>
-      <Snackbar
-        open={this.state.open}
-        message={message}
-        autoHideDuration={3000}
-        onRequestClose={this.handleRequestClose}
-        bodyStyle={snackbarStyle}
-      />
+            <TextField key={this.props.task.id}
+                   hintText=""
+                   value={this.state.title}
+                   onChange={this.handleChange}
+                   multiLine={false}
+                   underlineShow={true}
+                   fullWidth={true}
+                   style={textFieldStyle} />
+      <Snackbar open={this.state.open}
+                message={message}
+                autoHideDuration={3000}
+                onRequestClose={this.handleRequestClose}
+                bodyStyle={snackbarStyle} />
     </li>)
   }
 }
@@ -124,6 +123,13 @@ class TaskListItem extends React.Component {
   const snackbarStyle = {
     backgroundColor: lightBlue200,
     color: lightBlue200
+  }
+
+  const textFieldStyle = {
+    paddingLeft: '10px',
+    fontSize: '14px',
+    height: '30px',
+    paddingBottom: '3px'
   }
 
 export default TaskListItem;

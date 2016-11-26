@@ -43,14 +43,14 @@ class DetailContent extends React.Component {
   renderDescription() {
     return(
       <div className='task-detail-description'>
-        <TextField
-          hintText="Description"
-          value={this.state.description}
-          onChange={this.handleChange('description')}
-          multiLine={true} underlineShow={false}
-          rows={4}
-          rowsMax={10}
-          fullWidth = {true} />
+        <TextField hintText="Description"
+                   value={this.state.description}
+                   onChange={this.handleChange('description')}
+                   multiLine={true}
+                   underlineShow={true}
+                   rows={2}
+                   rowsMax={3}
+                   fullWidth={true} />
       </div>)
   }
 
