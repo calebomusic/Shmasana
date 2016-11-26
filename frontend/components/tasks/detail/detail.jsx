@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter, hashHistory } from 'react-router';
 
-import Spinner from '../spinner';
-import CommentFormContainer from './comments/comment_form_container';
-import CommentListContainer from './comments/comment_list_container';
+import Spinner from '../../spinner';
+import CommentFormContainer from '../comments/comment_form_container';
+import CommentListContainer from '../comments/comment_list_container';
 import DetailHeaderContainer from './detail_header_container';
 import DetailProjectContainer from './detail_project_container';
 import DetailContentContainer from './detail_content_container';

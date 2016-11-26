@@ -5,12 +5,12 @@ import DetailHeader from './detail_header';
 import { updateTask,
          deleteTask,
          fetchTask,
-         removeTask } from '../../actions/task_actions';
+         removeTask } from '../../../actions/task_actions';
 
-import { removeProject } from '../../actions/project_actions';
+import { removeProject } from '../../../actions/project_actions';
 
 import { fetchTasksByUserAndWorkspace,
-         fetchTasksByProject } from '../../actions/tasks_actions';
+         fetchTasksByProject } from '../../../actions/tasks_actions';
 
 const mapStateToProps = (state) => (
   {

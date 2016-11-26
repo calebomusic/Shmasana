@@ -8,8 +8,6 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 
 import TaskListItem from './task_list_item';
 
-import { fetchTasksByUserAndWorkspace, updateTask } from '../../util/task_api_util';
-
 class TaskList extends React.Component {
   constructor(props) {
     super(props)

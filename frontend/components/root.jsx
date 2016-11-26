@@ -9,7 +9,7 @@ import { lightBlue200, lightBlue500, lightRed200 } from 'material-ui/styles/colo
 import App from './app';
 import SessionFormContainer from './session/session_form_container';
 import SignUpHomeContainer from './session/signup_home_container';
-import TaskDetailContainer from './tasks/detail_container';
+import TaskDetailContainer from './tasks/detail/detail_container';
 
 import { receiveErrors } from '../actions/session_actions';
 import { fetchUserWorkspacesOnLogin,
