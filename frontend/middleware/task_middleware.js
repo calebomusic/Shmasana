@@ -50,7 +50,7 @@ const TaskMiddleware = store => next => action => {
       const pathname = hashHistory.getCurrentLocation().pathname;
       const params = pathname.split('/')
 
-      if (params[3] === 'list' ) {
+      if (params[3] === 'list' || params.length === 3 || params[3] === '') {
         const userId = parseInt(params[1]);
         const workspaceId = parseInt(params[2]);
         store.dispatch(fetchTasksByUserAndWorkspace(userId, workspaceId));
