@@ -16,6 +16,7 @@ class DetailProject extends React.Component {
     this.toggleProjectList = this.toggleProjectList.bind(this);
     this.handleProjectChange = this.handleProjectChange.bind(this);
     this.redirectOnProjectChange = this.redirectOnProjectChange.bind(this);
+    this.findProject = this.findProject.bind(this);
   }
 
   renderProjectList() {
@@ -61,7 +62,7 @@ class DetailProject extends React.Component {
     }
 
     this.props.task.project_id = projectId;
-    this.props.updateTask(this.props.task);
+    this.props.updateTaskAndFetch(this.props.task);
 
     this.redirectOnProjectChange(projectId);
   }
@@ -80,8 +81,19 @@ class DetailProject extends React.Component {
     }
   }
 
+  findProject(id) {
+    if (this.props.workspace) {
+    const projects = this.props.workspace.projects;
+      for (var i = 0; i < projects.length; i++) {
+        if (id === projects[i].id) {
+          return projects[i].name;
+        }
+      }
+    }
+  }
+
   render() {
-    const project = this.props.task.project ? this.props.task.project.name : 'NO PROJECT'
+    const project = this.findProject(this.props.task.project_id) || 'NO PROJECT'
 
     let projectList;
 

@@ -7,7 +7,8 @@ import { removeProject } from '../../../actions/project_actions';
 
 const mapStateToProps = (state) => (
   {
-    task: state.task,
+    task: state.task.present,
+    title: state.task.present.title,
     loading: state.loading
   }
 )

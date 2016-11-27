@@ -7,16 +7,17 @@ import TaskReducer from './task_reducer';
 import TasksReducer from './tasks_reducer';
 import ViewReducer from './view_reducer';
 import MainContentSpinnerReducer from './main_content_spinner_reducer';
+import OptimisticReducer from './optimistic_reducer';
 
 const RootReducer = combineReducers({
   session: SessionReducer,
   workspace: WorkspacesReducer,
   sidebar: SidebarReducer,
   project: ProjectReducer,
-  task: TaskReducer,
+  task: OptimisticReducer(TaskReducer),
   tasks: TasksReducer,
   view: ViewReducer,
   loading: MainContentSpinnerReducer,
-})
+});
 
 export default RootReducer;

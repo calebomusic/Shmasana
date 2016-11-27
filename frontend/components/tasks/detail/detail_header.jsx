@@ -29,7 +29,7 @@ class DetailHeader extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { dueDate: '' };
+    this.state = { assigneeListOpen: false };
 
     this.closeDetail = this.closeDetail.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -39,6 +39,18 @@ class DetailHeader extends React.Component {
     this.handleAssigneeChange = this.handleAssigneeChange.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.renderAvatar = this.renderAvatar.bind(this);
+    this.findAssignee = this.findAssignee.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ dueDate: this.props.dueDate,
+                    assignee: this.props.task.assignee });
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ dueDate: this.props.dueDate,
+                    assignee: this.props.task.assignee });
+                    console.log(this.props.task.assignee);
   }
 
   parseDate(date) {
@@ -65,9 +77,10 @@ class DetailHeader extends React.Component {
   }
 
   renderAvatar() {
-    if (this.props.task.assignee) {
-      let letter = this.props.task.assignee.username[0]
-      let color = colors[letter.charCodeAt() % 4]
+    let assignee = this.findAssignee(this.props.task.assignee_id);
+    if (assignee) {
+      let letter = assignee.username[0]
+      let color = colors[letter.charCodeAt() % 4];
 
       return(
             <Avatar
@@ -124,7 +137,6 @@ class DetailHeader extends React.Component {
     this.closeDetail();
     this.props.deleteTask(this.props.task.id);
     this.props.removeTask();
-    // this.fetchTasks();
   }
 
   closeDetail() {
@@ -148,6 +160,7 @@ class DetailHeader extends React.Component {
 
   handleDateChange(e, date) {
     this.props.task.due_date = date;
+    this.setState({dueDate: this.parseDate(date) })
     this.props.updateTask(this.props.task);
   }
 
@@ -167,8 +180,22 @@ class DetailHeader extends React.Component {
         assigneeId = null;
       }
 
+      // const assignee = this.findAssignee(assigneeId);
+      // this.setState({ assignee: assignee});
+      console.log('new assignee id: ' + assigneeId);
       this.props.task[field] = assigneeId;
       this.props.updateTask(this.props.task);
+    }
+  }
+
+  findAssignee(id) {
+    if (this.props.workspace) {
+    const team = this.props.workspace.team;
+      for (var i = 0; i < team.length; i++) {
+        if (id === team[i].id) {
+          return team[i];
+        }
+      }
     }
   }
 

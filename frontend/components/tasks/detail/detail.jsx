@@ -24,7 +24,6 @@ class Detail extends React.Component {
   render() {
     if (this.props.loading) {
       return(<div className='task-detail'>
-
         <div className='detail-spinner'>
           <Spinner />
         </div>

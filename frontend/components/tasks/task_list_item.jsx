@@ -1,30 +1,16 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
+import { withRouter, hashHistory } from 'react-router';
 
 import TextField from 'material-ui/TextField';
 import Snackbar from 'material-ui/Snackbar';
-import {
-  lightBlue200,
-  lightBlue500,
-  lightRed200,
-  grey50,
-  grey600,
-  deepPurple50,
-  red500,
-  blue500,
-  redA400,
-  pink400
-} from 'material-ui/styles/colors';
+import { lightBlue200 } from 'material-ui/styles/colors';
 
 class TaskListItem extends React.Component {
   constructor(props) {
     super(props)
 
-    const title = this.props.task.title ? this.props.task.title : ''
+    this.state = { location: '', selected: false, open: false}
 
-    this.state = { location: '', selected: false, title: title, open: false}
-
-    this.setLocation = this.setLocation.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateTask = this.props.updateTask.bind(this);
     this.toggleComplete = this.toggleComplete.bind(this);
@@ -33,32 +19,16 @@ class TaskListItem extends React.Component {
   }
 
   componentWillMount() {
-    this.setLocation(this.props);
+    this.setState({title: this.props.task.title})
   }
 
   componentWillReceiveProps(newProps) {
-    this.setLocation(newProps)
-    this.setState({title: newProps.task.title})
-  }
-
-  setLocation(props) {
-    const userId = props.task.author_id;
-    const workspaceId = props.task.workspace_id;
-    const projectId = props.task.project_id;
-    const taskId = props.task.id;
-
-    let location
-
-    if (projectId) {
-      location = `${userId}/${workspaceId}/${projectId}/${taskId}`;
-    } else {
-      location = `${userId}/${workspaceId}/list/${taskId}`;
-    }
-    this.setState({location: location})
+    this.setState({title: newProps.task.title});
   }
 
   handleChange(e) {
-    this.props.task.title = e.target.value
+    this.props.task.title = e.target.value;
+    this.setState( {title: e.target.value });
     this.props.updateTask(this.props.task);
   }
 
@@ -76,10 +46,12 @@ class TaskListItem extends React.Component {
 
   updateFocus() {
     this.setState({selected: true});
-    this.props.fetchTask(this.props.task.id)
+    this.props.fetchTask(this.props.task.id);
   }
 
   updateBlur() {
+    this.props.task.title = this.state.title;
+
     this.setState({selected: false});
   }
 
@@ -101,22 +73,24 @@ class TaskListItem extends React.Component {
     const message = `Task completed!`;
 
     return(<li className={className}>
-      <button onClick={this.toggleComplete}
+            <button onClick={this.toggleComplete}
               className={buttonClassName}></button>
-            <TextField key={this.props.task.id}
-                   hintText=""
-                   value={this.state.title}
-                   onChange={this.handleChange}
-                   multiLine={false}
-                   underlineShow={true}
-                   fullWidth={true}
-                   style={textFieldStyle} />
-      <Snackbar open={this.state.open}
+            <TextField id={'' + this.props.task.id + this.props.task.name}
+                       hintText=""
+                       value={this.state.title}
+                       onChange={this.handleChange}
+                       multiLine={false}
+                       underlineShow={true}
+                       fullWidth={true}
+                       style={textFieldStyle}
+                       onFocus={this.updateFocus}
+                       onBlur={this.updateBlur} />
+            <Snackbar open={this.state.open}
                 message={message}
                 autoHideDuration={3000}
                 onRequestClose={this.handleRequestClose}
                 bodyStyle={snackbarStyle} />
-    </li>)
+            </li>)
   }
 }
 
@@ -132,4 +106,4 @@ class TaskListItem extends React.Component {
     paddingBottom: '3px'
   }
 
-export default TaskListItem;
+export default withRouter(TaskListItem);

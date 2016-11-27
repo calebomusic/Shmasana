@@ -62,7 +62,7 @@ class SideBar extends React.Component {
               backgroundColor={color}
               size={30}
               style={avatarStyle}
-              key={user.username}>
+              id={user.username + user.id}>
               {letter}
             </Avatar>
           </div>

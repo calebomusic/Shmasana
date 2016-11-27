@@ -5,7 +5,7 @@ import { RECEIVE_COMMENT } from '../actions/comment_actions';
 import merge from 'lodash/merge'
 
 const TaskReducer = (oldState = {}, action) => {
-  let newState = merge({}, oldState)
+  let newState = merge({}, oldState);
   switch (action.type) {
     case RECEIVE_TASK:
       return action.task;

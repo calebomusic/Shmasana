@@ -23,6 +23,7 @@ const TasksMiddleware = store => next => action => {
   const errors = (errors) => {
     console.log(errors)
   }
+  
   switch (action.type) {
     case FETCH_TASKS_BY_PROJECT:
       fetchTasksByProject(action.projectId, successfulFetch, errors);

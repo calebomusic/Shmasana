@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import DetailContent from './detail_content';
 
-import { updateTask,
+import { updateTaskAndFetch,
          deleteTask,
          fetchTask,
          removeTask } from '../../../actions/task_actions';
@@ -14,14 +14,15 @@ import { fetchTasksByUserAndWorkspace,
 
 const mapStateToProps = (state) => (
   {
-    task: state.task,
+    task: state.task.present,
+    title: state.task.present.title
   }
 )
 
 
 const mapDispatchToProps = (dispatch) => (
   {
-    updateTask: (task) => dispatch(updateTask(task)),
+    updateTaskAndFetch: (task) => dispatch(updateTaskAndFetch(task)),
   }
 )
 

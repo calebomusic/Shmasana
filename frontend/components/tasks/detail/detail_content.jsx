@@ -11,20 +11,25 @@ class DetailContent extends React.Component {
     this.renderDescription = this.renderDescription.bind(this);
     this.renderTitle = this.renderTitle.bind(this);
   }
+
   componentWillMount() {
-    const title = this.props.task.title ? this.props.task.title : '';
-    this.setState({title: title});
+    const title = this.props.task.title;
+    const description = this.props.task.description;
+
+    this.setState({ title, description });
   }
 
   componentWillReceiveProps(newProps){
-    const title = newProps.task.title ? newProps.task.title : '';
-    this.setState({title: title});
+    const title = newProps.title;
+    const description = newProps.task.description;
+    this.setState({ title, description});
   }
 
   handleChange(field) {
     return (e) => {
-      this.props.task[field] = e.target.value
-      this.props.updateTask(this.props.task);
+      this.props.task[field] = e.target.value;
+      this.setState({ [field]: e.target.value });
+      this.props.updateTaskAndFetch(this.props.task);
     }
   }
 
@@ -36,8 +41,7 @@ class DetailContent extends React.Component {
     } else {
       this.props.task.completed_at = null;
     }
-    this.props.updateTask(this.props.task);
-    this.props.updateTask(this.props.task);
+    this.props.updateTaskAndFetch(this.props.task);
   }
 
   renderDescription() {

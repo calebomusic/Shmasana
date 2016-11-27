@@ -18,7 +18,6 @@ const mapStateToProps = (state) => (
   {
     currentUser: state.session.currentUser,
     sidebar: state.sidebar,
-    task: state.task,
     tasks: state.tasks,
     view: state.view
   }

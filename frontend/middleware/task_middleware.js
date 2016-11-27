@@ -1,11 +1,17 @@
 import { hashHistory } from 'react-router';
+import { isEqual } from 'lodash';
 
 import {  CREATE_TASK,
           UPDATE_TASK,
           FETCH_TASK,
           DELETE_TASK,
+          UPDATE_AND_FETCH,
           receiveTask,
-          removeTask} from '../actions/task_actions';
+          receiveTaskBegin,
+          receiveTaskEnd,
+          removeTask,
+          end,
+          revert } from '../actions/task_actions';
 import { createTask,
          updateTask,
          fetchTask,
@@ -15,9 +21,23 @@ import { fetchTasksByUserAndWorkspace,
          fetchTasksByProject } from '../actions/tasks_actions';
 
 const TaskMiddleware = store => next => action => {
-    const successfulCreateOrUpdate = (task) => {
+    const successfulCreate = (task) => {
       store.dispatch(receiveTask(task));
       fetchTasks();
+    }
+
+    const successfulUpdateAndFetch = (task) => {
+      successfulUpdate(task);
+      fetchTasks();
+    }
+
+    const successfulUpdate = (task) => {
+      const presentTask = store.getState().task.present;
+      if (isEqual(presentTask, task)) {
+        store.dispatch(end());
+      } else {
+        store.dispatch(receiveTaskEnd(task));
+      }
     }
 
     const fetchProjectOnProjectChange = (projectId) => {
@@ -65,12 +85,21 @@ const TaskMiddleware = store => next => action => {
       }
     }
 
+    const revertOnError = () => {
+      store.dispatch(revert());
+    }
+
   switch (action.type) {
     case CREATE_TASK:
-      createTask(action.task, action.task.workspace_id, successfulCreateOrUpdate);
+      createTask(action.task, action.task.workspace_id, successfulCreate);
       return next(action);
     case UPDATE_TASK:
-      updateTask(action.task, action.task.workspace_id, successfulCreateOrUpdate);
+      store.dispatch(receiveTaskBegin(action.task));
+      updateTask(action.task, action.task.workspace_id, successfulUpdate, revertOnError);
+      return next(action);
+    case UPDATE_AND_FETCH:
+      store.dispatch(receiveTaskBegin(action.task));
+      updateTask(action.task, action.task.workspace_id, successfulUpdateAndFetch, revertOnError);
       return next(action);
     case FETCH_TASK:
       fetchTask(action.id, successfulFetch);

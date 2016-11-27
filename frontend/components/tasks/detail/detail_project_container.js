@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DetailProject from './detail_project';
 
 import { updateTask,
+         updateTaskAndFetch,
          deleteTask,
          fetchTask,
          removeTask } from '../../../actions/task_actions';
@@ -15,14 +16,14 @@ import { fetchTasksByUserAndWorkspace,
 const mapStateToProps = (state) => (
   {
     workspace: state.workspace[Object.keys(state.workspace)],
-    task: state.task,
+    task: state.task.present,
   }
 )
 
 
 const mapDispatchToProps = (dispatch) => (
   {
-    updateTask: (task) => dispatch(updateTask(task)),
+    updateTaskAndFetch: (task) => dispatch(updateTaskAndFetch(task)),
     fetchTask: (id) => dispatch(fetchTask(id)),
     removeTask: () => dispatch(removeTask()),
     removeProject: () => dispatch(removeProject()),

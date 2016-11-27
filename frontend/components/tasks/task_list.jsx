@@ -7,6 +7,7 @@ import Divider from 'material-ui/Divider';
 import DropDownMenu from 'material-ui/DropDownMenu';
 
 import TaskListItem from './task_list_item';
+import Spinner from '../spinner';
 
 class TaskList extends React.Component {
   constructor(props) {
@@ -115,21 +116,40 @@ class TaskList extends React.Component {
   }
 
   render() {
-    return(
-    <div className='task-list'>
-      <div className='task-list-top'>
-        <button className='task-list-top-left'
-                onTouchTap={this.createTask}>
-                  Add Task
-        </button>
-        <button className='task-list-top-right'>
-          {this.renderViewDropdown()}
-        </button>
-      </div>
-      <div className='task-list-list'>
-        {this.renderTasks()}
-      </div>
-    </div>)
+    if (this.props.loading) {
+      return(
+        <div className='task-list'>
+          <div className='task-list-top'>
+            <button className='task-list-top-left'
+                    onTouchTap={this.createTask}>
+                      Add Task
+            </button>
+            <button className='task-list-top-right'>
+              {this.renderViewDropdown()}
+            </button>
+          </div>
+          <div className='detail-spinner'>
+            <Spinner />
+          </div>
+        </div>
+      )
+    } else {
+      return(
+      <div className='task-list'>
+        <div className='task-list-top'>
+          <button className='task-list-top-left'
+                  onTouchTap={this.createTask}>
+                    Add Task
+          </button>
+          <button className='task-list-top-right'>
+            {this.renderViewDropdown()}
+          </button>
+        </div>
+        <div className='task-list-list'>
+          {this.renderTasks()}
+        </div>
+      </div>)
+    }
   }
 }
 

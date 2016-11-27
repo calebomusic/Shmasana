@@ -1,7 +1,6 @@
 import React from 'react';
 
 const DetailFooter = (props) => {
-  console.log(props);
   const parseDate = (date) => {
     date = new Date(date).toDateString().split(' ');
     const month = date[1];
