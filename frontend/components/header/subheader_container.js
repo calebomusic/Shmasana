@@ -20,7 +20,6 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => (
-  // Needs some way to toggle task or calendar display.
   {
     fetchWorkspace: (id) => dispatch(fetchWorkspace(id)),
     fetchProject: (id) => dispatch(fetchProject(id)),
