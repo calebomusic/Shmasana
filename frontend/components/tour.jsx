@@ -26,32 +26,16 @@ class UserTour extends React.Component {
     fireClick() {
       if (this.state.tourStep === 3 || this.state.tourStep === 4) {
         this.eventFire(document.getElementsByClassName('header-user-dropdown')[0], 'click');
-      }
-      if (this.state.tourStep === 9 || this.state.tourStep === 10) {
-        console.log('more projects and tasks');
+      } else if (this.state.tourStep === 9 || this.state.tourStep === 10) {
         this.eventFire(document.getElementsByClassName('action-dropdown-button')[0], 'click');
-      }
-
-      if ((this.state.tourStep === 10) || (this.state.tourStep === 4)) {
+      } else if ((this.state.tourStep === 10) || (this.state.tourStep === 4)) {
         this.eventFire(document.getElementsByClassName('subheader')[0], 'click');
-        console.log('clicked away');
-      }
-
-      if (this.state.tourStep === 13) {
+      } else if (this.state.tourStep === 13) {
         this.eventFire(document.getElementsByTagName('input')[0], 'focus');
       }
     }
 
     render() {
-      console.log(this.state);
-      // if (this.state.tourStep === 5) {
-      //   this.eventFire(document.getElementById('mytest1'), 'click');
-      // }
-      //
-      // if (this.state.tourStep === 0) {
-      //   this.eventFire(document.getElementById('mytest1'), 'click');
-      // }
-
       return (
         <div>
             <Tour active={this.state.isTourActive}

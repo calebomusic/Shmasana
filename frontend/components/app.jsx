@@ -6,10 +6,18 @@ import TaskListContainer from './tasks/task_list_container';
 import UserTour from './tour';
 
 const App = ({children, params}) => {
+  let tour;
+
+  if (!(params.taskId && params.projectId)) {
+    tour = <UserTour />
+  }
+
+  console.log(UserTour);
+
   return(
   <div className='app'>
     <SideBarContainer />
-    <UserTour />
+    {tour}
     <div className='main-content'>
       <AllHeaders />
       <div className='tasks'>
