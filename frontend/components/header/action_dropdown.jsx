@@ -67,7 +67,7 @@ class ActionDropdown extends React.Component {
     if (this.state.modal) {
       return(<div>
             <button className='action-dropdown-button'
-                    onTouchTap={this.handleTouchTap}>
+                    onClick={this.handleTouchTap}>
               +
             </button>
             <CreateProjectModal createProject={this.props.createProject}
@@ -77,7 +77,7 @@ class ActionDropdown extends React.Component {
       return (
         <div>
           <button className='action-dropdown-button'
-                  onTouchTap={this.handleTouchTap}>
+                  onClick={this.handleTouchTap}>
             +
           </button>
           <Popover open={this.state.open}
@@ -109,5 +109,5 @@ class ActionDropdown extends React.Component {
     display: 'flex',
     flexDirection: 'column'
   }
-  
+
 export default withRouter(ActionDropdown);

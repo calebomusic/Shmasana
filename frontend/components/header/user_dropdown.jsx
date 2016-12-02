@@ -129,7 +129,9 @@ class UserDropdown extends React.Component {
         </div>)
     } else {
       return(<div>
-        <div className='header-user-dropdown' onTouchTap={this.handleTouchTap}>
+        <div className='header-user-dropdown'
+             onClick={this.handleTouchTap}
+          >
           <p>{this.props.currentUser.username}</p>
         <Avatar
           color={deepPurple50}
