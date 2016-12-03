@@ -108,4 +108,5 @@ input[type="submit"] {
 .app {
   display: block;
   height: 100%;
+  overflow: hidden;
 }
