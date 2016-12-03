@@ -17,7 +17,7 @@ u2 = User.create(username: 'Linda', password: 'password', email: 'Linda@gmail.co
 u3 = User.create(username: 'Bob', password: 'password', email: 'Bob@gmail.com')
 u4 = User.create(username: 'Emil', password: 'password', email: 'Emil@gmail.com')
 u5 = User.create(username: 'James', password: 'password', email: 'James@gmail.com')
-u6 = User.create(username: 'Colin', password: 'password', email: 'Colin@gmail.gov')
+u6 = User.create(username: 'Connor', password: 'password', email: 'Conorn@gmail.gov')
 u7 = User.create(username: 'Robin', password: 'password', email: 'Robin@msn.com')
 u8 = User.create(username: 'Jasmine', password: 'password', email: 'Jasmine@gmail.com')
 u9 = User.create(username: 'Lex', password: 'password', email: 'Lex@gmail.com')
@@ -28,9 +28,9 @@ u13 = User.create(username: 'Risa', password: 'password', email: 'Risa@gmail.com
 u14 = User.create(username: 'Theresa', password: 'password', email: 'Theresa@word.net')
 u15 = User.create(username: 'Alredo', password: 'password', email: 'gmail@yahoo.com')
 
-w1 = Workspace.create(name: 'Innovation')
-w2 = Workspace.create(name: 'Paradigms')
-w3 = Workspace.create(name: 'Business')
+w1 = Workspace.create(name: 'Occupy Mars')
+w2 = Workspace.create(name: 'Personal')
+w3 = Workspace.create(name: 'Gardening')
 
 # Push users to workspaces
 [u0,
@@ -63,8 +63,8 @@ u8,
 u9,
 u10].each { |u| w3.users.push(u)}
 
-p0 = Project.create(name: 'Design', workspace_id: w1.id )
-p1 = Project.create(name: 'Market', workspace_id: w1.id)
+p0 = Project.create(name: 'Spaceship', workspace_id: w1.id )
+p1 = Project.create(name: 'Space School', workspace_id: w1.id)
 p2 = Project.create(name: 'Ideas', workspace_id: w1.id)
 p3 = Project.create(name: 'Rebuild', workspace_id: w1.id)
 p4 = Project.create(name: 'Raise Awareness', workspace_id: w1.id)
@@ -74,97 +74,143 @@ p4 = Project.create(name: 'Shift Paradigms', workspace_id: w1.id)
 
 # Guest user Tasks:
 
-task = Task.create(title: '', workspace_id: w1.id, author_id: u0.id,
-  description: "Infinity differentiates into subtle potentiality", assignee_id: u1.id )
-task = Task.create(title: 'The Great Task', workspace_id: w1.id, author_id: u0.id,
-  description: "The invisible reflects immortal force fields", assignee_id: u3.id )
-task = Task.create(title: '', workspace_id: w1.id, author_id: u0.id, completed: true, completed_at: time_rand, assignee_id: u2.id )
-task = Task.create(title: 'Do it', workspace_id: w1.id, author_id: u0.id, assignee_id: u1.id )
+task = Task.create(title: 'Design Flag', workspace_id: w1.id, author_id: u0.id,
+  description: "Design flag to place on Mars!", assignee_id: u2.id )
+task = Task.create(title: 'Recruit team of astronauts', workspace_id: w1.id, author_id: u0.id,
+  description: "Junior astronauts accepted", assignee_id: u3.id )
+task = Task.create(title: 'Purchase appopriate spaceship and accessories',
+ description: 'See also: spaceship project', workspace_id: w1.id, author_id: u0.id, completed: true, completed_at: time_rand, assignee_id: u2.id )
+task = Task.create(title: 'Organize anti-gravity training sesssion', workspace_id: w1.id, author_id: u0.id, assignee_id: u1.id )
 task = Task.create(title: 'Just do it', workspace_id: w1.id, author_id: u0.id, completed: true, completed_at: time_rand )
-task = Task.create(title: 'New Task', workspace_id: w1.id, author_id: u0.id,
-  description: "Infinity differentiates into subtle potentiality", assignee_id: u1.id )
-task = Task.create(title: 'Prepare', workspace_id: w1.id, author_id: u0.id,
+task = Task.create(title: 'Organize water discussion', workspace_id: w1.id, author_id: u0.id,
+  description: "Discuss the possibility that there is no water", assignee_id: u1.id )
+task = Task.create(title: 'Blockchain video production machine learning', workspace_id: w1.id, author_id: u0.id,
   description: "Infinity differentiates into subtle potentiality")
 
-task = Task.create(title: 'Dream', workspace_id: w1.id, author_id: u0.id,
-  description: "Infinity differentiates into subtle actuality", assignee_id: u1.id )
-task = Task.create(title: 'Plan', workspace_id: w1.id, author_id: u0.id,
-  description: "The invisible reflects immortal force fields", assignee_id: u3.id )
+task = Task.create(title: 'Notify media of launch', workspace_id: w1.id, author_id: u0.id,
+  description: "Notify all the media", assignee_id: u1.id )
+task = Task.create(title: 'Run safety check of spaceship', workspace_id: w1.id, author_id: u0.id,
+  description: "Saftey first", assignee_id: u3.id )
 task = Task.create(title: '', workspace_id: w1.id, author_id: u0.id, completed: true, completed_at: time_rand, assignee_id: u2.id )
-task = Task.create(title: 'Do it', workspace_id: w1.id, author_id: u0.id, assignee_id: u1.id )
+task = Task.create(title: 'Occupy mMars', workspace_id: w1.id, author_id: u0.id, assignee_id: u1.id )
 task = Task.create(title: 'Just do it', workspace_id: w1.id, author_id: u0.id, completed: true, completed_at: time_rand )
 task = Task.create(title: 'Just do it', workspace_id: w1.id, author_id: u0.id,
   description: "Infinity differentiates into subtle potentiality", assignee_id: u1.id )
-task = Task.create(title: 'Prepare', workspace_id: w1.id, author_id: u0.id,
-  description: "Infinity differentiates into subtle potentiality")
 
 # Other user tasks
 
-task = Task.create(title: '', workspace_id: w1.id, author_id: u1.id,
-  description: "Infinity differentiates into subtle potentiality", assignee_id: u1.id )
-task = Task.create(title: '', workspace_id: w1.id, author_id: u2.id,
-  description: "The invisible reflects immortal force fields", assignee_id: u3.id )
-task = Task.create(title: '', workspace_id: w1.id, author_id: u3.id, completed: true, completed_at: time_rand, assignee_id: u2.id )
+task = Task.create(title: 'Buy spacefood', workspace_id: w1.id, author_id: u1.id,
+  description: "No Soylent", assignee_id: u1.id )
+task = Task.create(title: 'Find Mars Rover', workspace_id: w1.id, author_id: u2.id,
+  description: "Keep this task on down low.", assignee_id: u3.id )
+task = Task.create(title: 'Where is the Mars Rover?', workspace_id: w1.id, author_id: u3.id, completed: true, completed_at: time_rand, assignee_id: u2.id )
 task = Task.create(title: 'Do it', workspace_id: w1.id, author_id: u2.id, assignee_id: u1.id )
 task = Task.create(title: 'Just do it', workspace_id: w1.id, author_id: u2.id, completed: true, completed_at: time_rand )
-task = Task.create(title: 'New Task', workspace_id: w1.id, author_id: u1.id,
+task = Task.create(title: 'Prepare for meeting other lifeforms', workspace_id: w1.id, author_id: u1.id,
   description: "Infinity differentiates into subtle potentiality", assignee_id: u1.id )
-task = Task.create(title: 'Prepare', workspace_id: w1.id, author_id: u1.id,
-  description: "Infinity differentiates into subtle potentiality")
+task = Task.create(title: 'Buy spacebooks', workspace_id: w1.id, author_id: u1.id,
+  description: "Kurt Vonnegut!")
 
-# Tasks w/ project
-task = Task.create(title: 'Run', workspace_id: w1.id, author_id: u1.id, project_id: p0.id, assignee_id: u3.id)
-task = Task.create(title: 'Energize', workspace_id: w1.id, author_id: u1.id, project_id: p0.id,
-  description: "Infinity differentiates into subtle potentiality", completed: true, completed_at: time_rand, assignee_id: u1.id )
-task = Task.create(title: 'Eat', workspace_id: w1.id, author_id: u2.id, project_id: p0.id,
-  description: "Nature unfolds through incredible actions", completed: true, completed_at: time_rand, assignee_id: u2.id  )
-task = Task.create(title: 'Sleep', workspace_id: w1.id, author_id: u2.id, project_id: p0.id,
-  description: "Infinity differentiates into subtle potentiality", completed: true, completed_at: time_rand, assignee_id: u7.id )
-task = Task.create(title: 'Repeat', workspace_id: w1.id, author_id: u4.id, project_id: p1.id,
+# Spaceship
+task = Task.create(title: 'Compare SpaceX and BlueOrigin', workspace_id: w1.id, author_id: u1.id, project_id: p0.id, assignee_id: u3.id)
+task = Task.create(title: 'Collect movie titles for the trip', workspace_id: w1.id, author_id: u1.id, project_id: p0.id,
+  description: "Avoid space horror", completed: true, completed_at: time_rand, assignee_id: u1.id )
+task = Task.create(title: 'Call Elon', workspace_id: w1.id, author_id: u2.id, project_id: p0.id,
+  description: "", completed: true, completed_at: time_rand, assignee_id: u2.id  )
+task = Task.create(title: 'Call Jeff', workspace_id: w1.id, author_id: u2.id, project_id: p0.id,
+  description: "", completed: true, completed_at: time_rand, assignee_id: u7.id )
+task = Task.create(title: 'Purchase space couch', workspace_id: w1.id, author_id: u4.id, project_id: p0.id,
   description: "The invisible reflects immortal force fields", assignee_id: u3.id)
-task = Task.create(title: 'Run', workspace_id: w1.id, author_id: u1.id, project_id: p1.id,
+task = Task.create(title: 'Call recruiters', workspace_id: w1.id, author_id: u1.id, project_id: p0.id,
   description: "The physical world creates intrinsic miracles", assignee_id: u2.id)
-task = Task.create(title: 'Energize', workspace_id: w1.id, author_id: u1.id, project_id: p1.id,
+task = Task.create(title: 'Energize team', workspace_id: w1.id, author_id: u1.id, project_id: p0.id,
   description: "Our consciousness is rooted in an abundance of balance", completed: true, completed_at: time_rand  )
-task = Task.create(title: 'Eat', workspace_id: w1.id, author_id: u2.id, project_id: p1.id,
-  description: "Nature unfolds through incredible actions", completed: true, completed_at: time_rand, assignee_id: u1.id  )
-task = Task.create(title: 'Sleep', workspace_id: w1.id, author_id: u2.id, project_id: p1.id,
-  description: "Our consciousness is rooted in an abundance of balance", assignee_id: u3.id)
-task = Task.create(title: 'Repeat', workspace_id: w1.id, author_id: u4.id, project_id: p2.id,
-  description: "The physical world creates intrinsic miracles", completed: true, completed_at: time_rand  )
-ask = Task.create(title: 'Repeat', workspace_id: w1.id, author_id: u4.id, project_id: p2.id,
+task = Task.create(title: 'Find best microwave', workspace_id: w1.id, author_id: u2.id, project_id: p0.id,
+  description: "Don't be cheap", completed: true, completed_at: time_rand, assignee_id: u1.id  )
+task = Task.create(title: 'Nap', workspace_id: w1.id, author_id: u2.id, project_id: p0.id,
+  description: "", assignee_id: u3.id)
+task = Task.create(title: 'Compare food options', workspace_id: w1.id, author_id: u4.id,
+  description: "", completed: true, completed_at: time_rand  )
+ask = Task.create(title: 'Blueprint', workspace_id: w1.id, author_id: u4.id,
   description: "Infinity differentiates into subtle potentiality", assignee_id: u2.id)
-task = Task.create(title: 'Run', workspace_id: w1.id, author_id: u1.id, project_id: p2.id,
-  description: "Our consciousness is rooted in an abundance of balance", completed: true, completed_at: time_rand )
-task = Task.create(title: 'Energize', workspace_id: w1.id, author_id: u1.id, project_id: p2.id,
-  description: "Infinity differentiates into subtle potentiality", completed: true, completed_at: time_rand, assignee_id: u5.id )
-task = Task.create(title: 'Eat', workspace_id: w1.id, author_id: u2.id, project_id: p2.id,
-  description: "Our consciousness is rooted in an abundance of balance", assignee_id: u1.id)
-task = Task.create(title: 'Sleep', workspace_id: w1.id, author_id: u2.id, project_id: p2.id,
-  description: "Our consciousness is rooted in an abundance of balance", assignee_id: u5.id)
-task = Task.create(title: 'Repeat', workspace_id: w1.id, author_id: u4.id, project_id: p2.id,
-  description: "Nature unfolds through incredible actions", completed: true, completed_at: time_rand, assignee_id: u4.id  )
-ask = Task.create(title: 'Repeat', workspace_id: w1.id, author_id: u4.id, project_id: p3.id,
-  description: "Our consciousness is rooted in an abundance of balance", completed: true, completed_at: time_rand )
-task = Task.create(title: 'Run', workspace_id: w1.id, author_id: u1.id, project_id: p3.id, assignee_id: u1.id)
-task = Task.create(title: 'Energize', workspace_id: w1.id, author_id: u1.id, project_id: p3.id,
-  description: "Infinity differentiates into subtle potentiality", completed: true, completed_at: time_rand )
-task = Task.create(title: 'Eat', workspace_id: w1.id, author_id: u2.id, project_id: p3.id,
-  description: "Our consciousness is rooted in an abundance of balance", completed: true, completed_at: time_rand )
-task = Task.create(title: 'Sleep', workspace_id: w1.id, author_id: u2.id, project_id: p3.id )
-task = Task.create(title: 'Repeat', workspace_id: w1.id, author_id: u4.id, project_id: p4.id,
+
+
+# SpaceSchool
+task = Task.create(title: 'Teach astroengineering', workspace_id: w1.id, author_id: u1.id, project_id: p1.id, assignee_id: u3.id)
+task = Task.create(title: '', workspace_id: w1.id, author_id: u1.id, project_id: p1.id,
+  description: "Talk to promising astronauts", completed: true, completed_at: time_rand, assignee_id: u1.id )
+task = Task.create(title: 'Call NASA', workspace_id: w1.id, author_id: u2.id, project_id: p1.id,
+  description: "", completed: true, completed_at: time_rand, assignee_id: u2.id  )
+task = Task.create(title: 'Discuss student progress with TAs', workspace_id: w1.id, author_id: u2.id, project_id: p1.id,
+  description: "", completed: true, completed_at: time_rand, assignee_id: u7.id )
+task = Task.create(title: 'Improve gym', workspace_id: w1.id, author_id: u4.id, project_id: p1.id,
+  description: "", assignee_id: u3.id)
+task = Task.create(title: 'Hold assembly', workspace_id: w1.id, author_id: u1.id, project_id: p1.id,
+  description: "The physical world creates intrinsic miracles", assignee_id: u2.id)
+task = Task.create(title: 'Recruit developers', workspace_id: w1.id, author_id: u1.id, project_id: p1.id,
+  description: "Our consciousness is rooted in an abundance of balance", completed: true, completed_at: time_rand  )
+task = Task.create(title: 'Find best microwave', workspace_id: w1.id, author_id: u2.id, project_id: p1.id,
+  description: "Don't be cheap", completed: true, completed_at: time_rand, assignee_id: u1.id  )
+task = Task.create(title: 'Hold flag design contest', workspace_id: w1.id, author_id: u2.id, project_id: p1.id,
+  description: "", assignee_id: u3.id)
+task = Task.create(title: 'Improve cafeteria food', workspace_id: w1.id, author_id: u4.id,
+  description: "Add different soylent flavor?", completed: true, completed_at: time_rand, project_id: p1.id )
+ask = Task.create(title: 'Have a determinate plan for the future', workspace_id: w1.id, author_id: u4.id,
+  description: "Infinity differentiates into subtle potentiality", assignee_id: u2.id, project_id: p1.id,)
+
+# Personal tasks
+task = Task.create(title: 'Run', workspace_id: w2.id, author_id: u1.id, assignee_id: u3.id)
+task = Task.create(title: 'Energize', workspace_id: w2.id, author_id: u1.id,
+  description: "Infinity differentiates into subtle potentiality", completed: true, completed_at: time_rand, assignee_id: u1.id )
+task = Task.create(title: 'Eat', workspace_id: w2.id, author_id: u2.id,
   description: "Nature unfolds through incredible actions", completed: true, completed_at: time_rand, assignee_id: u2.id  )
-ask = Task.create(title: 'Repeat', workspace_id: w1.id, author_id: u4.id, project_id: p4.id,
-  description: "The physical world creates intrinsic miracles", assignee_id: u1.id )
-task = Task.create(title: 'Run', workspace_id: w1.id, author_id: u1.id, project_id: p4.id,
+task = Task.create(title: 'Sleep', workspace_id: w2.id, author_id: u2.id,
+  description: "Infinity differentiates into subtle potentiality", completed: true, completed_at: time_rand, assignee_id: u7.id )
+task = Task.create(title: 'Repeat', workspace_id: w2.id, author_id: u4.id,
+  description: "The invisible reflects immortal force fields", assignee_id: u3.id)
+task = Task.create(title: 'Run', workspace_id: w2.id, author_id: u1.id,
+  description: "The physical world creates intrinsic miracles", assignee_id: u2.id)
+task = Task.create(title: 'Energize', workspace_id: w2.id, author_id: u1.id,
+  description: "Our consciousness is rooted in an abundance of balance", completed: true, completed_at: time_rand  )
+task = Task.create(title: 'Eat', workspace_id: w2.id, author_id: u2.id,
+  description: "Nature unfolds through incredible actions", completed: true, completed_at: time_rand, assignee_id: u1.id  )
+task = Task.create(title: 'Sleep', workspace_id: w2.id, author_id: u2.id,
+  description: "Our consciousness is rooted in an abundance of balance", assignee_id: u3.id)
+task = Task.create(title: 'Repeat', workspace_id: w2.id, author_id: u4.id,
+  description: "The physical world creates intrinsic miracles", completed: true, completed_at: time_rand  )
+ask = Task.create(title: 'Repeat', workspace_id: w2.id, author_id: u4.id,
+  description: "Infinity differentiates into subtle potentiality", assignee_id: u2.id)
+task = Task.create(title: 'Run', workspace_id: w2.id, author_id: u1.id,
+  description: "Our consciousness is rooted in an abundance of balance", completed: true, completed_at: time_rand )
+task = Task.create(title: 'Energize', workspace_id: w2.id, author_id: u1.id,
+  description: "Infinity differentiates into subtle potentiality", completed: true, completed_at: time_rand, assignee_id: u5.id )
+task = Task.create(title: 'Eat', workspace_id: w2.id, author_id: u2.id,
+  description: "Our consciousness is rooted in an abundance of balance", assignee_id: u1.id)
+task = Task.create(title: 'Sleep', workspace_id: w2.id, author_id: u2.id,
+  description: "Our consciousness is rooted in an abundance of balance", assignee_id: u5.id)
+task = Task.create(title: 'Repeat', workspace_id: w2.id, author_id: u4.id,
+  description: "Nature unfolds through incredible actions", completed: true, completed_at: time_rand, assignee_id: u4.id  )
+ask = Task.create(title: 'Repeat', workspace_id: w2.id, author_id: u4.id,
+  description: "Our consciousness is rooted in an abundance of balance", completed: true, completed_at: time_rand )
+task = Task.create(title: 'Run', workspace_id: w2.id, author_id: u1.id, assignee_id: u1.id)
+task = Task.create(title: 'Energize', workspace_id: w2.id, author_id: u1.id,
   description: "Infinity differentiates into subtle potentiality", completed: true, completed_at: time_rand )
-task = Task.create(title: 'Energize', workspace_id: w1.id, author_id: u1.id, project_id: p4.id,
+task = Task.create(title: 'Eat', workspace_id: w2.id, author_id: u2.id,
+  description: "Our consciousness is rooted in an abundance of balance", completed: true, completed_at: time_rand )
+task = Task.create(title: 'Sleep', workspace_id: w2.id, author_id: u2.id )
+task = Task.create(title: 'Repeat', workspace_id: w2.id, author_id: u4.id,
+  description: "Nature unfolds through incredible actions", completed: true, completed_at: time_rand, assignee_id: u2.id  )
+ask = Task.create(title: 'Repeat', workspace_id: w2.id, author_id: u4.id,
+  description: "The physical world creates intrinsic miracles", assignee_id: u1.id )
+task = Task.create(title: 'Run', workspace_id: w2.id, author_id: u1.id,
+  description: "Infinity differentiates into subtle potentiality", completed: true, completed_at: time_rand )
+task = Task.create(title: 'Energize', workspace_id: w2.id, author_id: u1.id,
   description: "Infinity differentiates into subtle potentiality", assignee_id: u5.id)
-task = Task.create(title: 'Eat', workspace_id: w1.id, author_id: u2.id, project_id: p4.id,
+task = Task.create(title: 'Eat', workspace_id: w2.id, author_id: u2.id,
   description: "The invisible reflects immortal force fields", completed: true, completed_at: time_rand )
-task = Task.create(title: 'Sleep', workspace_id: w1.id, author_id: u2.id, project_id: p4.id,
+task = Task.create(title: 'Sleep', workspace_id: w2.id, author_id: u2.id,
   description: "Infinity differentiates into subtle potentiality", assignee_id: u2.id )
-task = Task.create(title: 'Repeat', workspace_id: w1.id, author_id: u4.id, project_id: p4.id,
+task = Task.create(title: 'Repeat', workspace_id: w2.id, author_id: u4.id,
   description: "The invisible reflects immortal force fields" )
 
 # Add completed at
