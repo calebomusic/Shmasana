@@ -1,7 +1,7 @@
 # Shmasana
 
 [Shmasana live](http://shmasana.herokuapp.com/)
-![Shmasana!](http://)
+![Shmasana!](https://github.com/calebomusic/Shmasana/blob/master/docs/screenshots/charles.png)
 
 Shmasana is a single-page full-stack web application inspired by Asana. It has all the features of a complete taks management systems allowing users to create tasks, projects, workspaces and invite other users to their workspaces.
 
@@ -75,7 +75,7 @@ An example application state is:
 
 Shmasana optimistically updates on title and description changes for a task, allowing users to edit tasks seamlessly without interruption.
 
-Optimistic updating is enabled by utilizing a higher-order reducer `OptimisticReducer` which wraps around `TaskReducer`:
+Optimistic updating is enabled by utilizing a higher-order reducer, `OptimisticReducer`, which wraps around the `TaskReducer`:
 
 ```javascript
 const OptimisticReducer = (reducer) => {
@@ -121,7 +121,7 @@ const TaskMiddleware = store => next => action => {
 `receiveTaskBegin` is passed to the `OptimisticReducer` which stores the action due to the status payload and passes the action to the `TaskReducer` which updates the store. The AJAX request receives successfulUpdate as a success callback which dispatches `receiveTaskEnd`. Because `receiveTaskEnd`carries the status `END` the earliest `receiveTaskBegin` action is removed from the past array. The error callback, `revertOnError` will dispatch the last action stored in past array.
 
 
-![Shmasana provides a framework to get things done](http://)
+![Shmasana provides a framework to get things done](https://github.com/calebomusic/Shmasana/blob/master/docs/screenshots/landing.png)
 
 ### Users and Workspaces
 
@@ -183,7 +183,7 @@ Users are allowed to mark tasks in their workspace complete, assign tasks to oth
 
 Tasks need not be assigned to a project, project-less tasks reside in the workspace route: `/:userId/:workspaceId/list/:taskId`
 
-![Shmasana supports comments](http://)
+![Shmasana supports comments](https://github.com/calebomusic/Shmasana/blob/master/docs/screenshots/linda.png)
 
 ## Future Directions for the Project
 
