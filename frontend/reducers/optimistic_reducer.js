@@ -7,14 +7,12 @@ const OptimisticReducer = (reducer) => {
     switch (action.status) {
       case BEGIN:
         return {
-          past: [ ...newState, action],
+          past: [ ...newState.past, action],
           present: reducer(newState, action)
         }
       case END:
-        return {
-          past: [],
-          present: newState.present
-        }
+        newState.past.shift();
+        return newState;
       case REVERT:
         const prevAction = newState.past[newState.past.length - 1];
         return {
