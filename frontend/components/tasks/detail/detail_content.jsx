@@ -54,7 +54,8 @@ class DetailContent extends React.Component {
                    underlineShow={true}
                    rows={2}
                    rowsMax={3}
-                   fullWidth={true} />
+                   fullWidth={true}
+                   style={textFieldStyle}/>
       </div>)
   }
 
@@ -87,5 +88,9 @@ class DetailContent extends React.Component {
   }
 
 }
+
+  const textFieldStyle = {
+    width: '100%'
+  }
 
 export default DetailContent;

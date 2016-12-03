@@ -81,10 +81,10 @@ class TaskListItem extends React.Component {
                        onChange={this.handleChange}
                        multiLine={false}
                        underlineShow={true}
-                       fullWidth={true}
                        style={textFieldStyle}
                        onFocus={this.updateFocus}
-                       onBlur={this.updateBlur} />
+                       onBlur={this.updateBlur}
+                       inputStyle ={{width: '100%'}} />
             <Snackbar open={this.state.open}
                 message={message}
                 autoHideDuration={3000}
@@ -103,7 +103,8 @@ class TaskListItem extends React.Component {
     paddingLeft: '10px',
     fontSize: '14px',
     height: '30px',
-    paddingBottom: '3px'
+    paddingBottom: '3px',
+    width: '100%'
   }
 
 export default withRouter(TaskListItem);

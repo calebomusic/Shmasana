@@ -64,11 +64,11 @@
   display: flex;
   flex-direction: column;
   height: 598px;
-  width: 90%;
-  padding-left: 45px;
+  /*width: 90%;*/
+  padding-left: 65px;
   padding-right: 20px;
   padding-top: 10px;
-  margin-left: 20px;
+
   overflow: scroll;
 }
 
