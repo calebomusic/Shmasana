@@ -13,15 +13,22 @@ class DetailContent extends React.Component {
   }
 
   componentWillMount() {
-    const title = this.props.task.title;
-    const description = this.props.task.description;
+    let title = this.props.task.title;
+    title = title ? title : '';
+
+    let description = this.props.task.description;
+    description = description ? description : '';
 
     this.setState({ title, description });
   }
 
   componentWillReceiveProps(newProps){
-    const title = newProps.title;
-    const description = newProps.task.description;
+    let title = this.props.task.title;
+    title = title ? title : '';
+
+    let description = this.props.task.description;
+    description = description ? description : '';
+
     this.setState({ title, description});
   }
 

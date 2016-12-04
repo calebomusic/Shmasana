@@ -56,7 +56,7 @@ class SideBar extends React.Component {
       let color = colors[letter.charCodeAt() % 4]
 
       return(
-          <div>
+          <div key={user.username + user.id}>
             <Avatar
               color={deepPurple50}
               backgroundColor={color}
