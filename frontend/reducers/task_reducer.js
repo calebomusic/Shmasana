@@ -12,12 +12,15 @@ const TaskReducer = (oldState = {}, action) => {
     case REMOVE_TASK:
       return {};
     case RECEIVE_COMMENT:
-      let commentIds = newState.comments.map((comment) => comment.id)
 
+      let commentIds = newState.present.comments.map((comment) => comment.id)
+      console.log(action.comment.id);
       if (!commentIds.includes(action.comment.id)) {
-        newState.comments.push(action.comment);
+        newState.present.comments.push(action.comment);
       }
-
+      console.log(newState);
+      console.log(newState.present);
+      // debugger
       return newState;
     default:
       return oldState;

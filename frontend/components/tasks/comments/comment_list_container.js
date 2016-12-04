@@ -7,7 +7,8 @@ import { createComment } from '../../../actions/comment_actions';
 const mapStateToProps = (state) => (
   {
     currentUser: state.session.currentUser,
-    task: state.task.present
+    task: state.task.present,
+    comments: state.task.present.comments
   }
 )
 

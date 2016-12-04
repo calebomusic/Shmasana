@@ -22,6 +22,10 @@ class CommentList extends React.Component {
     this.renderAvatar = this.renderAvatar.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    console.log(newProps.comments);
+  }
+
   renderAvatar(comment) {
     let author = comment.author;
 
@@ -49,8 +53,8 @@ class CommentList extends React.Component {
   }
 
   renderCommentList() {
-    if (this.props.task.comments) {
-      return this.props.task.comments.map((comment) => (
+    if (this.props.comments) {
+      return this.props.comments.map((comment) => (
         <li key={comment.id}
             className='comment'>
           <div className='comment-title-body-avatar'>

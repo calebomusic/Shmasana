@@ -50,7 +50,6 @@ class DetailHeader extends React.Component {
   componentWillReceiveProps(newProps) {
     this.setState({ dueDate: this.props.dueDate,
                     assignee: this.props.task.assignee });
-                    console.log(this.props.task.assignee);
   }
 
   parseDate(date) {
@@ -180,9 +179,6 @@ class DetailHeader extends React.Component {
         assigneeId = null;
       }
 
-      // const assignee = this.findAssignee(assigneeId);
-      // this.setState({ assignee: assignee});
-      console.log('new assignee id: ' + assigneeId);
       this.props.task[field] = assigneeId;
       this.props.updateTask(this.props.task);
     }
