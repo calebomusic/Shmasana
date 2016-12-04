@@ -12,8 +12,6 @@ const App = ({children, params}) => {
     tour = <UserTour />
   }
 
-  console.log(UserTour);
-
   return(
   <div className='app'>
     <SideBarContainer />

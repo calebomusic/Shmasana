@@ -22,10 +22,6 @@ class CommentList extends React.Component {
     this.renderAvatar = this.renderAvatar.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log(newProps.comments);
-  }
-
   renderAvatar(comment) {
     let author = comment.author;
 

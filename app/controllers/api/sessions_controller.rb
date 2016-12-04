@@ -14,7 +14,6 @@ class Api::SessionsController < ApplicationController
     @user = current_user
     if @user
       log_out!
-      # TODO: may change
       render json: {}
     else
       render json: ['No user to log out'], status: 404

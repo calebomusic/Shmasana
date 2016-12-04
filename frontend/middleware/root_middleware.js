@@ -13,6 +13,5 @@ export default applyMiddleware(SessionMiddleware,
   ProjectMiddleware,
   TaskMiddleware,
   TasksMiddleware,
-  CommentMiddleware,
-  Logger()
+  CommentMiddleware
 );

@@ -27,7 +27,7 @@ import { fetchTasksByUserAndWorkspace } from '../actions/tasks_actions';
 import { hashHistory } from 'react-router';
 
 const WorkspacesMiddleware = store => next => action => {
-  // TODO: testing
+  // TODO: for testing
   let errors = e => console.log(e.responseJSON);
 
   let receiveAllWorkspacesSuccess = workspaces => {

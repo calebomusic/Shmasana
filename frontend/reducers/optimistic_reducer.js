@@ -6,7 +6,7 @@ import { merge } from 'lodash';
 const OptimisticReducer = (reducer) => {
   return (oldState = { past: [], present: {}}, action) => {
     let newState = merge({}, oldState)
-    
+
     if (action.type === RECEIVE_COMMENT) {
       return reducer(newState, action);
     } else {

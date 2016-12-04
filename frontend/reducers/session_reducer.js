@@ -38,5 +38,3 @@ export default (state = null_user, action) => {
       return state;
   }
 }
-
-// TODO: receive new task, project?
