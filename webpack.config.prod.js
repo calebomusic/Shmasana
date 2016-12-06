@@ -1,8 +1,8 @@
-var webpack = require("webpack");
+const webpack = require("webpack");
 
 module.exports = {
   context: __dirname,
-  entry: "./frontend/boardflix.jsx",
+  entry: "./frontend/shmashana.jsx",
   output: {
     path: "./app/assets/javascripts",
     filename: "bundle.js"
