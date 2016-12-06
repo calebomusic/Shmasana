@@ -8,7 +8,8 @@
   },
   "scripts": {
     "postinstall": "./node_modules/.bin/webpack",
-    "heroku-postbuild": "webpack --config wbepack.config.prod.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
