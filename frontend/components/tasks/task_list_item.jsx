@@ -19,11 +19,19 @@ class TaskListItem extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({title: this.props.task.title})
+    if (this.props.task.title === undefined) {
+      this.setState({title: ''});
+    } else {
+      this.setState({title: this.props.task.title})
+    }
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({title: newProps.task.title});
+    if (newProps.task.title === undefined) {
+      this.setState({title: ''});
+    } else {
+      this.setState({title: newProps.task.title});
+    }
   }
 
   handleChange(e) {
