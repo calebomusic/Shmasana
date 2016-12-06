@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "postinstall": "./node_modules/.bin/webpack"
+    "postinstall": "./node_modules/.bin/webpack",
+    "heroku-postbuild": "webpack --config wbepack.config.prod.js"
   },
   "repository": {
     "type": "git",
