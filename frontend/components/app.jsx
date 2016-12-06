@@ -8,14 +8,9 @@ import UserTour from './tour';
 const App = ({children, params}) => {
   let tour;
 
-  if (!(params.taskId && params.projectId)) {
-    tour = <UserTour />
-  }
-
   return(
   <div className='app'>
     <SideBarContainer />
-    {tour}
     <div className='main-content'>
       <AllHeaders />
       <div className='tasks'>
