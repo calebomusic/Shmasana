@@ -51,23 +51,27 @@ const WorkspacesMiddleware = store => next => action => {
   }
 
   const receiveWorkspaceAndFetchTasksSuccess = workspace => {
-    store.dispatch(receiveWorkspace(workspace));
+    if (currentUser) {
+      store.dispatch(receiveWorkspace(workspace));
 
-    const workspaceId = workspace.id;
-    const currentUserId = store.getState().session.currentUser.id;
-    store.dispatch(fetchTasksByUserAndWorkspace(currentUserId, workspaceId));
+      const workspaceId = workspace.id;
+      const currentUserId = store.getState().session.currentUser.id;
+      store.dispatch(fetchTasksByUserAndWorkspace(currentUserId, workspaceId));
 
-    redirectToNewWorkspace(workspace);
+      redirectToNewWorkspace(workspace);
+    }
   }
 
   let redirectToNewWorkspace = (workspace) => {
-    const currentUserId = store.getState().session.currentUser.id;
+    if (currentUser) {
+      const currentUserId = currentUser.id;
 
-    const workspaceId = workspace.id;
-    const locationWorkspaceId = parseInt(hashHistory.getCurrentLocation().pathname.split('/')[2])
+      const workspaceId = workspace.id;
+      const locationWorkspaceId = parseInt(hashHistory.getCurrentLocation().pathname.split('/')[2])
 
-    if (locationWorkspaceId !== workspaceId) {
-      hashHistory.push(`${currentUserId}/${workspaceId}`)
+      if (locationWorkspaceId !== workspaceId) {
+        hashHistory.push(`${currentUserId}/${workspaceId}`)
+      }
     }
   }
 
