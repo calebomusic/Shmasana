@@ -70,18 +70,6 @@ p3 = Project.create(name: 'Rebuild', workspace_id: w1.id)
 p4 = Project.create(name: 'Raise Awareness', workspace_id: w1.id)
 p4 = Project.create(name: 'Shift Paradigms', workspace_id: w1.id)
 
-# Add comments
-
-Comment.create(task_id: task2.id, author_id: u0.id, body: "Let's find the best astronauts!" )
-Comment.create(task_id: task1.id, author_id: u0.id, body: "Let's have a lot of color!" )
-Comment.create(task_id: task1.id, author_id: u2.id, body: "On it as soon as I find the rover.")
-Comment.create(task_id: task1.id, author_id: u3.id, body: "?" )
-Comment.create(task_id: task4.id, author_id: u1.id , body: "Can't wait for another training session!")
-Comment.create(task_id: task5.id, author_id: u0.id , body: "Just did it")
-Comment.create(task_id: task6.id, author_id: u1.id, body: "Can't wait for another discussion.")
-Comment.create(task_id: task6.id, author_id: u2.id , body: "This issue is very important!" )
-Comment.create(task_id: task7.id, author_id: u3.id , body: "?" )
-
 # Guest user Tasks:
 
 task1 = Task.create(title: 'Design Flag', workspace_id: w1.id, author_id: u0.id,
@@ -120,17 +108,6 @@ task = Task.create(title: 'Prepare for meeting other lifeforms', workspace_id: w
   description: "Infinity differentiates into subtle potentiality", assignee_id: u1.id )
 task = Task.create(title: 'Buy spacebooks', workspace_id: w1.id, author_id: u1.id,
   description: "Kurt Vonnegut!")
-
-
-  Comment.create(task_id: task9.id, author_id: u0.id, body: "I favor SpaceX" )
-  Comment.create(task_id: task10.id, author_id: u2.id, body: "Don't forget about this!" )
-  Comment.create(task_id: task10.id, author_id: u1.id, body: "Completed!")
-  Comment.create(task_id: task12.id, author_id: u2.id, body: "Had a very pleasant conversation earlier" )
-  Comment.create(task_id: task13.id, author_id: u3.id , body: "?")
-  Comment.create(task_id: task13.id, author_id: u0.id , body: "This is important, Bob!")
-  Comment.create(task_id: task13.id, author_id: u1.id, body: "!")
-  Comment.create(task_id: task14.id, author_id: u2.id , body: "This issue is very important!" )
-  Comment.create(task_id: task9.id, author_id: u3.id , body: "?" )
 
 # Spaceship
 task9 = Task.create(title: 'Compare SpaceX and BlueOrigin', workspace_id: w1.id, author_id: u1.id, project_id: p0.id, assignee_id: u3.id)
@@ -235,3 +212,25 @@ task = Task.create(title: 'Repeat', workspace_id: w2.id, author_id: u4.id,
   description: "The invisible reflects immortal force fields" )
 
 # Add completed at
+
+# Add comments
+
+Comment.create(task_id: task2.id, author_id: u0.id, body: "Let's find the best astronauts!" )
+Comment.create(task_id: task1.id, author_id: u0.id, body: "Let's have a lot of color!" )
+Comment.create(task_id: task1.id, author_id: u2.id, body: "On it as soon as I find the rover.")
+Comment.create(task_id: task1.id, author_id: u3.id, body: "?" )
+Comment.create(task_id: task4.id, author_id: u1.id , body: "Can't wait for another training session!")
+Comment.create(task_id: task5.id, author_id: u0.id , body: "Just did it")
+Comment.create(task_id: task6.id, author_id: u1.id, body: "Can't wait for another discussion.")
+Comment.create(task_id: task6.id, author_id: u2.id , body: "This issue is very important!" )
+Comment.create(task_id: task7.id, author_id: u3.id , body: "?" )
+
+Comment.create(task_id: task9.id, author_id: u0.id, body: "I favor SpaceX" )
+Comment.create(task_id: task10.id, author_id: u2.id, body: "Don't forget about this!" )
+Comment.create(task_id: task10.id, author_id: u1.id, body: "Completed!")
+Comment.create(task_id: task12.id, author_id: u2.id, body: "Had a very pleasant conversation earlier" )
+Comment.create(task_id: task13.id, author_id: u3.id , body: "?")
+Comment.create(task_id: task13.id, author_id: u0.id , body: "This is important, Bob!")
+Comment.create(task_id: task13.id, author_id: u1.id, body: "!")
+Comment.create(task_id: task14.id, author_id: u2.id , body: "This issue is very important!" )
+Comment.create(task_id: task9.id, author_id: u3.id , body: "?" )
