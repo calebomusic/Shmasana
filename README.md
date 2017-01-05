@@ -13,7 +13,7 @@ This section describes the frontend application state, the Implementation of opt
 
 ### Application State
 
-Following the Redux framework, there is a single source of truth, the application state. Application state includes the loading state, current project, current user, sidebar state, current task, tasks, view, and current workspace. The user, project, task, and workspace slices of state hold the respective properties and association info typically the primary key (associations are described in greater detail below). All the workspace tasks are held in state to avoid additional AJAX requests and enable fluid transitions between views. The task includes the present task and past task actions to support optimistic updating.
+Following the Redux framework, there is a single source of truth, the application state. Application state includes the loading state, current project, current user, sidebar state, current task, tasks, view, and current workspace. The user, project, task, and workspace slices of state hold the respective properties and association info (associations are described in greater detail below). All the workspace's task are held in state to avoid additional AJAX requests and enable fluid transitions between views. The task includes the present task and past task actions to support optimistic updating.
 
 An example application state is:
 
@@ -47,7 +47,9 @@ An example application state is:
         comments:Array[2]
         completed:true
         completed_at:"1996-10-03T16:16:15.374Z",
-        created_at:"2016-12-03T01:28:31.166Z", description: "Avoid space horror",due_date:null,
+        created_at:"2016-12-03T01:28:31.166Z",
+        description: "Avoid space horror",
+        due_date:null,
         id:22,
         project:Object,
         project_id:1,
@@ -147,10 +149,11 @@ has_many :created_tasks,
   class_name: :Task,
   foreign_key: :author_id
 
-has_many :comments, foreign_key: :author_id
+has_many :comments,
+  foreign_key: :author_id
 ```
 
-Upon successfully creating an account an workspace is created by dispatching the `createWorkspace` action which updates the frontend store and makes a request to create a workspace.
+Upon successfully creating an account, a workspace is created by dispatching the `createWorkspace` action which updates the frontend store and makes a request to create a workspace.
 Upon successfully creating the workspace, the user is redirected to that workspace.
 
 Successful signup callback:
@@ -171,12 +174,16 @@ They may be assigned to a user via `assignee_id`, a project via `project_id.`
 Tasks may also have titles, descriptions, due dates, and may or may not be completed. In the `Task` model the associations are instantiated as follows:
 
 ```ruby
-  belongs_to :author, class_name: :User
+  belongs_to :author,
+    class_name: :User
   belongs_to :project
   belongs_to :workspace
-  belongs_to :assignee, class_name: :User
-  has_one :workspace, through: :project
-  has_many :comments, class_name: :Comment
+  belongs_to :assignee,
+    class_name: :User
+  has_one :workspace,
+    through: :project
+  has_many :comments,
+    class_name: :Comment
 ```
 
 Users are allowed to mark tasks in their workspace complete, assign tasks to other users, or invite other users to the workspace.
