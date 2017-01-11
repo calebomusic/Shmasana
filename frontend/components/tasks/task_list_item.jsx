@@ -93,11 +93,6 @@ class TaskListItem extends React.Component {
                        onFocus={this.updateFocus}
                        onBlur={this.updateBlur}
                        inputStyle ={{width: '100%'}} />
-            <Snackbar open={this.state.open}
-                message={message}
-                autoHideDuration={3000}
-                onRequestClose={this.handleRequestClose}
-                bodyStyle={snackbarStyle} />
             </li>)
   }
 }
@@ -116,3 +111,9 @@ class TaskListItem extends React.Component {
   }
 
 export default withRouter(TaskListItem);
+//
+// <Snackbar open={this.state.open}
+//     message={message}
+//     autoHideDuration={3000}
+//     onRequestClose={this.handleRequestClose}
+//     bodyStyle={snackbarStyle} />
