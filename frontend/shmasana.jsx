@@ -22,7 +22,9 @@ injectTapEventPlugin();
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
-
+  console.log("Thanks for checking out Shmasana! Add some new tasks and check them off.");
+  console.log("I'm currently looking for new oppurtunities, checkout my LinkedIn here: https://www.linkedin.com/in/caleb-ontiveros");
+  console.log("And porfolio here: calebomusic.github.io.");
   if(window.currentUser) {
     store = configureStore({session: {currentUser: window.currentUser}});
   } else {
